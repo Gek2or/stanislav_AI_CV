@@ -36,26 +36,29 @@ export default function Assistant({ t, lang }) {
   }
 
   return (
-    <section className="contentSection sectionShell" id="assistant">
-      <div className="sectionHeading">
-        <p className="overline">PORTFOLIO KNOWLEDGE ASSISTANT</p>
-        <h2>{t.assistantTitle}</h2>
+    <section className="contentSection sectionShell assistantSection" id="assistant">
+      <div className="assistantIntroGrid">
+        <div>
+          <p className="sectionNumber">05</p>
+          <p className="overline">OPTIONAL INTERACTIVE DETAIL</p>
+          <h2>{t.assistantTitle}</h2>
+        </div>
         <p>{t.assistantIntro}</p>
       </div>
 
-      <div className="assistantShell glassPanel">
+      <div className="assistantShell">
+        <div className="suggestedQuestions">
+          {t.questions.map((question, index) => (
+            <button key={question} onClick={() => ask(question, index)}><Sparkles size={14}/>{question}</button>
+          ))}
+        </div>
+
         <div className="assistantChat">
           {messages.map((message, index) => (
             <div className={`chatMessage ${message.type}`} key={`${index}-${message.text.slice(0, 12)}`}>
               <div className="chatIcon">{message.type === 'bot' ? <Bot size={17}/> : <User size={17}/>}</div>
               <p>{message.text}</p>
             </div>
-          ))}
-        </div>
-
-        <div className="suggestedQuestions">
-          {t.questions.map((question, index) => (
-            <button key={question} onClick={() => ask(question, index)}><Sparkles size={14}/>{question}</button>
           ))}
         </div>
 
