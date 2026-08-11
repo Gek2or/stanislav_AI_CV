@@ -5,7 +5,7 @@ export default function Contact({ t }) {
     <section className="contactSection sectionShell" id="contact">
       <div className="contactIntro">
         <p className="sectionNumber">06</p>
-        <p className="overline">CONTACT</p>
+        <p className="overline">{t.nav[4]}</p>
         <h2>{t.contactTitle}</h2>
         <p>{t.contactText}</p>
       </div>
