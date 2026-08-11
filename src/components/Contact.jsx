@@ -3,7 +3,8 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 export default function Contact({ t }) {
   return (
     <section className="contactSection sectionShell" id="contact">
-      <div>
+      <div className="contactIntro">
+        <p className="sectionNumber">06</p>
         <p className="overline">CONTACT</p>
         <h2>{t.contactTitle}</h2>
         <p>{t.contactText}</p>
