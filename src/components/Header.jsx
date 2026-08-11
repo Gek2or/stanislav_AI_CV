@@ -1,20 +1,22 @@
-import { Cpu } from 'lucide-react'
+import { Code2 } from 'lucide-react'
 import { languages } from '../data/content'
 
 export default function Header({ lang, setLang, nav }) {
   const links = [
-    ['#ai-core', nav[0]],
+    ['#work', nav[2]],
+    ['#engineering', nav[0]],
     ['#bitonet', nav[1]],
-    ['#projects', nav[2]],
-    ['#assistant', nav[3]],
     ['#contact', nav[4]],
   ]
 
   return (
     <header className="topbar">
-      <a href="#top" className="brand" aria-label="Stanislav AI home">
-        <span className="brandIcon"><Cpu size={18} /></span>
-        <span>STANISLAV<span className="accent">.AI</span></span>
+      <a href="#top" className="brand" aria-label="Stanislav Kosytskyy home">
+        <span className="brandIcon"><Code2 size={17} /></span>
+        <span className="brandText">
+          <strong>Stanislav Kosytskyy</strong>
+          <small>AI Software Engineer</small>
+        </span>
       </a>
 
       <nav className="desktopNav" aria-label="Main navigation">
