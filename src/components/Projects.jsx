@@ -9,7 +9,7 @@ export default function Projects({ t }) {
       <div className="sectionIntroGrid">
         <div>
           <p className="sectionNumber">02</p>
-          <p className="overline">EXPERIENCE & SELECTED WORK</p>
+          <p className="overline">{t.nav[2]}</p>
           <h2>{t.projectsTitle}</h2>
         </div>
         <p className="sectionLead">{t.projectsIntro}</p>
@@ -19,10 +19,7 @@ export default function Projects({ t }) {
         {primary.map(([title, text], index) => (
           <article className={`experienceRow ${index === 0 ? 'featured' : ''}`} key={title}>
             <div className="experienceIndex">0{index + 1}</div>
-            <div className="experienceTitle">
-              <h3>{title}</h3>
-              <span>{index === 0 ? 'REAL OPERATIONS' : 'PRACTICAL RESPONSIBILITY'}</span>
-            </div>
+            <div className="experienceTitle"><h3>{title}</h3></div>
             <p>{text}</p>
             <ArrowUpRight size={18}/>
           </article>
@@ -30,8 +27,8 @@ export default function Projects({ t }) {
       </div>
 
       <div className="buildsHeader">
-        <p className="overline">ACTIVE BUILDS & EXPERIMENTS</p>
-        <span>{builds.length.toString().padStart(2, '0')} selected areas</span>
+        <p className="overline">{t.engineeringTitle}</p>
+        <span>{builds.length.toString().padStart(2, '0')}</span>
       </div>
       <div className="buildGrid">
         {builds.map(([title, text], index) => (
