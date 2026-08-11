@@ -1,56 +1,45 @@
-import { ArrowDownRight, Braces, ShieldCheck, Workflow } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { ArrowDownRight, BriefcaseBusiness, Code2, MapPin, Workflow } from 'lucide-react'
 
 export default function Hero({ t }) {
-  const [statusIndex, setStatusIndex] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setStatusIndex((value) => (value + 1) % t.commandStatus.length)
-    }, 2300)
-    return () => clearInterval(timer)
-  }, [t.commandStatus])
+  const evidence = [
+    [BriefcaseBusiness, t.projects[0][0], t.projects[0][1]],
+    [Workflow, t.projects[1][0], t.projects[1][1]],
+    [Code2, t.engineering[0][0], t.engineering[0][2]],
+  ]
 
   return (
     <section className="hero sectionShell" id="top">
       <div className="heroCopy">
-        <div className="rolePill"><span className="pulseDot" />{t.target}</div>
-        <p className="overline">STANISLAV KOSYTSKYY</p>
-        <h1>{t.role}</h1>
+        <p className="overline">{t.target}</p>
+        <h1>Stanislav<br/>Kosytskyy</h1>
+        <div className="heroRole">{t.role}</div>
         <p className="heroLead">{t.hero}</p>
         <p className="heroSecondary">{t.heroSecondary}</p>
         <div className="heroActions">
-          <a className="primaryButton" href="#ai-core">{t.ctaPrimary}<ArrowDownRight size={18} /></a>
-          <a className="secondaryButton" href="#bitonet">{t.ctaSecondary}</a>
+          <a className="primaryButton" href="#work">{t.nav[2]}<ArrowDownRight size={18} /></a>
+          <a className="secondaryButton" href="#contact">{t.nav[4]}</a>
         </div>
       </div>
 
-      <div className="commandPanel glassPanel">
-        <div className="windowBar">
-          <div className="windowDots"><i/><i/><i/></div>
-          <span>{t.commandTitle}</span>
-          <span className="liveTag"><span />LIVE</span>
+      <aside className="candidateBrief" aria-label="Candidate summary">
+        <div className="briefTop">
+          <span className="briefIndex">01</span>
+          <span className="briefLocation"><MapPin size={15}/> Finland</span>
         </div>
-        <div className="commandBody">
-          <div className="terminalLine"><span>&gt; active_task:</span> <strong>{t.commandStatus[statusIndex]}</strong></div>
-          <div className="metricGrid">
-            <div><Braces size={18}/><span>MODE</span><strong>multi-model</strong></div>
-            <div><ShieldCheck size={18}/><span>REVIEW</span><strong>human-in-loop</strong></div>
-            <div><Workflow size={18}/><span>OUTPUT</span><strong>reusable workflow</strong></div>
-          </div>
-          <div className="signalBlock">
-            <span>problem</span><b>→</b><span>context</span><b>→</b><span>model</span><b>→</b><span>code</span><b>→</b><span>eval</span>
-          </div>
-          <div className="codeSnippet">
-            <span className="codeMuted">// my default mindset</span>
-            <br/><span className="codeKey">if</span> (task.is_repetitive) {'{'}
-            <br/> &nbsp;&nbsp;question(process);
-            <br/> &nbsp;&nbsp;prototype(solution);
-            <br/> &nbsp;&nbsp;verify(output);
-            <br/>{'}'}
-          </div>
+        <p className="briefKicker">PRACTICAL PROFILE</p>
+        <div className="evidenceList">
+          {evidence.map(([Icon, title, text], index) => (
+            <article className="evidenceItem" key={title}>
+              <div className="evidenceIcon"><Icon size={18}/></div>
+              <div>
+                <span>0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
         </div>
-      </div>
+      </aside>
     </section>
   )
 }
