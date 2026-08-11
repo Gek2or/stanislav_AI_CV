@@ -1,61 +1,63 @@
-import { BrainCircuit, Bot, CheckCircle2, Code2, GitBranch, Layers3, ScanSearch } from 'lucide-react'
-
-const icons = [ScanSearch, BrainCircuit, GitBranch, Code2, CheckCircle2, Layers3]
+import { Bot, CheckCircle2 } from 'lucide-react'
 
 export default function AICore({ t }) {
   return (
-    <section className="contentSection sectionShell" id="ai-core">
-      <div className="sectionHeading">
-        <p className="overline">AI SYSTEM THINKING</p>
-        <h2>{t.aiTitle}</h2>
-        <p>{t.aiIntro}</p>
-      </div>
-
-      <div className="pipelineGrid">
-        {t.pipeline.map(([num, title, text], index) => {
-          const Icon = icons[index]
-          return (
-            <article className="pipelineCard" key={num}>
-              <div className="pipelineTop"><span>{num}</span><Icon size={20}/></div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          )
-        })}
-      </div>
-
-      <div className="modelSection">
-        <div className="modelIntro">
-          <Bot size={26}/>
-          <div>
-            <p className="overline">TOOL STRATEGY</p>
-            <h3>{t.modelsTitle}</h3>
-            <p>{t.modelsIntro}</p>
-          </div>
+    <section className="contentSection sectionShell" id="engineering">
+      <div className="sectionIntroGrid">
+        <div>
+          <p className="sectionNumber">03</p>
+          <p className="overline">AI ENGINEERING APPROACH</p>
+          <h2>{t.aiTitle}</h2>
         </div>
-        <div className="modelRows">
-          {t.models.map(([name, purpose]) => (
-            <div className="modelRow" key={name}>
-              <strong>{name}</strong>
-              <span>{purpose}</span>
-            </div>
-          ))}
-        </div>
+        <p className="sectionLead">{t.aiIntro}</p>
       </div>
 
-      <div className="engineeringSection">
-        <div className="sectionHeading compactHeading">
+      <div className="processList">
+        {t.pipeline.map(([num, title, text]) => (
+          <article className="processStep" key={num}>
+            <span>{num}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="engineeringBlock">
+        <div className="engineeringIntro">
           <p className="overline">ENGINEERING FOCUS</p>
           <h3>{t.engineeringTitle}</h3>
           <p>{t.engineeringIntro}</p>
         </div>
-        <div className="engineeringGrid">
+        <div className="engineeringList">
           {t.engineering.map(([name, status, text]) => (
-            <article className="engineeringCard" key={name}>
-              <div className="engineeringStatus"><span />{status}</div>
+            <article className="engineeringRow" key={name}>
+              <div>
+                <span className="statusDot" />
+                <strong>{status}</strong>
+              </div>
               <h4>{name}</h4>
               <p>{text}</p>
             </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="toolBlock">
+        <div className="toolHeading">
+          <Bot size={22}/>
+          <div>
+            <p className="overline">MODEL & TOOL STRATEGY</p>
+            <h3>{t.modelsTitle}</h3>
+            <p>{t.modelsIntro}</p>
+          </div>
+        </div>
+        <div className="toolList">
+          {t.models.map(([name, purpose]) => (
+            <div className="toolRow" key={name}>
+              <CheckCircle2 size={16}/>
+              <strong>{name}</strong>
+              <span>{purpose}</span>
+            </div>
           ))}
         </div>
       </div>
