@@ -40,7 +40,7 @@ export default function Assistant({ t, lang }) {
       <div className="assistantIntroGrid">
         <div>
           <p className="sectionNumber">05</p>
-          <p className="overline">OPTIONAL INTERACTIVE DETAIL</p>
+          <p className="overline">{t.nav[3]}</p>
           <h2>{t.assistantTitle}</h2>
         </div>
         <p>{t.assistantIntro}</p>
