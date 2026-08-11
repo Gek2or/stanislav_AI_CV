@@ -26,7 +26,7 @@ export default function Hero({ t }) {
           <span className="briefIndex">01</span>
           <span className="briefLocation"><MapPin size={15}/> Finland</span>
         </div>
-        <p className="briefKicker">PRACTICAL PROFILE</p>
+        <p className="briefKicker">{t.commandTitle}</p>
         <div className="evidenceList">
           {evidence.map(([Icon, title, text], index) => (
             <article className="evidenceItem" key={title}>
