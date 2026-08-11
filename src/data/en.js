@@ -1,78 +1,78 @@
 export default {
   "nav": [
-    "AI Core",
+    "Engineering",
     "Why Bitonet",
-    "Projects",
+    "Experience",
     "Ask AI",
     "Contact"
   ],
   "role": "AI Software Engineer",
-  "target": "Target role · Bitonet Oy",
-  "hero": "I build practical AI workflows around real business problems — combining software thinking, automation, model selection and human review.",
-  "heroSecondary": "Finland-based entrepreneur with software/game-development studies and hands-on experience turning messy daily operations into clearer systems.",
-  "ctaPrimary": "Explore AI workflow",
-  "ctaSecondary": "Why Bitonet",
-  "commandTitle": "AI WORKBENCH",
+  "target": "Application focus · AI Software Engineer · Bitonet Oy",
+  "hero": "I turn real operational problems into clearer software and AI workflows — with automation where it helps, human review where it matters, and a strong bias toward practical delivery.",
+  "heroSecondary": "My background combines entrepreneurship in Finland, software and game-development studies, hands-on AI workflow design, and a deliberate move toward Python/API-based AI engineering.",
+  "ctaPrimary": "View experience",
+  "ctaSecondary": "Contact",
+  "commandTitle": "PRACTICAL PROFILE",
   "commandStatus": [
-    "mapping the problem",
-    "selecting the right model",
-    "structuring context",
-    "checking assumptions",
-    "turning a result into a reusable workflow"
+    "understanding the real workflow",
+    "selecting the smallest useful tool",
+    "structuring context and constraints",
+    "checking important outputs",
+    "turning one-off work into a repeatable system"
   ],
-  "aiTitle": "I do not just prompt. I design the system around the prompt.",
-  "aiIntro": "My approach is model-agnostic: understand the task first, then choose the tool, structure the context, verify the output and document what works.",
+  "aiTitle": "How I approach AI software",
+  "aiIntro": "I start with the workflow, not the model. I define the outcome, context and decision points first, then choose the right tool, build the smallest useful solution, verify the result and make the process reusable.",
   "pipeline": [
-    ["01", "Problem", "What outcome actually matters?"],
-    ["02", "Context", "What data, constraints and assumptions exist?"],
-    ["03", "Route", "Which model or creative tool fits best?"],
-    ["04", "Build", "Prompt, code, API or automation logic."],
-    ["05", "Evaluate", "Facts, tone, edge cases, safety and usefulness."],
-    ["06", "Reuse", "Turn the result into a repeatable workflow."]
+    ["01", "Problem", "Define the actual business or user outcome."],
+    ["02", "Context", "Identify data, constraints, assumptions and risk."],
+    ["03", "Route", "Choose the model, API, code path or creative tool that fits."],
+    ["04", "Build", "Create the prompt, script, integration or prototype."],
+    ["05", "Evaluate", "Check facts, edge cases, tone, safety and usefulness."],
+    ["06", "Reuse", "Document the working pattern and turn it into a repeatable workflow."]
   ],
-  "modelsTitle": "Model routing",
-  "modelsIntro": "Different tools for different jobs — not one chatbot for everything.",
-  "engineeringTitle": "Engineering direction",
-  "engineeringIntro": "The next step is turning practical AI usage into production-shaped software skills. I show the level honestly: building, experimenting or learning — not inflated expertise.",
+  "modelsTitle": "Model and tool selection",
+  "modelsIntro": "I use different tools for different jobs. The model is part of the system, not the system itself.",
+  "engineeringTitle": "What I am building toward as an engineer",
+  "engineeringIntro": "I do not present myself as a senior backend engineer. I present a practical foundation, honest current level and a clear engineering direction: Python, APIs, LLM applications, automation and reliable delivery.",
   "engineering": [
     ["Python + REST APIs", "BUILDING", "Scripts, service integrations, quote/customer/financial tooling and backend logic."],
-    ["RAG + knowledge assistants", "LEARNING", "Retrieval, grounded answers, document context, source-aware responses and access boundaries."],
+    ["RAG + knowledge assistants", "LEARNING", "Retrieval, grounded answers, document context, source awareness and access boundaries."],
     ["Agents + tool use", "EXPERIMENTING", "Multi-step tasks, tool selection, approval points and human-controlled automation."],
     ["Evaluation + guardrails", "PRACTICAL", "Test cases, fact checking, assumptions, human review and quality comparison between models."],
     ["Cloud + serverless", "LEARNING", "Deploying APIs, jobs and AI integrations securely without exposing client-side secrets."],
-    ["Git + GitHub delivery", "BUILDING", "Versioned work, repositories, deploy pipelines and progressively cleaner project structure."]
+    ["Git + GitHub delivery", "BUILDING", "Versioned work, repositories, deployment pipelines and progressively cleaner project structure."]
   ],
   "models": [
-    ["ChatGPT", "General reasoning, structured work, documents, workflow design"],
-    ["Claude", "Long context, deeper analysis, comparing complex alternatives"],
-    ["Gemini", "Research support, multimodal work and Google ecosystem experiments"],
-    ["Grok", "Alternative perspective, fast comparison and idea stress-testing"],
+    ["ChatGPT", "Structured reasoning, documents, workflow design and general problem solving"],
+    ["Claude", "Long-context analysis and comparison of complex alternatives"],
+    ["Gemini", "Multimodal work, research support and Google ecosystem experiments"],
+    ["Grok", "Alternative viewpoints, rapid comparison and idea stress-testing"],
     ["Google Flow", "Video concepts, scene development and visual storytelling"],
-    ["Google Labs / Storyboard", "Emerging AI tools, pre-production and visual planning"],
+    ["Google Labs / Storyboard", "Creative experiments, pre-production and visual planning"],
     ["AI coding tools", "Code explanations, debugging, prototypes and implementation support"]
   ],
   "bitonetEyebrow": "WHY BITONET",
-  "bitonetTitle": "The company direction matches the way I already think about technology.",
-  "bitonetIntro": "Bitonet publicly emphasizes clear business-first technology, industry-specific software, controlled AI use in the Finnish legal environment, security and step-by-step implementation. That is exactly the direction I want to grow into as an AI Software Engineer.",
+  "bitonetTitle": "Why I am applying to Bitonet",
+  "bitonetIntro": "What attracts me is the combination of business-oriented software, controlled AI use, security and practical implementation. That matches the way I already work: understand the process first, reduce unnecessary complexity and keep important decisions visible and reviewable.",
   "fit": [
-    ["Business-first", "I start from the real workflow, not from the model. Autochemix gives me daily experience with customers, offers, pricing, logistics and operational decisions."],
-    ["Responsible AI", "I keep important decisions human-reviewed, compare outputs when quality matters and avoid treating model output as unquestioned truth."],
-    ["Finnish workflows", "I already work with Finnish customer communication, company administration, PRH-related processes and real business documentation."],
-    ["Build + learn", "I can contribute practical AI usage now while deepening Python, APIs, integrations and production engineering."]
+    ["Business context", "Running Autochemix gives me direct exposure to customers, offers, pricing, logistics, documentation and the operational consequences of software decisions."],
+    ["Responsible AI", "I treat model output as a draft, keep human review for important decisions and compare or verify results when quality matters."],
+    ["Finnish operating environment", "I already work with Finnish customer communication, company administration, PRH-related processes and practical business documentation."],
+    ["Practical growth path", "I can contribute useful AI workflow thinking now while deepening Python, APIs, integrations and production engineering in a professional team."]
   ],
-  "projectsTitle": "Proof from real work, active builds and experiments",
-  "projectsIntro": "Not every item is a finished product. The point is to show what problems I already handle and what I am actively turning into software.",
+  "projectsTitle": "Experience first. Experiments second.",
+  "projectsIntro": "The strongest proof is not a list of AI tools. It is the operational work I already own, the processes I have improved, and the systems I am now turning into software.",
   "projects": [
-    ["Muuttobotti / Autochemix Oy", "Operational management of moving services: client acquisition, detailed Finnish offers, pricing, Crafter + team logistics, marketing, website support and daily operations."],
-    ["AI-assisted business workflow library", "Reusable prompts, templates and methods for communication, offers, documentation, planning and information structuring."],
-    ["Company administration in Finland", "Practical work with shareholder and board documents, PRH filings, change notifications and communication around official company matters."],
-    ["Financial & operational analysis", "Working with Holvi statements, financial-statement materials, turnover, expenses and the connection between numbers and real business performance."],
-    ["Python business automation", "Developing scripts for quote generation, customer/financial tracking, data organization and future custom integrations."],
-    ["Psychological horror game", "Multilingual prototype with changing locations, evidence mechanics, sound design, unreliable perception and different character perspectives."],
-    ["Creative AI workflows", "AI music, image generation/editing, Google Flow, storyboard workflows and visual iteration for marketing, games and content."]
+    ["Muuttobotti / Autochemix Oy", "End-to-end operational management of moving services: client acquisition, detailed commercial offers in Finnish, pricing calculations, Crafter van and team logistics, marketing, website support and daily operations."],
+    ["AI-assisted business workflow library", "Reusable prompts, templates and methods for customer communication, offers, documents, planning and information structuring — designed to reduce repeated work and improve consistency."],
+    ["Company administration in Finland", "Practical work with shareholder and board documents, PRH filings, change notifications, official communication and day-to-day company matters."],
+    ["Financial and operational analysis", "Working with Holvi statements, financial-statement materials, turnover and expenses, and connecting the numbers to real business performance."],
+    ["Python business automation", "Developing scripts for quote generation, customer and financial tracking, data organization and future custom integrations."],
+    ["Psychological horror game", "A multilingual prototype exploring changing locations, evidence mechanics, sound design, unreliable perception and different character perspectives."],
+    ["Creative AI workflows", "AI music, image generation/editing, Google Flow, storyboard workflows and fast visual iteration for marketing, games and content."]
   ],
   "assistantTitle": "Ask Stanislav AI",
-  "assistantIntro": "A curated portfolio knowledge assistant. It answers from structured information on this site — no fake claims about a live model.",
+  "assistantIntro": "An optional interactive layer for details after the main CV. Answers are based on the structured information in this portfolio; it does not pretend to be a live LLM backend.",
   "assistantPlaceholder": "Ask about AI, Bitonet, projects, Python…",
   "assistantSend": "Ask",
   "questions": [
@@ -85,14 +85,14 @@ export default {
     "Why Bitonet?"
   ],
   "answers": [
-    "Stanislav combines practical AI use, entrepreneurial responsibility and a software-development foundation. He understands real customer and business constraints, can prototype quickly, and is deliberately moving toward deeper Python, API and production AI engineering.",
-    "He uses AI for customer communication, offers, documents, information structuring, workflow design, code explanations, debugging support, music, images, video concepts and game-development experiments. The final decision stays human.",
-    "He starts from the task. ChatGPT is useful for broad structured work, Claude for long-context analysis, Gemini for multimodal and Google-oriented work, Grok for alternative viewpoints, Flow for video concepts, and coding tools for implementation and debugging.",
-    "In daily business he has reduced repeated writing and structuring work through reusable prompts, templates and repeatable review steps. He is now extending that mindset into Python-based quote, customer and financial tracking tools.",
+    "Stanislav combines practical AI use, entrepreneurial responsibility and a software-development foundation. He understands real customer and business constraints, prototypes quickly and is deliberately moving toward deeper Python, API and production AI engineering.",
+    "He uses AI for customer communication, offers, documents, information structuring, workflow design, code explanations, debugging support, music, images, video concepts and game-development experiments. Important final decisions remain human-reviewed.",
+    "He starts from the task rather than loyalty to one model. ChatGPT is useful for broad structured work, Claude for long-context analysis, Gemini for multimodal and Google-oriented work, Grok for alternative viewpoints, Flow for video concepts, and coding tools for implementation and debugging.",
+    "In daily business he has reduced repeated writing and structuring through reusable prompts, templates and review steps. He is extending the same mindset into Python-based quote, customer and financial tracking tools.",
     "He treats model output as a draft, not authority. Important outputs are reviewed, assumptions are surfaced, sensitive data is handled carefully, and a second model or manual check is used when quality matters.",
-    "His current technical focus is Python, REST APIs, GitHub workflows, LLM applications, RAG, agents, automation logic and cloud deployment. The goal is to move from effective AI tool use to building custom integrations and production-ready systems.",
-    "Bitonet describes technology as something that should make business clearer, safer and easier to manage. Stanislav already approaches AI the same way: start from the workflow, keep security and human judgment in the loop, and build step by step instead of adding complexity for its own sake."
+    "His current technical focus is Python, REST APIs, GitHub workflows, LLM applications, RAG, agents, automation logic and cloud deployment. The goal is to move from effective AI tool use to custom integrations and production-shaped systems.",
+    "Bitonet's business-oriented, controlled approach to software and AI matches how Stanislav already works: understand the workflow first, keep security and human judgment in the loop, and improve systems step by step rather than adding complexity for its own sake."
   ],
-  "contactTitle": "Let’s talk about practical AI software.",
+  "contactTitle": "Let’s discuss practical AI software.",
   "contactText": "AI Software Engineer candidate · Finland"
 }
