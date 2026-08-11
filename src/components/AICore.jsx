@@ -6,7 +6,7 @@ export default function AICore({ t }) {
       <div className="sectionIntroGrid">
         <div>
           <p className="sectionNumber">03</p>
-          <p className="overline">AI ENGINEERING APPROACH</p>
+          <p className="overline">{t.nav[0]}</p>
           <h2>{t.aiTitle}</h2>
         </div>
         <p className="sectionLead">{t.aiIntro}</p>
@@ -24,7 +24,7 @@ export default function AICore({ t }) {
 
       <div className="engineeringBlock">
         <div className="engineeringIntro">
-          <p className="overline">ENGINEERING FOCUS</p>
+          <p className="overline">{t.engineeringTitle}</p>
           <h3>{t.engineeringTitle}</h3>
           <p>{t.engineeringIntro}</p>
         </div>
@@ -46,7 +46,7 @@ export default function AICore({ t }) {
         <div className="toolHeading">
           <Bot size={22}/>
           <div>
-            <p className="overline">MODEL & TOOL STRATEGY</p>
+            <p className="overline">{t.modelsTitle}</p>
             <h3>{t.modelsTitle}</h3>
             <p>{t.modelsIntro}</p>
           </div>
