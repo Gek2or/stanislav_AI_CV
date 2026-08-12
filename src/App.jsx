@@ -36,7 +36,7 @@ export default function App() {
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
       <main>
         <Hero t={t} />
-        <Projects t={t} />
+        <Projects t={t} lang={safeLang} />
         <AICore t={t} />
         <BitonetFit t={t} />
         <Assistant t={t} lang={safeLang} />
