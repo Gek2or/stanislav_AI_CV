@@ -1,6 +1,10 @@
-import { Bot, CheckCircle2 } from 'lucide-react'
+import { Bot, CheckCircle2, ChevronRight } from 'lucide-react'
+import { useState } from 'react'
 
 export default function AICore({ t }) {
+  const [activeStep, setActiveStep] = useState(0)
+  const active = t.pipeline[activeStep]
+
   return (
     <section className="contentSection sectionShell" id="engineering">
       <div className="sectionIntroGrid">
@@ -12,14 +16,30 @@ export default function AICore({ t }) {
         <p className="sectionLead">{t.aiIntro}</p>
       </div>
 
-      <div className="processList">
-        {t.pipeline.map(([num, title, text]) => (
-          <article className="processStep" key={num}>
-            <span>{num}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
+      <div className="processExperience">
+        <div className="processList" role="list" aria-label={t.aiTitle}>
+          {t.pipeline.map(([num, title], index) => (
+            <button
+              type="button"
+              className={`processStep ${activeStep === index ? 'active' : ''}`}
+              key={num}
+              onMouseEnter={() => setActiveStep(index)}
+              onFocus={() => setActiveStep(index)}
+              onClick={() => setActiveStep(index)}
+              aria-pressed={activeStep === index}
+            >
+              <span>{num}</span>
+              <h3>{title}</h3>
+              <ChevronRight size={16}/>
+            </button>
+          ))}
+        </div>
+        <div className="processDetail" aria-live="polite">
+          <span>{active?.[0]}</span>
+          <h3>{active?.[1]}</h3>
+          <p>{active?.[2]}</p>
+          <div className="detailLine"><i/><i/><i/><i/><i/><i/></div>
+        </div>
       </div>
 
       <div className="engineeringBlock">
@@ -53,7 +73,7 @@ export default function AICore({ t }) {
         </div>
         <div className="toolList">
           {t.models.map(([name, purpose]) => (
-            <div className="toolRow" key={name}>
+            <div className="toolRow" key={name} tabIndex="0">
               <CheckCircle2 size={16}/>
               <strong>{name}</strong>
               <span>{purpose}</span>
