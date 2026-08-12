@@ -1,0 +1,367 @@
+/* Professional visual refinement layer — loaded last on purpose. */
+:root {
+  --pro-panel: rgba(14, 20, 28, .86);
+  --pro-panel-strong: rgba(16, 23, 32, .96);
+  --pro-line: rgba(151, 203, 255, .16);
+  --pro-line-strong: rgba(151, 203, 255, .34);
+  --pro-blue: #8fcfff;
+  --pro-cyan: #88f0e8;
+  --pro-green: #8be3aa;
+  --pro-shadow: 0 30px 80px rgba(0, 0, 0, .38);
+}
+
+body {
+  background:
+    radial-gradient(circle at 72% 4%, rgba(71, 142, 196, .12), transparent 27rem),
+    radial-gradient(circle at 7% 20%, rgba(72, 200, 188, .055), transparent 23rem),
+    #090d12;
+}
+
+.appFrame::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: .34;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, black, transparent 70%);
+}
+
+.topbar {
+  border-bottom-color: rgba(255,255,255,.075) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.16);
+}
+
+.hero {
+  gap: clamp(38px, 5vw, 78px) !important;
+}
+
+.heroCopy {
+  min-width: 0;
+}
+
+.heroName {
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+.heroName span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.heroLead {
+  max-width: 690px !important;
+}
+
+.heroActions a {
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.heroActions a:hover {
+  transform: translateY(-2px);
+}
+
+.heroActions .primaryButton:hover {
+  box-shadow: 0 14px 34px rgba(233, 243, 250, .14);
+}
+
+.aiSystemApp {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--pro-line-strong) !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.026), transparent 14%),
+    linear-gradient(145deg, rgba(11,17,24,.98), rgba(8,13,19,.95)) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.025) inset,
+    0 26px 90px rgba(0,0,0,.48),
+    0 0 60px rgba(73, 160, 220, .07) !important;
+  transform: translateZ(0);
+}
+
+.aiSystemApp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(99, 191, 255, .14), transparent 30%),
+    radial-gradient(circle at 16% 82%, rgba(94, 238, 218, .06), transparent 29%);
+}
+
+.aiSystemApp::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 10%, rgba(255,255,255,.035) 35%, transparent 55%);
+  transform: translateX(-120%);
+  animation: proPanelSweep 9s ease-in-out infinite;
+}
+
+@keyframes proPanelSweep {
+  0%, 64% { transform: translateX(-120%); opacity: 0; }
+  72% { opacity: .75; }
+  86%, 100% { transform: translateX(120%); opacity: 0; }
+}
+
+.aiAppTopbar {
+  min-height: 66px;
+  border-bottom: 1px solid rgba(255,255,255,.075) !important;
+  background: rgba(255,255,255,.014) !important;
+  backdrop-filter: blur(18px);
+}
+
+.aiAppLogo {
+  box-shadow: 0 0 28px rgba(112, 199, 255, .16);
+}
+
+.aiAppIdentity strong {
+  letter-spacing: -.015em;
+}
+
+.aiAppPanel {
+  animation: proPanelIn .34s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes proPanelIn {
+  from { opacity: 0; transform: translateY(8px) scale(.995); }
+  to { opacity: 1; transform: none; }
+}
+
+.aiPanelHeading h3 {
+  letter-spacing: -.035em !important;
+}
+
+.aiArchitectureMap,
+.aiStageInspector,
+.aiRouteDetail,
+.aiEvaluationPanel article,
+.aiSignalsPanel article,
+.aiPipelineTrack button,
+.aiModelRail button {
+  transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease, color .2s ease;
+}
+
+.aiArchitectureMap:hover,
+.aiStageInspector:hover,
+.aiRouteDetail:hover {
+  border-color: var(--pro-line-strong) !important;
+}
+
+.aiStage,
+.aiModelRail button,
+.aiPipelineTrack button {
+  cursor: pointer;
+}
+
+.aiStage:hover,
+.aiModelRail button:hover,
+.aiPipelineTrack button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(143,207,255,.35) !important;
+  background: rgba(143,207,255,.055) !important;
+}
+
+.aiStage.active,
+.aiModelRail button.active,
+.aiPipelineTrack button.active {
+  box-shadow: 0 0 0 1px rgba(143,207,255,.12) inset, 0 10px 30px rgba(78,165,225,.08);
+}
+
+.aiCore {
+  box-shadow: 0 0 48px rgba(98, 193, 255, .12);
+}
+
+.aiCoreRing {
+  animation-duration: 10s !important;
+}
+
+.aiArchitectureMap svg path.active {
+  filter: drop-shadow(0 0 5px rgba(143,207,255,.75));
+}
+
+.aiEvalMeter i {
+  box-shadow: 0 0 18px rgba(139,227,170,.23);
+}
+
+.aiSignalPulse i {
+  box-shadow: 0 0 0 5px rgba(139,227,170,.05), 0 0 18px rgba(139,227,170,.25);
+}
+
+/* Engineering toolchain */
+.developerStackBlock {
+  margin-top: 86px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,.11);
+}
+
+.developerStackIntro {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  column-gap: 70px;
+  align-items: start;
+  margin-bottom: 32px;
+}
+
+.developerStackIntro .overline {
+  grid-column: 1 / -1;
+  margin-bottom: 18px;
+}
+
+.developerStackIntro h3 {
+  margin: 0;
+  max-width: 560px;
+  font-size: clamp(2rem, 3.7vw, 3.7rem);
+  line-height: 1.02;
+  letter-spacing: -.05em;
+}
+
+.developerStackIntro > p:last-child {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.developerToolGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+
+.developerToolCard {
+  position: relative;
+  min-height: 238px;
+  padding: 22px;
+  outline: 0;
+  border-right: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 90% 5%, rgba(143,207,255,.055), transparent 36%),
+    rgba(255,255,255,.012);
+  transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.developerToolCard:hover,
+.developerToolCard:focus-visible {
+  z-index: 2;
+  transform: translateY(-4px);
+  border-color: rgba(143,207,255,.25);
+  background:
+    radial-gradient(circle at 90% 5%, rgba(143,207,255,.11), transparent 40%),
+    rgba(255,255,255,.025);
+  box-shadow: 0 20px 50px rgba(0,0,0,.22), 0 0 35px rgba(71,151,211,.055);
+}
+
+.developerToolTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--pro-blue);
+}
+
+.developerToolIndex {
+  color: var(--faint);
+  font: 700 .68rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.developerToolCard h4 {
+  margin: 40px 0 10px;
+  font-size: 1.02rem;
+  letter-spacing: -.02em;
+}
+
+.developerToolCard p {
+  margin: 0;
+  min-height: 74px;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.62;
+}
+
+.developerToolStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  color: #a9eac0;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.developerToolStatus i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pro-green);
+  box-shadow: 0 0 14px rgba(139,227,170,.45);
+}
+
+/* Give long sections a more deliberate visual rhythm. */
+.contentSection {
+  scroll-margin-top: 90px;
+}
+
+.experienceRow,
+.engineeringRow,
+.toolRow,
+.fitRow,
+.buildCard {
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+.experienceRow:hover,
+.engineeringRow:hover,
+.toolRow:hover,
+.fitRow:hover {
+  background: rgba(255,255,255,.014);
+}
+
+.buildCard:hover {
+  transform: translateY(-4px);
+  background: rgba(143,207,255,.024) !important;
+}
+
+@media (max-width: 1120px) {
+  .developerToolGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px) {
+  .hero { align-items: start !important; }
+  .aiSystemApp { margin-top: 8px; }
+  .developerStackIntro { grid-template-columns: 1fr; gap: 18px; }
+  .developerStackIntro .overline { grid-column: auto; }
+}
+
+@media (max-width: 680px) {
+  .appFrame::before { background-size: 28px 28px; opacity: .22; }
+  .hero { gap: 30px !important; }
+  .heroName { font-size: clamp(3.55rem, 18vw, 5.4rem) !important; letter-spacing: -.065em !important; }
+  .heroLead { font-size: 1rem !important; line-height: 1.58 !important; }
+  .aiSystemApp { border-radius: 14px !important; box-shadow: 0 20px 54px rgba(0,0,0,.38) !important; }
+  .developerStackBlock { margin-top: 64px; padding-top: 36px; }
+  .developerToolGrid { grid-template-columns: 1fr; }
+  .developerToolCard { min-height: 205px; }
+  .developerToolCard h4 { margin-top: 28px; }
+  .developerToolCard p { min-height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aiSystemApp::after { display: none; }
+  .aiAppPanel,
+  .developerToolCard,
+  .heroActions a { animation: none !important; transition: none !important; }
+}
