@@ -37,7 +37,7 @@ export default function App() {
       <main>
         <Hero t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
-        <AICore t={t} />
+        <AICore t={t} lang={safeLang} />
         <BitonetFit t={t} />
         <Assistant t={t} lang={safeLang} />
         <Contact t={t} />
