@@ -1,0 +1,415 @@
+.aiSystemApp {
+  --ai-bg: #090d12;
+  --ai-panel: rgba(14, 20, 28, .92);
+  --ai-line: rgba(147, 192, 255, .13);
+  --ai-line-strong: rgba(147, 192, 255, .24);
+  --ai-text: #eef6ff;
+  --ai-muted: #8ea0b3;
+  --ai-accent: #79c9ff;
+  --ai-accent-2: #85f0c0;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid var(--ai-line-strong);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(77, 160, 255, .13), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,.026), transparent 28%),
+    var(--ai-bg);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255,255,255,.04);
+  color: var(--ai-text);
+  isolation: isolate;
+}
+
+.aiSystemApp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .24;
+  background-image:
+    linear-gradient(rgba(128, 170, 220, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128, 170, 220, .055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 86%);
+}
+
+.aiSystemApp::after {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -110px;
+  top: 145px;
+  border-radius: 50%;
+  background: rgba(56, 151, 255, .07);
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+.aiAppTopbar {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--ai-line);
+  background: rgba(8, 12, 17, .82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.aiAppIdentity,
+.aiAppControls,
+.aiAppIdentity > div:last-child,
+.aiLive,
+.aiAppControls button,
+.aiAppTabs button,
+.aiConsoleLabel,
+.aiConsoleLines,
+.aiRouteMeta,
+.aiSignalPulse {
+  display: flex;
+  align-items: center;
+}
+
+.aiAppIdentity { gap: 11px; min-width: 0; }
+.aiAppLogo {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--ai-accent);
+  border: 1px solid var(--ai-line-strong);
+  background: linear-gradient(145deg, rgba(121, 201, 255, .14), rgba(255,255,255,.018));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.aiAppIdentity > div:last-child { align-items: flex-start; flex-direction: column; gap: 2px; min-width: 0; }
+.aiAppIdentity span { color: var(--ai-accent); font-size: .62rem; font-weight: 850; letter-spacing: .16em; }
+.aiAppIdentity strong { max-width: 290px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .82rem; letter-spacing: -.01em; }
+
+.aiAppControls { gap: 8px; }
+.aiLive { gap: 6px; white-space: nowrap; color: var(--ai-accent-2); font-size: .6rem; font-weight: 850; letter-spacing: .1em; }
+.aiLive i, .aiRouteMeta i { width: 6px; height: 6px; border-radius: 50%; background: var(--ai-accent-2); box-shadow: 0 0 12px rgba(133, 240, 192, .65); }
+.aiLive i { animation: aiPulse 2.2s infinite; }
+.aiAppControls button {
+  min-height: 34px;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid var(--ai-line);
+  border-radius: 9px;
+  color: var(--ai-muted);
+  background: rgba(255,255,255,.022);
+  cursor: pointer;
+  transition: .2s ease;
+}
+.aiAppControls button span { font-size: .66rem; font-weight: 750; }
+.aiAppControls button:hover,
+.aiAppControls button.active { border-color: rgba(121,201,255,.38); color: var(--ai-text); background: rgba(121,201,255,.08); }
+
+.aiAppTabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--ai-line);
+  background: rgba(255,255,255,.012);
+}
+.aiAppTabs button {
+  position: relative;
+  justify-content: center;
+  min-height: 49px;
+  gap: 7px;
+  border: 0;
+  border-right: 1px solid var(--ai-line);
+  color: #6f8296;
+  background: transparent;
+  cursor: pointer;
+  font-size: .69rem;
+  font-weight: 760;
+  transition: color .18s ease, background .18s ease;
+}
+.aiAppTabs button:last-child { border-right: 0; }
+.aiAppTabs button:hover { color: #c7d7e7; background: rgba(121,201,255,.035); }
+.aiAppTabs button.active { color: var(--ai-text); background: linear-gradient(180deg, rgba(121,201,255,.09), transparent); }
+.aiAppTabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ai-accent);
+  box-shadow: 0 0 18px rgba(121,201,255,.58);
+}
+
+.aiAppViewport { min-height: 430px; }
+.aiAppPanel { min-height: 430px; padding: 22px; animation: aiPanelIn .28s ease both; }
+.aiPanelHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, .85fr);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 21px;
+}
+.aiPanelHeading > div > span { color: var(--ai-accent); font: 800 .6rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .13em; }
+.aiPanelHeading h3 { margin: 7px 0 0; font-size: clamp(1.35rem, 2vw, 1.85rem); letter-spacing: -.04em; line-height: 1.05; }
+.aiPanelHeading > p { margin: 0; color: var(--ai-muted); font-size: .78rem; line-height: 1.55; }
+
+.aiArchitecture {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(190px, .75fr);
+  gap: 15px;
+  min-height: 315px;
+}
+.aiArchitectureMap,
+.aiStageInspector,
+.aiRouteDetail,
+.aiEvalGrid article,
+.aiSignalGrid article {
+  border: 1px solid var(--ai-line);
+  background: rgba(255,255,255,.014);
+  border-radius: 15px;
+}
+.aiArchitectureMap { position: relative; overflow: hidden; min-height: 315px; }
+.aiArchitectureMap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 48%, rgba(121,201,255,.11), transparent 35%);
+  pointer-events: none;
+}
+.aiArchitectureMap svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.aiArchitectureMap svg path { vector-effect: non-scaling-stroke; stroke: rgba(121,201,255,.17); stroke-width: 1; stroke-dasharray: 3 5; fill: none; transition: .24s ease; }
+.aiArchitectureMap svg path.active { stroke: rgba(121,201,255,.9); stroke-width: 1.7; filter: drop-shadow(0 0 6px rgba(121,201,255,.55)); stroke-dasharray: 1 0; }
+
+.aiCore {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 86px;
+  height: 86px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
+  border-radius: 50%;
+  border: 1px solid rgba(121,201,255,.38);
+  background: radial-gradient(circle at 35% 30%, rgba(153,219,255,.18), rgba(10,15,21,.98) 65%);
+  box-shadow: 0 0 50px rgba(60,145,220,.18), inset 0 0 30px rgba(121,201,255,.05);
+  color: var(--ai-accent);
+}
+.aiCore strong { font-size: 1.08rem; color: white; line-height: 1; }
+.aiCore span { color: #7c95aa; font-size: .47rem; font-weight: 850; letter-spacing: .13em; }
+.aiCoreRing { position: absolute; inset: -9px; border: 1px solid rgba(121,201,255,.15); border-radius: 50%; animation: aiSpin 13s linear infinite; }
+.aiCoreRing::after { content: ''; position: absolute; top: -3px; left: 50%; width: 6px; height: 6px; border-radius: 50%; background: var(--ai-accent); box-shadow: 0 0 12px rgba(121,201,255,.8); }
+
+.aiStage {
+  position: absolute;
+  z-index: 3;
+  min-width: 83px;
+  min-height: 42px;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  grid-template-rows: 12px 15px;
+  column-gap: 6px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 1px solid var(--ai-line);
+  border-radius: 10px;
+  color: #a4b3c1;
+  background: rgba(8,13,19,.9);
+  cursor: pointer;
+  transition: .2s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16);
+}
+.aiStage svg { grid-row: 1 / 3; color: #60788c; }
+.aiStage span { color: #526a7f; font: 700 .5rem/1 ui-monospace, monospace; }
+.aiStage strong { font-size: .68rem; text-align: left; white-space: nowrap; }
+.aiStage:hover,
+.aiStage.active { transform: translateY(-2px); border-color: rgba(121,201,255,.43); color: white; background: rgba(121,201,255,.09); box-shadow: 0 8px 24px rgba(0,0,0,.24), 0 0 18px rgba(121,201,255,.07); }
+.aiStage.active svg { color: var(--ai-accent); }
+.aiStage1 { left: 7%; top: 10%; }
+.aiStage2 { right: 7%; top: 8%; }
+.aiStage3 { right: 2.5%; top: 52%; }
+.aiStage4 { left: 55%; bottom: 5%; }
+.aiStage5 { left: 5%; bottom: 11%; }
+
+.aiStageInspector { padding: 17px; display: flex; flex-direction: column; min-width: 0; }
+.aiInspectorTop { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ai-line); }
+.aiInspectorTop span { color: var(--ai-muted); font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; }
+.aiInspectorTop strong { color: var(--ai-accent); font: 800 .68rem/1 ui-monospace, monospace; }
+.aiStageInspector h4 { margin: 27px 0 8px; font-size: 1.38rem; letter-spacing: -.04em; }
+.aiStageInspector > p { margin: 0; color: var(--ai-muted); line-height: 1.6; font-size: .82rem; }
+.aiInspectorStats { margin-top: auto; display: grid; grid-template-columns: 1fr; gap: 9px; padding-top: 18px; }
+.aiInspectorStats div { padding: 10px 11px; border: 1px solid var(--ai-line); border-radius: 10px; background: rgba(255,255,255,.012); }
+.aiInspectorStats span { display: block; color: #63798c; font-size: .52rem; letter-spacing: .1em; }
+.aiInspectorStats strong { display: block; margin-top: 4px; font-size: .69rem; }
+
+.aiPipelineTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 7px;
+}
+.aiPipelineTrack::before { content: ''; position: absolute; left: 7%; right: 7%; top: 44px; height: 1px; background: linear-gradient(90deg, rgba(121,201,255,.1), rgba(121,201,255,.55), rgba(121,201,255,.1)); }
+.aiPipelineTrack button {
+  position: relative;
+  z-index: 1;
+  min-height: 238px;
+  padding: 15px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid var(--ai-line);
+  border-radius: 13px;
+  color: var(--ai-text);
+  background: rgba(255,255,255,.012);
+  cursor: pointer;
+  text-align: left;
+  transition: .2s ease;
+}
+.aiPipelineTrack button:hover,
+.aiPipelineTrack button.active { border-color: rgba(121,201,255,.34); background: rgba(121,201,255,.055); transform: translateY(-3px); }
+.aiPipeNum { color: #557087; font: 800 .56rem/1 ui-monospace, monospace; }
+.aiPipeDot { width: 9px; height: 9px; margin: 20px 0 27px; border-radius: 50%; background: #233544; border: 2px solid #0d1319; box-shadow: 0 0 0 1px rgba(121,201,255,.12); }
+.aiPipelineTrack button.active .aiPipeDot { background: var(--ai-accent); box-shadow: 0 0 0 4px rgba(121,201,255,.09), 0 0 16px rgba(121,201,255,.45); }
+.aiPipelineTrack strong { font-size: .82rem; }
+.aiPipelineTrack small { margin-top: 9px; color: var(--ai-muted); line-height: 1.5; font-size: .68rem; }
+
+.aiRoutingLayout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 14px; }
+.aiModelRail { display: grid; gap: 7px; }
+.aiModelRail button {
+  min-height: 41px;
+  display: grid;
+  grid-template-columns: 20px 1fr 18px;
+  gap: 8px;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid var(--ai-line);
+  border-radius: 10px;
+  color: #8fa2b4;
+  background: rgba(255,255,255,.012);
+  cursor: pointer;
+  text-align: left;
+  transition: .18s ease;
+}
+.aiModelRail button span { font-size: .72rem; font-weight: 720; }
+.aiModelRail button:hover,
+.aiModelRail button.active { color: white; border-color: rgba(121,201,255,.38); background: rgba(121,201,255,.065); transform: translateX(3px); }
+.aiModelRail button.active > svg:first-child { color: var(--ai-accent); }
+.aiRouteDetail { position: relative; overflow: hidden; padding: 22px; }
+.aiRouteDetail::after { content: ''; position: absolute; width: 170px; height: 170px; right: -60px; top: -60px; border-radius: 50%; background: rgba(121,201,255,.08); filter: blur(18px); }
+.aiRouteDetail > span { color: #637b8f; font-size: .58rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.aiRouteIcon { width: 48px; height: 48px; margin-top: 44px; display: grid; place-items: center; color: var(--ai-accent); border-radius: 12px; border: 1px solid rgba(121,201,255,.25); background: rgba(121,201,255,.07); }
+.aiRouteDetail h4 { margin: 16px 0 9px; font-size: 1.55rem; letter-spacing: -.04em; }
+.aiRouteDetail p { max-width: 460px; margin: 0; color: var(--ai-muted); line-height: 1.62; font-size: .82rem; }
+.aiRouteMeta { flex-wrap: wrap; gap: 7px; margin-top: 24px; }
+.aiRouteMeta span { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid var(--ai-line); border-radius: 999px; color: #8ca2b4; font-size: .61rem; }
+.aiRouteMeta i { width: 5px; height: 5px; }
+
+.aiEvalGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.aiEvalGrid article { padding: 16px; min-height: 135px; }
+.aiEvalTop { display: flex; justify-content: space-between; align-items: center; }
+.aiEvalTop span { color: #526b80; font: 800 .56rem/1 ui-monospace, monospace; }
+.aiEvalTop strong { color: var(--ai-accent-2); font: 800 .68rem/1 ui-monospace, monospace; }
+.aiEvalGrid h4 { margin: 24px 0 6px; font-size: .88rem; }
+.aiEvalGrid p { margin: 0; color: var(--ai-muted); font-size: .69rem; line-height: 1.48; }
+.aiEvalMeter { height: 3px; margin-top: 14px; background: rgba(255,255,255,.045); border-radius: 3px; overflow: hidden; }
+.aiEvalMeter i { display: block; height: 100%; background: linear-gradient(90deg, var(--ai-accent), var(--ai-accent-2)); box-shadow: 0 0 12px rgba(121,201,255,.34); }
+
+.aiSignalGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.aiSignalGrid article { min-height: 185px; padding: 14px; display: flex; flex-direction: column; transition: .2s ease; }
+.aiSignalGrid article:hover { transform: translateY(-3px); border-color: rgba(121,201,255,.32); background: rgba(121,201,255,.04); }
+.aiSignalPulse { justify-content: space-between; }
+.aiSignalPulse > i { width: 8px; height: 8px; border-radius: 50%; background: var(--ai-accent-2); box-shadow: 0 0 0 5px rgba(133,240,192,.045), 0 0 14px rgba(133,240,192,.34); animation: aiPulse 2s infinite; }
+.aiSignalPulse span { color: #536c80; font: 800 .55rem/1 ui-monospace, monospace; }
+.aiSignalGrid strong { margin-top: auto; font-size: .78rem; line-height: 1.38; }
+.aiSignalGrid small { margin-top: 8px; color: #5e788e; font-size: .58rem; text-transform: uppercase; letter-spacing: .09em; }
+
+.aiAppConsole {
+  min-height: 55px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--ai-line);
+  background: rgba(6,10,14,.9);
+}
+.aiConsoleLabel { gap: 7px; color: #647c90; font: 800 .55rem/1 ui-monospace, monospace; letter-spacing: .1em; white-space: nowrap; }
+.aiConsoleDot { width: 6px; height: 6px; border-radius: 50%; background: var(--ai-accent-2); box-shadow: 0 0 12px rgba(133,240,192,.5); }
+.aiConsoleLines { gap: 16px; justify-content: flex-end; overflow: hidden; }
+.aiConsoleLines span { color: #536b7f; font: 650 .58rem/1.2 ui-monospace, monospace; white-space: nowrap; }
+.aiConsoleLines b { color: #91a6b8; font-weight: 800; margin-right: 4px; }
+
+@keyframes aiPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .58; transform: scale(.82); } }
+@keyframes aiSpin { to { transform: rotate(360deg); } }
+@keyframes aiPanelIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1100px) {
+  .aiSystemApp { min-height: 590px; }
+  .aiPipelineTrack { grid-template-columns: repeat(3, 1fr); }
+  .aiPipelineTrack::before { display: none; }
+  .aiPipelineTrack button { min-height: 155px; }
+  .aiPipeDot { margin: 14px 0 16px; }
+  .aiSignalGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .aiSystemApp { min-height: 0; border-radius: 18px; }
+  .aiAppTopbar { align-items: flex-start; }
+  .aiAppControls { flex-direction: column-reverse; align-items: flex-end; }
+  .aiLive { font-size: .52rem; }
+  .aiAppControls button span { display: none; }
+  .aiAppTabs { overflow-x: auto; grid-template-columns: repeat(5, minmax(74px, 1fr)); scrollbar-width: none; }
+  .aiAppTabs::-webkit-scrollbar { display: none; }
+  .aiAppTabs button { min-height: 48px; padding: 0 8px; }
+  .aiAppTabs button span { font-size: .61rem; }
+  .aiAppPanel { padding: 15px; min-height: 0; }
+  .aiPanelHeading { grid-template-columns: 1fr; gap: 9px; margin-bottom: 15px; }
+  .aiPanelHeading > p { font-size: .72rem; }
+  .aiArchitecture { grid-template-columns: 1fr; }
+  .aiArchitectureMap { min-height: 300px; }
+  .aiStageInspector { min-height: 190px; }
+  .aiStage1 { left: 3%; }
+  .aiStage2 { right: 3%; }
+  .aiStage3 { right: 1%; }
+  .aiStage5 { left: 2%; }
+  .aiPipelineTrack { grid-template-columns: repeat(2, 1fr); }
+  .aiPipelineTrack button { min-height: 150px; }
+  .aiRoutingLayout { grid-template-columns: 1fr; }
+  .aiModelRail { grid-template-columns: repeat(2, 1fr); }
+  .aiModelRail button { grid-template-columns: 18px 1fr; }
+  .aiModelRail button > svg:last-child { display: none; }
+  .aiRouteIcon { margin-top: 25px; }
+  .aiEvalGrid { grid-template-columns: 1fr; }
+  .aiSignalGrid { grid-template-columns: repeat(2, 1fr); }
+  .aiSignalGrid article { min-height: 140px; }
+  .aiAppConsole { grid-template-columns: 1fr; gap: 7px; }
+  .aiConsoleLines { justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; }
+}
+
+@media (max-width: 430px) {
+  .aiAppIdentity strong { max-width: 180px; font-size: .72rem; }
+  .aiAppIdentity span { font-size: .54rem; }
+  .aiAppLogo { width: 34px; height: 34px; flex-basis: 34px; }
+  .aiStage { min-width: 70px; padding: 6px 7px; }
+  .aiStage strong { font-size: .61rem; }
+  .aiCore { width: 76px; height: 76px; }
+  .aiPipelineTrack { grid-template-columns: 1fr; }
+  .aiPipelineTrack button { min-height: 125px; }
+  .aiPipeDot { margin: 10px 0 12px; }
+  .aiSignalGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aiSystemApp *, .aiSystemApp *::before, .aiSystemApp *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
