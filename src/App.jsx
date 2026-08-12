@@ -35,7 +35,7 @@ export default function App() {
       <div className="ambientGlow" aria-hidden="true" />
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
       <main>
-        <Hero t={t} />
+        <Hero t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
         <AICore t={t} />
         <BitonetFit t={t} />
