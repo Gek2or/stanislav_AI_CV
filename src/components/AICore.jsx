@@ -1,9 +1,48 @@
-import { Bot, CheckCircle2, ChevronRight } from 'lucide-react'
+import { Bot, CheckCircle2, ChevronRight, Code2, GitBranch, TerminalSquare, WandSparkles, Workflow } from 'lucide-react'
 import { useState } from 'react'
 
-export default function AICore({ t }) {
+const devCopy = {
+  en: {
+    eyebrow: 'DEVELOPER TOOLCHAIN',
+    title: 'Modern coding environments and engineering agents',
+    intro: 'Tools I use or actively explore for implementation, debugging, repository work and agent-assisted development. They support the workflow; they do not replace review, testing or engineering judgment.',
+    status: 'USE / EXPLORE',
+  },
+  fi: {
+    eyebrow: 'KEHITTÄJÄTYÖKALUT',
+    title: 'Nykyaikaiset koodiympäristöt ja engineering-agentit',
+    intro: 'Työkalut, joita käytän tai tutkin aktiivisesti toteutukseen, virheiden selvitykseen, repositoriotyöhön ja agenttiavusteiseen kehitykseen. Ne tukevat prosessia, mutta eivät korvaa tarkistusta, testausta tai insinöörin harkintaa.',
+    status: 'KÄYTÄN / TUTKIN',
+  },
+  ru: {
+    eyebrow: 'DEVELOPER TOOLCHAIN',
+    title: 'Современные coding environments и engineering agents',
+    intro: 'Инструменты, которые я использую или активно изучаю для реализации, debugging, работы с репозиториями и agent-assisted development. Они усиливают процесс, но не заменяют review, тестирование и инженерное решение.',
+    status: 'ИСПОЛЬЗУЮ / ИЗУЧАЮ',
+  },
+  uk: {
+    eyebrow: 'DEVELOPER TOOLCHAIN',
+    title: 'Сучасні coding environments та engineering agents',
+    intro: 'Інструменти, які я використовую або активно досліджую для реалізації, debugging, роботи з репозиторіями та agent-assisted development. Вони підсилюють процес, але не замінюють review, тестування та інженерне рішення.',
+    status: 'ВИКОРИСТОВУЮ / ВИВЧАЮ',
+  },
+}
+
+const devTools = [
+  ['Visual Studio Code + GitHub Copilot', 'Editor + inline assistance, agent mode, code navigation and repository-aware implementation.', Code2],
+  ['Cursor', 'AI-first code editor for codebase-aware edits, natural-language changes and fast iteration.', WandSparkles],
+  ['OpenAI Codex', 'Coding agent for repository changes, implementation tasks, refactors, tests and command execution.', TerminalSquare],
+  ['Claude Code', 'Terminal-based coding agent for understanding projects, editing files and multi-step engineering work.', TerminalSquare],
+  ['JetBrains AI / Junie', 'IDE-integrated AI assistance and autonomous coding-agent workflows across JetBrains environments.', Code2],
+  ['Zed', 'Fast collaborative editor with built-in agentic workflows and parallel AI-assisted development.', Code2],
+  ['GitHub + Actions', 'Version control, reviewable changes, CI/CD workflows and deployment automation.', GitBranch],
+  ['Vite + React workflow', 'Fast frontend development, component-driven implementation and production builds.', Workflow],
+]
+
+export default function AICore({ t, lang = 'en' }) {
   const [activeStep, setActiveStep] = useState(0)
   const active = t.pipeline[activeStep]
+  const copy = devCopy[lang] || devCopy.en
 
   return (
     <section className="contentSection sectionShell" id="engineering">
@@ -57,6 +96,27 @@ export default function AICore({ t }) {
               </div>
               <h4>{name}</h4>
               <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="developerStackBlock">
+        <div className="developerStackIntro">
+          <p className="overline">{copy.eyebrow}</p>
+          <h3>{copy.title}</h3>
+          <p>{copy.intro}</p>
+        </div>
+        <div className="developerToolGrid">
+          {devTools.map(([name, description, Icon], index) => (
+            <article className="developerToolCard" key={name} tabIndex="0">
+              <div className="developerToolTop">
+                <span className="developerToolIndex">0{index + 1}</span>
+                <Icon size={18}/>
+              </div>
+              <h4>{name}</h4>
+              <p>{description}</p>
+              <span className="developerToolStatus"><i/>{copy.status}</span>
             </article>
           ))}
         </div>
