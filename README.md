@@ -1,4 +1,4 @@
-# stanislav_AI_CV
+# Stanislav_CV
 
 Professional React/Vite portfolio for **Stanislav Kosytskyy**, tailored to an **AI Software Engineer** direction and specifically aligned with Bitonet Oy's publicly described focus on clear business-oriented technology, industry-specific software, responsible AI usage, security and manageable implementation.
 
