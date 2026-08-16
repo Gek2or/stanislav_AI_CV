@@ -4,10 +4,10 @@ import { languages } from '../data/content'
 import { useSiteSound } from '../sound/SoundProvider'
 
 const soundLabels = {
-  en: ['Sound on', 'Sound off'],
-  fi: ['Ääni päällä', 'Ääni pois'],
-  ru: ['Звук включён', 'Звук выключен'],
-  uk: ['Звук увімкнено', 'Звук вимкнено'],
+  en: ['Sound on · cyberpunk ambient + interface SFX', 'Sound off'],
+  fi: ['Ääni päällä · cyberpunk ambient + interface SFX', 'Ääni pois'],
+  ru: ['Звук включён · cyberpunk ambient + interface SFX', 'Звук выключен'],
+  uk: ['Звук увімкнено · cyberpunk ambient + interface SFX', 'Звук вимкнено'],
 }
 
 export default function Header({ lang, setLang, nav }) {
@@ -63,7 +63,7 @@ export default function Header({ lang, setLang, nav }) {
         >
           <span className="soundWave" aria-hidden="true"><i/><i/><i/></span>
           {soundEnabled ? <Volume2 size={15}/> : <VolumeX size={15}/>} 
-          <span>SFX</span>
+          <span>SOUND</span>
         </button>
 
         <div className="languageSwitch" aria-label="Language selector">
