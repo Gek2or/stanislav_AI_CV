@@ -1,0 +1,329 @@
+/* Final recruiter-facing polish. Loaded last to resolve visual conflicts between earlier experiments. */
+:root {
+  --role-bg: #070b10;
+  --role-panel: rgba(11, 17, 24, .92);
+  --role-line: rgba(166, 205, 232, .13);
+  --role-line-strong: rgba(143, 207, 255, .28);
+  --role-accent: #8fcfff;
+  --role-text: #f5f8fb;
+  --role-muted: #91a0b0;
+}
+
+body {
+  background:
+    radial-gradient(circle at 82% 6%, rgba(72, 145, 202, .10), transparent 28rem),
+    radial-gradient(circle at 10% 32%, rgba(86, 211, 194, .035), transparent 24rem),
+    var(--role-bg);
+}
+
+/* Keep the 3D layer atmospheric instead of competing with recruiter-facing text. */
+.tech3dScene { opacity: .30 !important; filter: saturate(.82); }
+.tech3dGridPlane { opacity: .62; }
+.ambientGlow { opacity: .72; }
+
+.sectionShell { width: min(1180px, calc(100% - 48px)); }
+
+.topbar {
+  min-height: 68px;
+  background: rgba(7, 11, 16, .88) !important;
+  border-bottom-color: rgba(255,255,255,.07) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.16);
+}
+.brandIcon { border-radius: 8px !important; }
+.brandText strong { font-size: .84rem; }
+.brandText small { font-size: .66rem; }
+.desktopNav { gap: 24px; }
+.desktopNav a { font-size: .79rem; }
+
+/* Hero: preserve the reference-inspired scale without letting the surname clip or dominate everything. */
+.referenceHero {
+  padding-top: clamp(56px, 6vw, 82px) !important;
+  padding-bottom: clamp(88px, 10vw, 132px) !important;
+}
+.referenceHeroIdentity { overflow: visible; }
+.referenceHeroIdentity h1 {
+  max-width: 100%;
+  overflow: visible;
+  font-size: clamp(4.8rem, 11vw, 10.4rem) !important;
+  line-height: .80 !important;
+  letter-spacing: -.074em !important;
+}
+.referenceHeroIdentity h1 span {
+  max-width: 100%;
+  overflow: visible;
+  white-space: nowrap;
+}
+.referenceHeroIdentity h1 span:last-child {
+  padding-right: .08em !important;
+  -webkit-text-stroke-width: 1.15px !important;
+}
+.referenceHeroSplit {
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .72fr) !important;
+  gap: clamp(38px, 5vw, 68px) !important;
+  margin-top: clamp(54px, 6vw, 78px) !important;
+}
+.referenceHeroStatement h2 {
+  max-width: 760px !important;
+  font-size: clamp(2.35rem, 4.4vw, 4.7rem) !important;
+  line-height: .99 !important;
+  text-wrap: balance;
+}
+.referenceHeroStatement > p {
+  max-width: 700px !important;
+  color: #9aa9b8 !important;
+  line-height: 1.72 !important;
+}
+.referenceHeroMetrics article {
+  min-height: 146px !important;
+  background: rgba(255,255,255,.006) !important;
+}
+.referenceHeroMetrics article > strong { font-variant-numeric: tabular-nums; }
+.referenceHeroTimeline {
+  margin-top: clamp(62px, 7vw, 88px) !important;
+}
+.referenceHeroTimeline article { min-height: 92px !important; }
+.referenceConsoleIntro {
+  margin-top: clamp(64px, 7vw, 92px) !important;
+  margin-bottom: 24px !important;
+}
+.referenceConsoleIntro h3 { font-size: clamp(2.5rem, 4.8vw, 4.8rem) !important; }
+.referenceConsoleWrap .aiSystemApp {
+  min-height: 610px !important;
+  border-color: rgba(143,207,255,.24) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.02) inset !important;
+}
+
+/* The first evidence section should feel like a continuation, not a second hero competing for attention. */
+.referenceDeck {
+  padding-top: clamp(86px, 10vw, 128px) !important;
+  padding-bottom: clamp(92px, 11vw, 138px) !important;
+}
+.referenceIntro {
+  grid-template-columns: minmax(0, 1.22fr) minmax(280px, .78fr) !important;
+  gap: 42px !important;
+  padding-bottom: 46px !important;
+}
+.referenceIntro h2 {
+  font-size: clamp(3.8rem, 7.3vw, 8rem) !important;
+  line-height: .87 !important;
+  letter-spacing: -.066em !important;
+}
+.referenceIntro > p { color: #95a4b4 !important; }
+.referenceStoryGrid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .82fr) !important;
+  gap: 34px !important;
+  margin-top: 50px !important;
+}
+.referenceChapters button { padding-top: 21px !important; padding-bottom: 21px !important; }
+.referenceChapterText small {
+  max-width: 610px !important;
+  color: #8795a4 !important;
+  line-height: 1.55 !important;
+}
+.referenceSystemCard {
+  top: 88px !important;
+  min-height: 560px !important;
+  border-radius: 18px !important;
+  background:
+    radial-gradient(circle at 75% 10%, rgba(87,177,242,.10), transparent 31%),
+    linear-gradient(145deg, rgba(12,18,25,.98), rgba(8,12,17,.98)) !important;
+}
+.referenceSystemVisual { height: 278px !important; }
+.referenceSystemCopy p { color: #94a3b2 !important; }
+.referenceStack { margin-top: 78px !important; }
+.referenceStackHeading h3 { font-size: clamp(2.2rem, 4.5vw, 4.5rem) !important; }
+.referenceStackRail article {
+  min-height: 168px !important;
+  background: rgba(255,255,255,.005) !important;
+}
+.referenceStackRail article strong { margin-top: 34px !important; }
+
+/* Section rhythm and readability. */
+.contentSection {
+  padding-top: clamp(90px, 11vw, 142px) !important;
+  padding-bottom: clamp(90px, 11vw, 142px) !important;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.sectionIntroGrid {
+  gap: clamp(32px, 5vw, 68px) !important;
+  margin-bottom: 48px !important;
+}
+.sectionIntroGrid h2 {
+  max-width: 720px;
+  text-wrap: balance;
+}
+.sectionLead {
+  max-width: 650px !important;
+  color: #98a7b6 !important;
+  line-height: 1.72 !important;
+}
+.sectionNumber { color: rgba(143,207,255,.72) !important; }
+
+/* Case study: remove the old empty fourth grid column and keep the business flow readable. */
+.featuredCase {
+  gap: 34px !important;
+  border-color: rgba(255,255,255,.10) !important;
+  background: linear-gradient(145deg, rgba(14,20,28,.82), rgba(8,13,19,.76)) !important;
+}
+.featuredCaseCopy p { color: #99a7b5 !important; line-height: 1.68 !important; }
+.caseTags span { background: rgba(143,207,255,.035) !important; }
+.caseSignal strong { color: #cbd6e0 !important; line-height: 1.5 !important; }
+.compactExperienceList .experienceRow {
+  grid-template-columns: 56px minmax(190px, .72fr) minmax(0, 1.28fr) !important;
+  align-items: start !important;
+  gap: 20px !important;
+}
+.compactExperienceList .experienceRow > p {
+  max-width: 760px;
+  color: #94a2b1 !important;
+  line-height: 1.62 !important;
+}
+.buildGrid { gap: 0 !important; }
+.buildCard { min-height: 300px; }
+.buildCard p { color: #8f9dac !important; line-height: 1.62 !important; }
+
+/* Engineering section: CI should read as a real delivery practice, not another tool badge. */
+.processExperience {
+  border-color: rgba(255,255,255,.10) !important;
+  background: rgba(255,255,255,.005);
+}
+.processStep { min-height: 70px !important; }
+.processDetail p { color: #9aa8b7 !important; line-height: 1.68 !important; }
+.engineeringBlock { margin-top: 76px !important; }
+.engineeringIntro p { color: #96a5b4 !important; line-height: 1.7 !important; }
+.engineeringRow {
+  min-height: 128px !important;
+  border-color: rgba(255,255,255,.08) !important;
+}
+.engineeringRow p { color: #8f9ead !important; line-height: 1.56 !important; }
+.toolBlock { margin-top: 74px !important; }
+.toolHeading p { color: #93a2b1 !important; }
+.toolRow { min-height: 62px !important; }
+.toolRow span { color: #8c9aa9 !important; }
+
+/* Bitonet fit: make the employer-specific evidence the visual conclusion of the technical story. */
+.bitonetStatement {
+  border-color: rgba(143,207,255,.18) !important;
+  background: rgba(143,207,255,.025) !important;
+}
+.bitonetStatement p { line-height: 1.72 !important; }
+.fitRow {
+  min-height: 126px !important;
+  grid-template-columns: 48px 24px minmax(170px,.72fr) minmax(0,1.28fr) !important;
+  gap: 16px !important;
+}
+.fitRow p { color: #94a2b1 !important; line-height: 1.62 !important; }
+
+/* Recruiter assistant should look optional and compact, not like the main product. */
+.assistantSection { padding-top: 88px !important; }
+.assistantShell {
+  border-color: rgba(255,255,255,.10) !important;
+  background: rgba(8,13,19,.72) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.20);
+}
+.suggestedQuestions button { border-color: rgba(255,255,255,.09) !important; }
+.chatMessage p { line-height: 1.58 !important; }
+
+.contactSection {
+  padding-top: clamp(90px, 10vw, 130px) !important;
+  padding-bottom: clamp(100px, 12vw, 150px) !important;
+}
+.contactIntro h2 { text-wrap: balance; }
+.contactCards a,
+.contactCards > div { border-color: rgba(255,255,255,.10) !important; }
+
+/* Keyboard interaction deserves the same quality as hover. */
+a:focus-visible,
+button:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 2px solid rgba(143,207,255,.72);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1080px) {
+  .desktopNav { display: none !important; }
+  .topbar { grid-template-columns: 1fr auto !important; }
+  .referenceHeroSplit,
+  .referenceIntro,
+  .referenceStoryGrid,
+  .sectionIntroGrid { grid-template-columns: 1fr !important; }
+  .referenceHeroMetrics { max-width: none !important; }
+  .referenceSystemCard { position: relative !important; top: auto !important; }
+  .fitRow { grid-template-columns: 44px 24px minmax(150px,.65fr) minmax(0,1.35fr) !important; }
+}
+
+@media (max-width: 760px) {
+  .sectionShell { width: min(100% - 28px, 1180px); }
+  .tech3dScene { opacity: .13 !important; }
+  .topbar { min-height: 62px !important; padding-left: 14px !important; padding-right: 14px !important; gap: 10px !important; }
+  .brand { min-width: 0 !important; }
+  .brandText small { display: none; }
+  .brandText strong { font-size: .75rem; }
+  .languageSwitch button { width: 32px !important; height: 32px !important; }
+
+  .referenceHero { padding-top: 38px !important; }
+  .referenceHeroIdentity { margin-top: 28px !important; }
+  .referenceHeroIdentity h1 {
+    font-size: clamp(3.65rem, 17vw, 6.1rem) !important;
+    line-height: .82 !important;
+    letter-spacing: -.065em !important;
+  }
+  .referenceHeroIdentity h1 span { white-space: normal; overflow-wrap: normal; }
+  .referenceHeroStatement h2 { font-size: clamp(2.15rem, 10vw, 3.6rem) !important; }
+  .referenceHeroMetrics { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .referenceHeroMetrics article { min-height: 124px !important; }
+  .referenceHeroTimeline { gap: 12px !important; }
+  .referenceConsoleWrap .aiSystemApp { min-height: auto !important; }
+
+  .referenceDeck { padding-top: 76px !important; }
+  .referenceIntro h2 { font-size: clamp(3rem, 14.5vw, 4.8rem) !important; }
+  .referenceChapters button {
+    grid-template-columns: 28px 30px minmax(0,1fr) 18px !important;
+    gap: 8px !important;
+  }
+  .referenceChapterText small { display: none; }
+  .referenceSystemCard { min-height: auto !important; }
+  .referenceSystemVisual { height: 244px !important; }
+  .referenceStackRail { grid-template-columns: 1fr !important; }
+
+  .contentSection { padding-top: 76px !important; padding-bottom: 76px !important; }
+  .sectionIntroGrid { margin-bottom: 34px !important; }
+  .featuredCase { grid-template-columns: 1fr !important; }
+  .compactExperienceList .experienceRow {
+    grid-template-columns: 34px minmax(0,1fr) !important;
+    gap: 8px 12px !important;
+  }
+  .compactExperienceList .experienceRow > p { grid-column: 2; }
+  .buildGrid { grid-template-columns: 1fr !important; }
+  .buildCard { min-height: 240px; }
+
+  .processExperience { grid-template-columns: 1fr !important; }
+  .engineeringBlock { grid-template-columns: 1fr !important; margin-top: 58px !important; }
+  .engineeringRow { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .toolBlock { margin-top: 58px !important; }
+  .toolRow { grid-template-columns: 24px minmax(0,1fr) !important; }
+  .toolRow span { grid-column: 2; }
+
+  .bitonetIntroGrid { grid-template-columns: 1fr !important; }
+  .fitRow {
+    grid-template-columns: 32px 22px minmax(0,1fr) !important;
+    gap: 10px !important;
+  }
+  .fitRow p { grid-column: 3; }
+
+  .assistantIntroGrid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 460px) {
+  .referenceHeroMetrics { grid-template-columns: 1fr 1fr !important; }
+  .referenceHeroMetrics article > strong { font-size: 2.7rem !important; }
+  .referenceHeroTopline { font-size: .66rem !important; }
+  .referenceHeroIdentity h1 { font-size: clamp(3.25rem, 16.2vw, 4.6rem) !important; }
+  .referenceStackHeading h3 { font-size: 2.25rem !important; }
+  .contactCards a span { overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech3dScene { display: none !important; }
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
