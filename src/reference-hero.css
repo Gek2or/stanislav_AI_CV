@@ -1,0 +1,321 @@
+.referenceHero {
+  position: relative;
+  z-index: 3;
+  padding-top: clamp(70px, 8vw, 110px);
+  padding-bottom: clamp(100px, 12vw, 160px);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.referenceHeroTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 44px;
+  color: #8393a5;
+  font-size: .72rem;
+  letter-spacing: .02em;
+}
+.referenceHeroTopline > div { display: inline-flex; align-items: center; gap: 8px; }
+.referenceHeroTopline strong { color: #d6e2ec; font-weight: 760; }
+
+.referenceHeroIdentity {
+  position: relative;
+  margin-top: 28px;
+}
+.referenceHeroIdentity > p {
+  margin: 0 0 8px;
+  color: #8fcfff;
+  font: 800 .82rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.referenceHeroIdentity h1 {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(5.2rem, 12.6vw, 12rem);
+  line-height: .76;
+  letter-spacing: -.085em;
+  font-weight: 760;
+  text-wrap: balance;
+}
+.referenceHeroIdentity h1 span:first-child {
+  color: #f6f9fc;
+}
+.referenceHeroIdentity h1 span:last-child {
+  width: fit-content;
+  max-width: 100%;
+  color: transparent;
+  -webkit-text-stroke: 1.35px rgba(208,229,245,.66);
+  text-stroke: 1.35px rgba(208,229,245,.66);
+  padding-right: .05em;
+}
+
+.referenceHeroSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, .82fr);
+  gap: clamp(40px, 6vw, 90px);
+  align-items: end;
+  margin-top: clamp(60px, 8vw, 100px);
+}
+
+.referenceHeroStatement {
+  max-width: 710px;
+}
+.referenceHeroKicker {
+  display: inline-flex;
+  color: #8fcfff;
+  font: 800 .66rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .15em;
+}
+.referenceHeroStatement h2 {
+  margin: 17px 0 0;
+  max-width: 710px;
+  font-size: clamp(2.25rem, 4.7vw, 5.25rem);
+  line-height: .98;
+  letter-spacing: -.057em;
+  font-weight: 690;
+}
+.referenceHeroStatement > p {
+  margin: 24px 0 0;
+  max-width: 650px;
+  color: #92a2b4;
+  font-size: .98rem;
+  line-height: 1.78;
+}
+.referenceHeroActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 30px;
+}
+.referenceTextLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd8e3;
+  font-size: .87rem;
+  font-weight: 760;
+  border-bottom: 1px solid rgba(203,216,227,.34);
+  padding-bottom: 4px;
+  transition: color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.referenceTextLink:hover {
+  color: #fff;
+  border-color: #8fcfff;
+  transform: translateY(-1px);
+}
+
+.referenceHeroMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+.referenceHeroMetrics article {
+  min-height: 160px;
+  padding: 18px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.008);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.referenceHeroMetrics article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(143,207,255,.2);
+  background: rgba(143,207,255,.025);
+}
+.referenceHeroMetrics article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #7891a7;
+}
+.referenceHeroMetrics article > div span {
+  color: #566b7f;
+  font: 800 .57rem/1 ui-monospace, monospace;
+}
+.referenceHeroMetrics article > strong {
+  display: block;
+  margin-top: 30px;
+  font-size: clamp(2.6rem, 4.4vw, 4.6rem);
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+.referenceHeroMetrics article > p {
+  margin: 8px 0 0;
+  color: #7d8d9e;
+  font-size: .72rem;
+}
+
+.referenceHeroTimeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: clamp(72px, 8vw, 104px);
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,.11);
+}
+.referenceHeroTimeline article {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 34px 74px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  min-height: 110px;
+  padding-right: 24px;
+}
+.referenceHeroTimeline article > span {
+  color: #52687b;
+  font: 800 .56rem/1 ui-monospace, monospace;
+}
+.referenceHeroTimeline article > strong {
+  color: #eaf3fa;
+  font: 800 .78rem/1 ui-monospace, monospace;
+}
+.referenceHeroTimeline article b {
+  display: block;
+  font-size: .88rem;
+}
+.referenceHeroTimeline article small {
+  display: block;
+  margin-top: 7px;
+  color: #738497;
+  font-size: .7rem;
+  line-height: 1.45;
+}
+.referenceTimelineRail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.referenceTimelineRail i {
+  position: relative;
+  display: block;
+  height: 8px;
+}
+.referenceTimelineRail i::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8fcfff;
+  box-shadow: 0 0 16px rgba(143,207,255,.45);
+}
+
+.referenceConsoleIntro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: end;
+  margin-top: clamp(70px, 9vw, 120px);
+  margin-bottom: 28px;
+}
+.referenceConsoleIntro span {
+  color: #8fcfff;
+  font: 800 .63rem/1 ui-monospace, monospace;
+  letter-spacing: .14em;
+}
+.referenceConsoleIntro h3 {
+  margin: 9px 0 0;
+  font-size: clamp(2.5rem, 5.2vw, 5.6rem);
+  line-height: .91;
+  letter-spacing: -.06em;
+}
+.referenceConsoleIntro > p {
+  margin: 0;
+  color: #8b9aaa;
+  line-height: 1.72;
+}
+.referenceConsoleWrap {
+  position: relative;
+  perspective: 1600px;
+}
+.referenceConsoleWrap .aiSystemApp {
+  width: 100%;
+  min-height: 650px;
+}
+
+@media (max-width: 1050px) {
+  .referenceHeroSplit,
+  .referenceConsoleIntro { grid-template-columns: 1fr; }
+  .referenceHeroSplit { gap: 48px; }
+  .referenceHeroMetrics { max-width: 720px; }
+}
+
+@media (max-width: 760px) {
+  .referenceHero {
+    padding-top: 52px;
+    padding-bottom: 94px;
+  }
+  .referenceHeroTopline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .referenceHeroIdentity {
+    margin-top: 36px;
+  }
+  .referenceHeroIdentity h1 {
+    font-size: clamp(4.2rem, 19vw, 7.1rem);
+    line-height: .78;
+  }
+  .referenceHeroSplit {
+    margin-top: 54px;
+  }
+  .referenceHeroStatement h2 {
+    font-size: clamp(2.4rem, 11vw, 4.5rem);
+  }
+  .referenceHeroMetrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .referenceHeroMetrics article {
+    min-height: 138px;
+    padding: 15px;
+  }
+  .referenceHeroTimeline {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .referenceHeroTimeline article {
+    grid-template-columns: 30px 72px 1fr;
+    min-height: 78px;
+    padding-right: 0;
+  }
+  .referenceTimelineRail {
+    display: none;
+  }
+  .referenceConsoleIntro {
+    gap: 18px;
+    margin-top: 84px;
+  }
+  .referenceConsoleWrap .aiSystemApp {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .referenceHeroMetrics {
+    grid-template-columns: 1fr;
+  }
+  .referenceHeroMetrics article {
+    min-height: 124px;
+  }
+  .referenceHeroMetrics article > strong {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referenceHeroMetrics article,
+  .referenceTextLink { transition: none !important; }
+}
