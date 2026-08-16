@@ -18,10 +18,15 @@ function savePreference(enabled) {
   }
 }
 
+function safeStop(node, when) {
+  try { node?.stop?.(when) } catch {}
+}
+
 export function SoundProvider({ children }) {
   const [enabled, setEnabled] = useState(readPreference)
   const audioRef = useRef(null)
   const masterRef = useRef(null)
+  const ambientRef = useRef(null)
   const lastHoverRef = useRef({ element: null, time: 0 })
   const lastSectionRef = useRef(0)
   const seenSectionsRef = useRef(new Set())
@@ -34,7 +39,7 @@ export function SoundProvider({ children }) {
     if (!audioRef.current) {
       const ctx = new AudioCtx()
       const master = ctx.createGain()
-      master.gain.value = 0.9
+      master.gain.value = 0.86
       master.connect(ctx.destination)
       audioRef.current = ctx
       masterRef.current = master
@@ -46,6 +51,234 @@ export function SoundProvider({ children }) {
     }
     return ctx
   }, [])
+
+  const stopAmbient = useCallback((fade = true) => {
+    const ambient = ambientRef.current
+    ambientRef.current = null
+    if (!ambient) return
+
+    ambient.active = false
+    ambient.timers.forEach((timer) => window.clearTimeout(timer))
+    ambient.timers.clear()
+
+    const ctx = ambient.ctx
+    const now = ctx.currentTime
+    const stopAt = now + (fade ? 0.42 : 0.02)
+
+    try {
+      ambient.bus.gain.cancelScheduledValues(now)
+      ambient.bus.gain.setValueAtTime(Math.max(0.0001, ambient.bus.gain.value), now)
+      ambient.bus.gain.exponentialRampToValueAtTime(0.0001, stopAt)
+    } catch {}
+
+    ambient.nodes.forEach((node) => safeStop(node, stopAt + 0.03))
+    window.setTimeout(() => {
+      ambient.connections.forEach((node) => {
+        try { node.disconnect?.() } catch {}
+      })
+    }, fade ? 520 : 80)
+  }, [])
+
+  const startAmbient = useCallback(async () => {
+    if (ambientRef.current?.active) return true
+
+    const ctx = await ensureAudio()
+    if (!ctx || ctx.state !== 'running' || !masterRef.current) return false
+
+    const now = ctx.currentTime
+    const bus = ctx.createGain()
+    const toneFilter = ctx.createBiquadFilter()
+    const airFilter = ctx.createBiquadFilter()
+    const nodes = []
+    const connections = [bus, toneFilter, airFilter]
+    const timers = new Set()
+
+    bus.gain.setValueAtTime(0.0001, now)
+    bus.gain.exponentialRampToValueAtTime(0.012, now + 1.8)
+
+    toneFilter.type = 'lowpass'
+    toneFilter.frequency.value = 520
+    toneFilter.Q.value = 0.55
+
+    airFilter.type = 'bandpass'
+    airFilter.frequency.value = 1850
+    airFilter.Q.value = 0.42
+
+    toneFilter.connect(bus)
+    airFilter.connect(bus)
+    bus.connect(masterRef.current)
+
+    const connectTone = ({ frequency, type = 'sine', gain = 0.001, pan = 0, detune = 0 }) => {
+      const osc = ctx.createOscillator()
+      const amp = ctx.createGain()
+      const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
+
+      osc.type = type
+      osc.frequency.value = frequency
+      osc.detune.value = detune
+      amp.gain.value = gain
+      if (panner) panner.pan.value = pan
+
+      osc.connect(amp)
+      if (panner) {
+        amp.connect(panner)
+        panner.connect(toneFilter)
+        connections.push(panner)
+      } else {
+        amp.connect(toneFilter)
+      }
+
+      osc.start(now)
+      nodes.push(osc)
+      connections.push(osc, amp)
+      return { osc, amp, panner }
+    }
+
+    // Layer 1 — low neon electrical bed. Frequencies are deliberately audible on laptop speakers,
+    // but the gains are very low so it reads as atmosphere rather than music.
+    connectTone({ frequency: 74, type: 'sine', gain: 0.0027, pan: -0.08 })
+    connectTone({ frequency: 148.5, type: 'triangle', gain: 0.00125, pan: 0.08, detune: -4 })
+    connectTone({ frequency: 222.6, type: 'sine', gain: 0.00065, pan: 0.02, detune: 5 })
+
+    // Layer 2 — slow breathing pulse on the ambient bus.
+    const lfo = ctx.createOscillator()
+    const lfoDepth = ctx.createGain()
+    lfo.type = 'sine'
+    lfo.frequency.value = 0.075
+    lfoDepth.gain.value = 0.0022
+    lfo.connect(lfoDepth)
+    lfoDepth.connect(bus.gain)
+    lfo.start(now)
+    nodes.push(lfo)
+    connections.push(lfo, lfoDepth)
+
+    // Layer 3 — a very light stereo "digital air" beating in the upper-mid range.
+    const airLeft = ctx.createOscillator()
+    const airRight = ctx.createOscillator()
+    const airLeftGain = ctx.createGain()
+    const airRightGain = ctx.createGain()
+    const leftPan = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
+    const rightPan = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
+
+    airLeft.type = 'sine'
+    airRight.type = 'sine'
+    airLeft.frequency.value = 1780
+    airRight.frequency.value = 1792
+    airLeftGain.gain.value = 0.00018
+    airRightGain.gain.value = 0.00016
+
+    airLeft.connect(airLeftGain)
+    airRight.connect(airRightGain)
+    if (leftPan && rightPan) {
+      leftPan.pan.value = -0.58
+      rightPan.pan.value = 0.58
+      airLeftGain.connect(leftPan)
+      airRightGain.connect(rightPan)
+      leftPan.connect(airFilter)
+      rightPan.connect(airFilter)
+      connections.push(leftPan, rightPan)
+    } else {
+      airLeftGain.connect(airFilter)
+      airRightGain.connect(airFilter)
+    }
+    airLeft.start(now)
+    airRight.start(now)
+    nodes.push(airLeft, airRight)
+    connections.push(airLeft, airRight, airLeftGain, airRightGain)
+
+    const ambient = { ctx, bus, nodes, connections, timers, active: true }
+    ambientRef.current = ambient
+
+    const schedule = (fn, delay) => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer)
+        if (ambientRef.current !== ambient || !ambient.active) return
+        fn()
+      }, delay)
+      timers.add(timer)
+    }
+
+    const scanner = () => {
+      if (ambientRef.current !== ambient || !ambient.active) return
+      const start = ctx.currentTime + 0.015
+      const duration = 1.65 + Math.random() * 0.55
+      const osc = ctx.createOscillator()
+      const amp = ctx.createGain()
+      const filter = ctx.createBiquadFilter()
+      const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
+      const end = start + duration
+
+      osc.type = 'triangle'
+      osc.frequency.setValueAtTime(235 + Math.random() * 35, start)
+      osc.frequency.exponentialRampToValueAtTime(920 + Math.random() * 260, end)
+      filter.type = 'bandpass'
+      filter.frequency.setValueAtTime(620, start)
+      filter.frequency.exponentialRampToValueAtTime(2100, end)
+      filter.Q.value = 1.15
+      amp.gain.setValueAtTime(0.0001, start)
+      amp.gain.exponentialRampToValueAtTime(0.00115, start + duration * 0.28)
+      amp.gain.exponentialRampToValueAtTime(0.0001, end)
+
+      osc.connect(filter)
+      filter.connect(amp)
+      if (panner) {
+        panner.pan.setValueAtTime(-0.68, start)
+        panner.pan.linearRampToValueAtTime(0.68, end)
+        amp.connect(panner)
+        panner.connect(bus)
+      } else {
+        amp.connect(bus)
+      }
+
+      osc.start(start)
+      osc.stop(end + 0.03)
+      window.setTimeout(() => {
+        try { osc.disconnect(); filter.disconnect(); amp.disconnect(); panner?.disconnect() } catch {}
+      }, (duration + 0.2) * 1000)
+
+      schedule(scanner, 11000 + Math.random() * 9000)
+    }
+
+    const sparkle = () => {
+      if (ambientRef.current !== ambient || !ambient.active) return
+      const base = ctx.currentTime + 0.015
+      const count = Math.random() > 0.55 ? 2 : 1
+
+      for (let index = 0; index < count; index += 1) {
+        const osc = ctx.createOscillator()
+        const amp = ctx.createGain()
+        const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
+        const start = base + index * 0.055
+        const end = start + 0.045 + Math.random() * 0.035
+        const from = 1180 + Math.random() * 780
+
+        osc.type = index % 2 === 0 ? 'sine' : 'triangle'
+        osc.frequency.setValueAtTime(from, start)
+        osc.frequency.exponentialRampToValueAtTime(from * (1.12 + Math.random() * 0.18), end)
+        amp.gain.setValueAtTime(0.0001, start)
+        amp.gain.exponentialRampToValueAtTime(0.00072, start + 0.008)
+        amp.gain.exponentialRampToValueAtTime(0.0001, end)
+
+        osc.connect(amp)
+        if (panner) {
+          panner.pan.value = -0.7 + Math.random() * 1.4
+          amp.connect(panner)
+          panner.connect(bus)
+        } else {
+          amp.connect(bus)
+        }
+        osc.start(start)
+        osc.stop(end + 0.02)
+      }
+
+      schedule(sparkle, 6500 + Math.random() * 8500)
+    }
+
+    // Do not fire immediately after enabling sound; let the listener settle into the page first.
+    schedule(scanner, 6500 + Math.random() * 4500)
+    schedule(sparkle, 3800 + Math.random() * 3500)
+    return true
+  }, [ensureAudio])
 
   const synth = useCallback(async (kind = 'tap', force = false) => {
     if (!enabled && !force) return
@@ -121,9 +354,9 @@ export function SoundProvider({ children }) {
     }
 
     if (kind === 'enable') {
-      note({ from: 360, to: 440, duration: 0.07, volume: 0.010, type: 'triangle', pan: -0.18 })
-      note({ delay: 0.055, from: 540, to: 660, duration: 0.08, volume: 0.009, pan: 0 })
-      note({ delay: 0.11, from: 760, to: 920, duration: 0.09, volume: 0.008, pan: 0.18 })
+      note({ from: 300, to: 390, duration: 0.075, volume: 0.009, type: 'triangle', pan: -0.2 })
+      note({ delay: 0.06, from: 500, to: 640, duration: 0.09, volume: 0.008, pan: 0 })
+      note({ delay: 0.125, from: 760, to: 980, duration: 0.11, volume: 0.0068, pan: 0.2 })
       return
     }
 
@@ -144,10 +377,39 @@ export function SoundProvider({ children }) {
       seenSectionsRef.current = new Set()
     } else {
       synth('disable', true)
+      stopAmbient(true)
       setEnabled(false)
       savePreference(false)
     }
-  }, [enabled, synth])
+  }, [enabled, stopAmbient, synth])
+
+  useEffect(() => {
+    if (!enabled) {
+      stopAmbient(false)
+      return undefined
+    }
+
+    let disposed = false
+
+    const bootAmbient = async () => {
+      if (disposed) return
+      const started = await startAmbient()
+      if (started || disposed) return
+
+      // Browsers can restore the user's ON preference while still blocking audio until a gesture.
+      // Start the bed on the first real interaction rather than trying to bypass autoplay policy.
+      window.addEventListener('pointerdown', bootAmbient, { once: true, passive: true })
+      window.addEventListener('keydown', bootAmbient, { once: true })
+    }
+
+    bootAmbient()
+    return () => {
+      disposed = true
+      window.removeEventListener('pointerdown', bootAmbient)
+      window.removeEventListener('keydown', bootAmbient)
+      stopAmbient(true)
+    }
+  }, [enabled, startAmbient, stopAmbient])
 
   useEffect(() => {
     if (!enabled) return undefined
