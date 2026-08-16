@@ -1,9 +1,19 @@
-import { Code2 } from 'lucide-react'
+import { Code2, Volume2, VolumeX } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { languages } from '../data/content'
+import { useSiteSound } from '../sound/SoundProvider'
+
+const soundLabels = {
+  en: ['Sound on', 'Sound off'],
+  fi: ['Ääni päällä', 'Ääni pois'],
+  ru: ['Звук включён', 'Звук выключен'],
+  uk: ['Звук увімкнено', 'Звук вимкнено'],
+}
 
 export default function Header({ lang, setLang, nav }) {
   const [progress, setProgress] = useState(0)
+  const { enabled: soundEnabled, toggle: toggleSound } = useSiteSound()
+  const labels = soundLabels[lang] || soundLabels.en
   const links = [
     ['#work', nav[2]],
     ['#engineering', nav[0]],
@@ -41,17 +51,33 @@ export default function Header({ lang, setLang, nav }) {
         {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
       </nav>
 
-      <div className="languageSwitch" aria-label="Language selector">
-        {languages.map((item) => (
-          <button
-            key={item.id}
-            className={lang === item.id ? 'active' : ''}
-            onClick={() => setLang(item.id)}
-            aria-pressed={lang === item.id}
-          >
-            {item.label}
-          </button>
-        ))}
+      <div className="headerControls">
+        <button
+          type="button"
+          className={`siteSoundToggle ${soundEnabled ? 'active' : ''}`}
+          onClick={toggleSound}
+          aria-pressed={soundEnabled}
+          aria-label={soundEnabled ? labels[0] : labels[1]}
+          title={soundEnabled ? labels[0] : labels[1]}
+          data-sound-toggle="true"
+        >
+          <span className="soundWave" aria-hidden="true"><i/><i/><i/></span>
+          {soundEnabled ? <Volume2 size={15}/> : <VolumeX size={15}/>} 
+          <span>SFX</span>
+        </button>
+
+        <div className="languageSwitch" aria-label="Language selector">
+          {languages.map((item) => (
+            <button
+              key={item.id}
+              className={lang === item.id ? 'active' : ''}
+              onClick={() => setLang(item.id)}
+              aria-pressed={lang === item.id}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
     </header>
   )
