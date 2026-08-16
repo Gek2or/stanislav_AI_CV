@@ -1,0 +1,29 @@
+/* Runtime-safe transform override: JS writes complete pixel/degree values. */
+.tech3dScene {
+  --scene-tx: 0px;
+  --scene-ty: 0px;
+  --scene-rx: 61deg;
+  --scene-rz: -14deg;
+}
+
+.tech3dWorld {
+  transform: translate3d(var(--scene-tx), var(--scene-ty), 0) rotateX(var(--scene-rx)) rotateZ(var(--scene-rz));
+}
+
+@media (max-width: 1080px) {
+  .tech3dWorld {
+    transform: translate3d(var(--scene-tx), var(--scene-ty), 0) rotateX(var(--scene-rx)) rotateZ(var(--scene-rz)) scale(.88);
+  }
+}
+
+@media (max-width: 760px) {
+  .tech3dWorld {
+    transform: rotateX(66deg) rotateZ(-14deg) scale(.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech3dWorld {
+    transform: rotateX(61deg) rotateZ(-14deg);
+  }
+}
