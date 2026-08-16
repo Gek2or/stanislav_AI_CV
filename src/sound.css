@@ -1,0 +1,119 @@
+/* Original site-wide sound identity: subtle, optional, and user-controlled. */
+.headerControls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+}
+
+.siteSoundToggle {
+  position: relative;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  color: #708295;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  background: rgba(255,255,255,.012);
+  font: 800 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .10em;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.siteSoundToggle:hover {
+  color: #d9e7f2;
+  border-color: rgba(143,207,255,.24);
+  background: rgba(143,207,255,.035);
+  transform: translateY(-1px);
+}
+
+.siteSoundToggle.active {
+  color: #a9dcff;
+  border-color: rgba(143,207,255,.34);
+  background: rgba(143,207,255,.055);
+  box-shadow: 0 0 0 1px rgba(143,207,255,.05) inset;
+}
+
+.soundWave {
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.soundWave i {
+  display: block;
+  width: 2px;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: .45;
+  transform-origin: center;
+}
+
+.siteSoundToggle.active .soundWave i:nth-child(1) { animation: siteSoundWave .72s ease-in-out infinite alternate; }
+.siteSoundToggle.active .soundWave i:nth-child(2) { animation: siteSoundWave .72s .12s ease-in-out infinite alternate; }
+.siteSoundToggle.active .soundWave i:nth-child(3) { animation: siteSoundWave .72s .24s ease-in-out infinite alternate; }
+
+@keyframes siteSoundWave {
+  from { height: 4px; opacity: .38; }
+  to { height: 12px; opacity: 1; }
+}
+
+/* The old console-local sound switch is replaced by the one global control. */
+.aiAppControls > button:last-child {
+  display: none !important;
+}
+
+/* Tiny visual acknowledgement paired with SFX, without changing layout. */
+a,
+button,
+[role="button"],
+[tabindex="0"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.siteSoundToggle.active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  border: 1px solid rgba(143,207,255,.08);
+  border-radius: inherit;
+  opacity: .75;
+}
+
+@media (max-width: 1080px) {
+  .topbar {
+    grid-template-columns: minmax(0,1fr) auto !important;
+  }
+  .headerControls { gap: 8px; }
+}
+
+@media (max-width: 760px) {
+  .headerControls { gap: 6px; }
+  .siteSoundToggle {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+  .siteSoundToggle > span:last-child,
+  .siteSoundToggle > svg {
+    display: none;
+  }
+  .soundWave { display: inline-flex !important; }
+}
+
+@media (max-width: 430px) {
+  .siteSoundToggle { width: 30px; height: 30px; }
+  .languageSwitch button { width: 29px !important; height: 29px !important; font-size: .58rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteSoundToggle,
+  .soundWave i { transition: none !important; animation: none !important; }
+}
