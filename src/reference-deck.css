@@ -1,0 +1,333 @@
+.referenceDeck {
+  position: relative;
+  z-index: 3;
+  padding-top: clamp(110px, 14vw, 180px);
+  padding-bottom: clamp(110px, 14vw, 180px);
+}
+
+.referenceIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 50px;
+  align-items: end;
+  padding-bottom: 58px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.referenceKicker {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8fcfff;
+  font: 800 .68rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .15em;
+}
+.referenceKicker i { width: 46px; height: 1px; background: rgba(143,207,255,.42); }
+.referenceKicker b { color: #718195; font-weight: 800; }
+
+.referenceIntro h2 {
+  margin: 0;
+  font-size: clamp(4.3rem, 8.4vw, 9.8rem);
+  line-height: .84;
+  letter-spacing: -.078em;
+  font-weight: 760;
+}
+.referenceIntro h2 span { display: block; }
+.referenceIntro h2 span:nth-child(2) { color: #aeb8c7; }
+.referenceIntro h2 span:nth-child(3) {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214,235,255,.65);
+  text-stroke: 1px rgba(214,235,255,.65);
+}
+
+.referenceIntro > p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.referenceStoryGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+  gap: 46px;
+  margin-top: 64px;
+}
+
+.referenceChapters {
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+.referenceChapterLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  color: #66768a;
+  font: 800 .62rem/1 ui-monospace, monospace;
+  letter-spacing: .13em;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.referenceChapterLabel b { color: #8fcfff; }
+
+.referenceChapters button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 42px 34px minmax(0, 1fr) 24px;
+  gap: 12px;
+  align-items: start;
+  padding: 24px 6px 24px 0;
+  text-align: left;
+  color: #dce7f0;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.085);
+  background: transparent;
+  cursor: pointer;
+  transition: background .22s ease, padding .22s ease, color .22s ease;
+}
+.referenceChapters button:hover,
+.referenceChapters button.active {
+  padding-left: 14px;
+  color: white;
+  background: linear-gradient(90deg, rgba(143,207,255,.07), transparent 72%);
+}
+.referenceChapterIndex {
+  padding-top: 4px;
+  color: #56677a;
+  font: 800 .62rem/1 ui-monospace, monospace;
+}
+.referenceChapterIcon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(143,207,255,.16);
+  border-radius: 8px;
+  color: #738da3;
+  transition: .22s ease;
+}
+.referenceChapters button.active .referenceChapterIcon,
+.referenceChapters button:hover .referenceChapterIcon {
+  color: #9fd7ff;
+  border-color: rgba(143,207,255,.35);
+  background: rgba(143,207,255,.07);
+}
+.referenceChapterText { min-width: 0; }
+.referenceChapterText strong {
+  display: block;
+  font-size: clamp(1.05rem, 1.6vw, 1.42rem);
+  letter-spacing: -.03em;
+}
+.referenceChapterText small {
+  display: block;
+  margin-top: 8px;
+  max-width: 650px;
+  color: #7f8c9c;
+  font-size: .79rem;
+  line-height: 1.6;
+}
+.referenceChapters button > svg { margin-top: 4px; color: #516274; }
+.referenceChapters button.active > svg { color: #8fcfff; }
+
+.referenceSystemCard {
+  position: sticky;
+  top: 100px;
+  min-height: 610px;
+  align-self: start;
+  overflow: hidden;
+  border: 1px solid rgba(143,207,255,.18);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 75% 12%, rgba(84,177,245,.12), transparent 32%),
+    linear-gradient(145deg, rgba(14,20,28,.98), rgba(8,13,19,.96));
+  box-shadow: 0 32px 90px rgba(0,0,0,.34);
+}
+.referenceSystemCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .24;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+}
+.referenceSystemTop,
+.referenceSystemFlow {
+  position: relative;
+  z-index: 2;
+}
+.referenceSystemTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #718195;
+  font: 800 .59rem/1 ui-monospace, monospace;
+  letter-spacing: .12em;
+}
+.referenceSystemTop b { color: #8fcfff; }
+
+.referenceSystemVisual {
+  position: relative;
+  height: 310px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+.referenceSystemVisual::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(143,207,255,.07);
+  border-radius: 50%;
+  transform: rotateX(66deg) rotateZ(-8deg);
+}
+.referenceSystemOrbit {
+  position: absolute;
+  left: 50%; top: 50%;
+  border: 1px solid rgba(143,207,255,.11);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) rotateX(67deg) rotateZ(-8deg);
+}
+.referenceSystemOrbit i {
+  position: absolute;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #8fcfff;
+  box-shadow: 0 0 18px rgba(143,207,255,.75);
+}
+.referenceSystemOrbit.orbitA { width: 170px; height: 170px; animation: refSpinA 9s linear infinite; }
+.referenceSystemOrbit.orbitB { width: 245px; height: 245px; animation: refSpinB 14s linear infinite reverse; }
+.referenceSystemOrbit.orbitC { width: 320px; height: 320px; animation: refSpinA 20s linear infinite; }
+.referenceSystemOrbit.orbitA i { top: 8%; left: 55%; }
+.referenceSystemOrbit.orbitB i { top: 48%; right: -3px; }
+.referenceSystemOrbit.orbitC i { bottom: 12%; left: 21%; }
+@keyframes refSpinA { to { transform: translate(-50%,-50%) rotateX(67deg) rotateZ(352deg); } }
+@keyframes refSpinB { to { transform: translate(-50%,-50%) rotateX(67deg) rotateZ(352deg); } }
+
+.referenceSystemCore {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 96px; height: 96px;
+  transform: translate(-50%,-50%) translateZ(22px);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  color: #8fcfff;
+  border: 1px solid rgba(143,207,255,.4);
+  background: radial-gradient(circle at 34% 28%, rgba(143,207,255,.22), rgba(8,13,19,.98) 64%);
+  box-shadow: 0 0 54px rgba(80,165,225,.16), inset 0 0 30px rgba(143,207,255,.05);
+}
+.referenceSystemCore strong { color: white; font-size: 1.25rem; }
+.referenceSystemCore span { color: #6e8297; font-size: .48rem; font-weight: 850; letter-spacing: .14em; }
+.referenceNode {
+  position: absolute;
+  padding: 7px 9px;
+  color: #7890a5;
+  border: 1px solid rgba(143,207,255,.12);
+  border-radius: 8px;
+  background: rgba(7,11,16,.86);
+  font: 800 .49rem/1 ui-monospace, monospace;
+  letter-spacing: .12em;
+}
+.referenceNode.nodeOne { left: 8%; top: 22%; }
+.referenceNode.nodeTwo { right: 9%; top: 18%; }
+.referenceNode.nodeThree { right: 7%; bottom: 19%; }
+.referenceNode.nodeFour { left: 10%; bottom: 16%; }
+
+.referenceSystemCopy {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px 22px;
+}
+.referenceSystemCopy > span { color: #617488; font: 800 .58rem/1 ui-monospace, monospace; }
+.referenceSystemCopy h3 { margin: 10px 0 8px; font-size: 1.35rem; letter-spacing: -.035em; }
+.referenceSystemCopy p { margin: 0; color: #8a99a9; font-size: .78rem; line-height: 1.58; }
+.referenceSystemFlow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.referenceSystemFlow div { padding: 14px; border-right: 1px solid rgba(255,255,255,.07); }
+.referenceSystemFlow div:last-child { border-right: 0; }
+.referenceSystemFlow span { display: block; color: #566b7e; font: 800 .49rem/1 ui-monospace, monospace; letter-spacing: .1em; }
+.referenceSystemFlow strong { display: block; margin-top: 5px; color: #c8d5df; font-size: .65rem; line-height: 1.35; }
+
+.referenceStack {
+  margin-top: 100px;
+  padding-top: 44px;
+  border-top: 1px solid rgba(255,255,255,.11);
+}
+.referenceStackHeading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 46px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+.referenceStackHeading span { color: #8fcfff; font: 800 .62rem/1 ui-monospace, monospace; letter-spacing: .13em; }
+.referenceStackHeading h3 { margin: 8px 0 0; font-size: clamp(2.3rem, 5vw, 5.2rem); line-height: .92; letter-spacing: -.06em; }
+.referenceStackHeading p { margin: 0; color: var(--muted); line-height: 1.75; }
+.referenceStackRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-left: 1px solid rgba(255,255,255,.07);
+}
+.referenceStackRail article {
+  min-height: 190px;
+  padding: 20px;
+  outline: 0;
+  border-right: 1px solid rgba(255,255,255,.07);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.008);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.referenceStackRail article:hover,
+.referenceStackRail article:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(143,207,255,.18);
+  background: rgba(143,207,255,.03);
+}
+.referenceStackRail article > div { display: flex; align-items: center; justify-content: space-between; color: #7793aa; }
+.referenceStackRail article > div span { color: #55697d; font: 800 .56rem/1 ui-monospace, monospace; }
+.referenceStackRail article strong { display: block; margin-top: 48px; font-size: 1rem; }
+.referenceStackRail article small { display: block; margin-top: 7px; color: #778697; line-height: 1.45; }
+
+@media (max-width: 1020px) {
+  .referenceIntro,
+  .referenceStoryGrid,
+  .referenceStackHeading { grid-template-columns: 1fr; }
+  .referenceSystemCard { position: relative; top: auto; }
+  .referenceStackRail { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 680px) {
+  .referenceDeck { padding-top: 92px; padding-bottom: 92px; }
+  .referenceIntro { gap: 24px; padding-bottom: 36px; }
+  .referenceIntro h2 { font-size: clamp(3.35rem, 17vw, 5.2rem); }
+  .referenceStoryGrid { margin-top: 40px; gap: 28px; }
+  .referenceChapters button { grid-template-columns: 32px 28px minmax(0,1fr) 18px; padding: 20px 2px 20px 0; }
+  .referenceChapterText small { font-size: .72rem; }
+  .referenceSystemCard { min-height: auto; border-radius: 16px; }
+  .referenceSystemVisual { height: 265px; }
+  .referenceSystemFlow { grid-template-columns: 1fr; }
+  .referenceSystemFlow div { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .referenceSystemFlow div:last-child { border-bottom: 0; }
+  .referenceStack { margin-top: 72px; }
+  .referenceStackHeading { gap: 20px; }
+  .referenceStackRail { grid-template-columns: 1fr; }
+  .referenceStackRail article { min-height: 150px; }
+  .referenceStackRail article strong { margin-top: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referenceSystemOrbit { animation: none !important; }
+  .referenceStackRail article,
+  .referenceChapters button { transition: none !important; }
+}
