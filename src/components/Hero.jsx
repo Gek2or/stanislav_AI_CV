@@ -1,74 +1,70 @@
-import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Languages, MapPin, Sparkles, Workflow } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Languages, MapPin, Workflow } from 'lucide-react'
 import AISystemApp from './AISystemApp'
 
 const copy = {
   en: {
     iam: 'I am',
-    kicker: 'AI SOFTWARE ENGINEER / FINLAND',
-    application: 'Application focus · Bitonet Oy',
-    statement: 'I connect real operations with software, automation and practical AI systems.',
+    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    application: 'Target role · AI Software Engineer · Bitonet Oy',
     selectedWork: 'selected work areas',
+    liveContext: 'live operating business',
     engineeringTracks: 'engineering tracks',
-    modelRoutes: 'AI / model routes',
     languages: 'site languages',
     timeline: [
       ['2020', 'Taitotalo', 'Software-development studies'],
-      ['2022', 'Development', 'Software + game-development practice'],
-      ['NOW', 'Finland', 'Business operations + AI engineering'],
+      ['2022', 'Building', 'Software + game-development projects'],
+      ['NOW', 'Finland', 'Operations → Python / APIs / AI systems'],
     ],
     console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'Inspect the way I structure a practical AI workflow: problem, context, routing, build, evaluation and human review.',
+    consoleCopy: 'A compact view of how I approach applied AI work: define the outcome, structure context, choose the route, build, verify, and keep human review where it matters.',
   },
   fi: {
     iam: 'Minä olen',
-    kicker: 'AI SOFTWARE ENGINEER / FINLAND',
-    application: 'Hakukohde · Bitonet Oy',
-    statement: 'Yhdistän todellisen operatiivisen työn ohjelmistoihin, automaatioon ja käytännöllisiin AI-järjestelmiin.',
+    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    application: 'Tavoiterooli · AI Software Engineer · Bitonet Oy',
     selectedWork: 'valittua työaluetta',
+    liveContext: 'toimiva liiketoimintaympäristö',
     engineeringTracks: 'engineering-polkuja',
-    modelRoutes: 'AI / model routes',
     languages: 'sivuston kieltä',
     timeline: [
       ['2020', 'Taitotalo', 'Ohjelmistokehityksen opinnot'],
-      ['2022', 'Development', 'Software + game-development -harjoittelu'],
-      ['NYT', 'Suomi', 'Liiketoiminta + AI engineering'],
+      ['2022', 'Rakentaminen', 'Software + game-development -projektit'],
+      ['NYT', 'Suomi', 'Operatiivinen työ → Python / API:t / AI-järjestelmät'],
     ],
     console: 'INTERAKTIIVINEN ENGINEERING CONSOLE',
-    consoleCopy: 'Tutki, miten rakennan käytännöllisen AI-workflow’n: ongelma, konteksti, reititys, toteutus, arviointi ja ihmisen tarkistus.',
+    consoleCopy: 'Tiivis näkymä applied AI -työtapaani: määritä tavoite, jäsennä konteksti, valitse toteutusreitti, rakenna, varmista ja pidä ihmisen tarkistus mukana siellä missä sillä on merkitystä.',
   },
   ru: {
     iam: 'Я —',
-    kicker: 'AI SOFTWARE ENGINEER / FINLAND',
-    application: 'Фокус заявки · Bitonet Oy',
-    statement: 'Я соединяю реальную операционную работу с software, автоматизацией и практичными AI-системами.',
+    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    application: 'Целевая роль · AI Software Engineer · Bitonet Oy',
     selectedWork: 'рабочих направлений',
+    liveContext: 'реальный действующий бизнес',
     engineeringTracks: 'engineering-направлений',
-    modelRoutes: 'AI / model routes',
     languages: 'языка сайта',
     timeline: [
       ['2020', 'Taitotalo', 'Обучение software development'],
-      ['2022', 'Development', 'Практика software + game development'],
-      ['СЕЙЧАС', 'Finland', 'Бизнес-операции + AI engineering'],
+      ['2022', 'Разработка', 'Software + game-development проекты'],
+      ['СЕЙЧАС', 'Finland', 'Операционка → Python / API / AI-системы'],
     ],
     console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'Здесь можно посмотреть, как я строю практический AI-workflow: задача, контекст, routing, build, evaluation и human review.',
+    consoleCopy: 'Кратко о моём подходе к applied AI: определить результат, собрать контекст, выбрать маршрут, реализовать, проверить и оставить human review там, где он важен.',
   },
   uk: {
     iam: 'Я —',
-    kicker: 'AI SOFTWARE ENGINEER / FINLAND',
-    application: 'Фокус заявки · Bitonet Oy',
-    statement: 'Я поєдную реальну операційну роботу із software, автоматизацією та практичними AI-системами.',
+    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    application: 'Цільова роль · AI Software Engineer · Bitonet Oy',
     selectedWork: 'робочих напрямів',
+    liveContext: 'реальний діючий бізнес',
     engineeringTracks: 'engineering-напрямів',
-    modelRoutes: 'AI / model routes',
     languages: 'мови сайту',
     timeline: [
       ['2020', 'Taitotalo', 'Навчання software development'],
-      ['2022', 'Development', 'Практика software + game development'],
-      ['ЗАРАЗ', 'Finland', 'Бізнес-операції + AI engineering'],
+      ['2022', 'Розробка', 'Software + game-development проєкти'],
+      ['ЗАРАЗ', 'Finland', 'Операційна робота → Python / API / AI-системи'],
     ],
     console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'Тут можна побачити, як я будую практичний AI-workflow: задача, контекст, routing, build, evaluation та human review.',
+    consoleCopy: 'Коротко про мій підхід до applied AI: визначити результат, зібрати контекст, обрати маршрут, реалізувати, перевірити та залишити human review там, де він важливий.',
   },
 }
 
@@ -76,8 +72,8 @@ export default function Hero({ t, lang = 'en' }) {
   const text = copy[lang] || copy.en
   const metrics = [
     [t.projects?.length || 0, text.selectedWork, BriefcaseBusiness],
+    [1, text.liveContext, Workflow],
     [t.engineering?.length || 0, text.engineeringTracks, Code2],
-    [t.models?.length || 0, text.modelRoutes, Sparkles],
     [4, text.languages, Languages],
   ]
 
@@ -99,7 +95,7 @@ export default function Hero({ t, lang = 'en' }) {
       <div className="referenceHeroSplit">
         <div className="referenceHeroStatement">
           <span className="referenceHeroKicker">{text.kicker}</span>
-          <h2>{text.statement}</h2>
+          <h2>{t.hero}</h2>
           <p>{t.heroSecondary}</p>
           <div className="referenceHeroActions">
             <a href="#work" className="primaryButton">{t.ctaPrimary}<ArrowDownRight size={17}/></a>
