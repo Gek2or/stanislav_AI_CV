@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 
 const SoundContext = createContext(null)
+const MASTER_GAIN = 1.29 // 0.86 × 1.5 — requested +50% global level.
 
 function readPreference() {
   try {
@@ -39,7 +40,7 @@ export function SoundProvider({ children }) {
     if (!audioRef.current) {
       const ctx = new AudioCtx()
       const master = ctx.createGain()
-      master.gain.value = 0.86
+      master.gain.value = MASTER_GAIN
       master.connect(ctx.destination)
       audioRef.current = ctx
       masterRef.current = master
@@ -61,8 +62,7 @@ export function SoundProvider({ children }) {
     ambient.timers.forEach((timer) => window.clearTimeout(timer))
     ambient.timers.clear()
 
-    const ctx = ambient.ctx
-    const now = ctx.currentTime
+    const now = ambient.ctx.currentTime
     const stopAt = now + (fade ? 0.42 : 0.02)
 
     try {
@@ -131,16 +131,13 @@ export function SoundProvider({ children }) {
       osc.start(now)
       nodes.push(osc)
       connections.push(osc, amp)
-      return { osc, amp, panner }
     }
 
-    // Layer 1 — low neon electrical bed. Frequencies are deliberately audible on laptop speakers,
-    // but the gains are very low so it reads as atmosphere rather than music.
+    // Subtle cyberpunk bed: low electrical hum + upper digital air.
     connectTone({ frequency: 74, type: 'sine', gain: 0.0027, pan: -0.08 })
     connectTone({ frequency: 148.5, type: 'triangle', gain: 0.00125, pan: 0.08, detune: -4 })
     connectTone({ frequency: 222.6, type: 'sine', gain: 0.00065, pan: 0.02, detune: 5 })
 
-    // Layer 2 — slow breathing pulse on the ambient bus.
     const lfo = ctx.createOscillator()
     const lfoDepth = ctx.createGain()
     lfo.type = 'sine'
@@ -152,7 +149,6 @@ export function SoundProvider({ children }) {
     nodes.push(lfo)
     connections.push(lfo, lfoDepth)
 
-    // Layer 3 — a very light stereo "digital air" beating in the upper-mid range.
     const airLeft = ctx.createOscillator()
     const airRight = ctx.createOscillator()
     const airLeftGain = ctx.createGain()
@@ -166,9 +162,9 @@ export function SoundProvider({ children }) {
     airRight.frequency.value = 1792
     airLeftGain.gain.value = 0.00018
     airRightGain.gain.value = 0.00016
-
     airLeft.connect(airLeftGain)
     airRight.connect(airRightGain)
+
     if (leftPan && rightPan) {
       leftPan.pan.value = -0.58
       rightPan.pan.value = 0.58
@@ -181,6 +177,7 @@ export function SoundProvider({ children }) {
       airLeftGain.connect(airFilter)
       airRightGain.connect(airFilter)
     }
+
     airLeft.start(now)
     airRight.start(now)
     nodes.push(airLeft, airRight)
@@ -202,11 +199,11 @@ export function SoundProvider({ children }) {
       if (ambientRef.current !== ambient || !ambient.active) return
       const start = ctx.currentTime + 0.015
       const duration = 1.65 + Math.random() * 0.55
+      const end = start + duration
       const osc = ctx.createOscillator()
       const amp = ctx.createGain()
       const filter = ctx.createBiquadFilter()
       const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
-      const end = start + duration
 
       osc.type = 'triangle'
       osc.frequency.setValueAtTime(235 + Math.random() * 35, start)
@@ -258,8 +255,8 @@ export function SoundProvider({ children }) {
         amp.gain.setValueAtTime(0.0001, start)
         amp.gain.exponentialRampToValueAtTime(0.00072, start + 0.008)
         amp.gain.exponentialRampToValueAtTime(0.0001, end)
-
         osc.connect(amp)
+
         if (panner) {
           panner.pan.value = -0.7 + Math.random() * 1.4
           amp.connect(panner)
@@ -267,6 +264,7 @@ export function SoundProvider({ children }) {
         } else {
           amp.connect(bus)
         }
+
         osc.start(start)
         osc.stop(end + 0.02)
       }
@@ -274,7 +272,6 @@ export function SoundProvider({ children }) {
       schedule(sparkle, 6500 + Math.random() * 8500)
     }
 
-    // Do not fire immediately after enabling sound; let the listener settle into the page first.
     schedule(scanner, 6500 + Math.random() * 4500)
     schedule(sparkle, 3800 + Math.random() * 3500)
     return true
@@ -288,15 +285,7 @@ export function SoundProvider({ children }) {
     const now = ctx.currentTime
     const master = masterRef.current
 
-    const note = ({
-      delay = 0,
-      from = 520,
-      to = from,
-      duration = 0.07,
-      volume = 0.012,
-      type = 'sine',
-      pan = 0,
-    }) => {
+    const note = ({ delay = 0, from = 520, to = from, duration = 0.07, volume = 0.012, type = 'sine', pan = 0 }) => {
       const osc = ctx.createOscillator()
       const gain = ctx.createGain()
       const filter = ctx.createBiquadFilter()
@@ -331,35 +320,30 @@ export function SoundProvider({ children }) {
     }
 
     if (kind === 'hover') {
-      note({ from: 820, to: 910, duration: 0.032, volume: 0.0045, type: 'sine', pan: -0.08 })
+      note({ from: 820, to: 910, duration: 0.032, volume: 0.0045, pan: -0.08 })
       return
     }
-
     if (kind === 'select') {
       note({ from: 340, to: 440, duration: 0.065, volume: 0.010, type: 'triangle', pan: -0.14 })
       note({ delay: 0.018, from: 680, to: 760, duration: 0.055, volume: 0.0065, pan: 0.14 })
       return
     }
-
     if (kind === 'confirm') {
       note({ from: 520, to: 620, duration: 0.075, volume: 0.011, type: 'triangle', pan: -0.08 })
       note({ delay: 0.045, from: 780, to: 920, duration: 0.085, volume: 0.009, pan: 0.08 })
       return
     }
-
     if (kind === 'section') {
-      note({ from: 155, to: 205, duration: 0.16, volume: 0.0075, type: 'sine', pan: -0.12 })
+      note({ from: 155, to: 205, duration: 0.16, volume: 0.0075, pan: -0.12 })
       note({ delay: 0.045, from: 310, to: 390, duration: 0.14, volume: 0.0045, type: 'triangle', pan: 0.12 })
       return
     }
-
     if (kind === 'enable') {
       note({ from: 300, to: 390, duration: 0.075, volume: 0.009, type: 'triangle', pan: -0.2 })
-      note({ delay: 0.06, from: 500, to: 640, duration: 0.09, volume: 0.008, pan: 0 })
+      note({ delay: 0.06, from: 500, to: 640, duration: 0.09, volume: 0.008 })
       note({ delay: 0.125, from: 760, to: 980, duration: 0.11, volume: 0.0068, pan: 0.2 })
       return
     }
-
     if (kind === 'disable') {
       note({ from: 620, to: 280, duration: 0.11, volume: 0.008, type: 'triangle' })
       return
@@ -390,14 +374,13 @@ export function SoundProvider({ children }) {
     }
 
     let disposed = false
+    let waitingForGesture = false
 
     const bootAmbient = async () => {
       if (disposed) return
       const started = await startAmbient()
-      if (started || disposed) return
-
-      // Browsers can restore the user's ON preference while still blocking audio until a gesture.
-      // Start the bed on the first real interaction rather than trying to bypass autoplay policy.
+      if (started || disposed || waitingForGesture) return
+      waitingForGesture = true
       window.addEventListener('pointerdown', bootAmbient, { once: true, passive: true })
       window.addEventListener('keydown', bootAmbient, { once: true })
     }
