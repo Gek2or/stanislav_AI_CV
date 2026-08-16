@@ -1,6 +1,7 @@
 import { Component, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
+import { SoundProvider } from './sound/SoundProvider.jsx'
 import './styles.css'
 import './ai-system.css'
 import './pro-polish.css'
@@ -11,6 +12,7 @@ import './reference-deck.css'
 import './reference-hero.css'
 import './role-targeting.css'
 import './engineering-artifacts.css'
+import './sound.css'
 
 class AppErrorBoundary extends Component {
   constructor(props) {
@@ -42,7 +44,9 @@ class AppErrorBoundary extends Component {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppErrorBoundary>
-      <App />
+      <SoundProvider>
+        <App />
+      </SoundProvider>
     </AppErrorBoundary>
   </StrictMode>,
 )
