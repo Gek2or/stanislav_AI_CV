@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import SignatureSection from './components/SignatureSection'
+import ReferenceDeck from './components/ReferenceDeck'
 import Projects from './components/Projects'
 import AICore from './components/AICore'
 import BitonetFit from './components/BitonetFit'
@@ -40,6 +41,7 @@ export default function App() {
       <main>
         <Hero t={t} lang={safeLang} />
         <SignatureSection t={t} lang={safeLang} />
+        <ReferenceDeck t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
         <AICore t={t} lang={safeLang} />
         <BitonetFit t={t} />
