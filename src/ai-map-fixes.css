@@ -1,0 +1,200 @@
+/* Final legibility pass for the AI architecture map.
+   Keeps the 3D atmosphere but flattens text-bearing controls so labels stay crisp. */
+
+.aiArchitectureMap {
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(121,201,255,.07), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.008), transparent 70%),
+    rgba(6, 11, 16, .82) !important;
+}
+
+.aiArchitectureMap::before {
+  opacity: .55;
+  background: radial-gradient(circle at 50% 48%, rgba(121,201,255,.075), transparent 31%) !important;
+}
+
+.aiArchitecture3d {
+  perspective: 1100px !important;
+}
+
+/* The depth planes can stay in 3D; interactive labels should not be rasterised on a Z plane. */
+.aiArchitecture3d .aiStage {
+  transform: translateZ(0) !important;
+}
+
+.aiArchitecture3d .aiStage:hover,
+.aiArchitecture3d .aiStage.active {
+  transform: translateY(-2px) translateZ(0) !important;
+}
+
+.aiStage {
+  min-width: 118px !important;
+  min-height: 52px !important;
+  grid-template-columns: 22px minmax(0, 1fr) !important;
+  grid-template-rows: 14px 18px !important;
+  column-gap: 8px !important;
+  padding: 9px 11px !important;
+  border-radius: 11px !important;
+  border-color: rgba(132, 190, 232, .18) !important;
+  color: #c8d5df !important;
+  background: rgba(7, 12, 18, .975) !important;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.025) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.aiStage svg {
+  width: 17px !important;
+  height: 17px !important;
+  color: #738ca0 !important;
+  filter: none !important;
+}
+
+.aiStage span {
+  color: #66c9ff !important;
+  font-size: .53rem !important;
+  letter-spacing: .02em !important;
+  opacity: .95;
+}
+
+.aiStage strong {
+  min-width: 0;
+  overflow: visible !important;
+  color: #dbe6ee !important;
+  font-size: .74rem !important;
+  font-weight: 720 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.01em !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+}
+
+.aiStage:hover,
+.aiStage.active {
+  border-color: rgba(121,201,255,.52) !important;
+  color: white !important;
+  background: linear-gradient(145deg, rgba(17, 35, 49, .98), rgba(8, 15, 22, .985)) !important;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.30),
+    0 0 0 1px rgba(121,201,255,.045) inset,
+    0 0 20px rgba(121,201,255,.055) !important;
+}
+
+.aiStage.active svg { color: #86d4ff !important; }
+.aiStage.active strong { color: #ffffff !important; }
+
+/* Pull every label inward so long RU/UA/FI words never sit on the panel edge. */
+.aiStage1 { left: 5.5% !important; top: 8% !important; }
+.aiStage2 { right: 5.5% !important; top: 8% !important; }
+.aiStage3 { right: 3.5% !important; top: 48% !important; }
+.aiStage4 { left: 52% !important; bottom: 4.5% !important; }
+.aiStage5 { left: 5.5% !important; bottom: 8% !important; }
+
+/* Make the central system core a crisp control node instead of a glowing blur. */
+.aiArchitecture3d .aiCore {
+  transform: translate(-50%, -50%) translateZ(4px) !important;
+}
+
+.aiCore {
+  width: 98px !important;
+  height: 98px !important;
+  gap: 4px !important;
+  border: 1px solid rgba(121,201,255,.48) !important;
+  background:
+    radial-gradient(circle at 38% 27%, rgba(147,219,255,.13), transparent 34%),
+    linear-gradient(145deg, rgba(13,25,35,.995), rgba(5,10,15,.995)) !important;
+  box-shadow:
+    0 0 26px rgba(72,162,224,.11),
+    inset 0 0 22px rgba(121,201,255,.035),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.aiCore > svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: #8ed6ff !important;
+  filter: none !important;
+}
+
+.aiCore strong {
+  font-size: 1rem !important;
+  line-height: 1 !important;
+  letter-spacing: .015em !important;
+  text-shadow: none !important;
+}
+
+.aiCore span {
+  color: #8098ab !important;
+  font-size: .45rem !important;
+  letter-spacing: .14em !important;
+  line-height: 1 !important;
+}
+
+.aiCoreRing {
+  inset: -7px !important;
+  border-color: rgba(121,201,255,.13) !important;
+  opacity: .72;
+}
+
+.aiCoreRing::after {
+  width: 5px !important;
+  height: 5px !important;
+  box-shadow: 0 0 8px rgba(121,201,255,.48) !important;
+}
+
+/* Cleaner network lines: enough hierarchy without bloom over labels. */
+.aiArchitectureMap svg path {
+  stroke: rgba(121,201,255,.14) !important;
+  stroke-width: 1 !important;
+  filter: none !important;
+}
+
+.aiArchitectureMap svg path.active {
+  stroke: rgba(117,207,255,.82) !important;
+  stroke-width: 1.45 !important;
+  filter: drop-shadow(0 0 3px rgba(121,201,255,.28)) !important;
+}
+
+.aiDepthPlane {
+  opacity: .26 !important;
+  filter: none !important;
+}
+
+.aiDepthBack { opacity: .22 !important; }
+.aiDepthMid { opacity: .18 !important; }
+
+@media (max-width: 760px) {
+  .aiArchitectureMap { min-height: 330px !important; }
+  .aiStage {
+    min-width: 100px !important;
+    min-height: 48px !important;
+    padding: 8px 9px !important;
+  }
+  .aiStage strong { font-size: .68rem !important; }
+  .aiStage1 { left: 3% !important; top: 7% !important; }
+  .aiStage2 { right: 3% !important; top: 7% !important; }
+  .aiStage3 { right: 2% !important; top: 50% !important; }
+  .aiStage4 { left: 48% !important; bottom: 3% !important; }
+  .aiStage5 { left: 3% !important; bottom: 7% !important; }
+  .aiCore { width: 88px !important; height: 88px !important; }
+}
+
+@media (max-width: 520px) {
+  .aiStage {
+    min-width: 88px !important;
+    grid-template-columns: 17px minmax(0,1fr) !important;
+    column-gap: 6px !important;
+  }
+  .aiStage svg { width: 14px !important; height: 14px !important; }
+  .aiStage strong { font-size: .61rem !important; }
+  .aiStage span { font-size: .47rem !important; }
+  .aiStage1 { left: 2% !important; }
+  .aiStage2 { right: 2% !important; }
+  .aiStage3 { right: 1% !important; }
+  .aiStage5 { left: 2% !important; }
+}
