@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './styles.css'
 import './ai-system.css'
 import './pro-polish.css'
+import './three-d.css'
 
 class AppErrorBoundary extends Component {
   constructor(props) {
