@@ -2,12 +2,13 @@ import { Bot, Send, Sparkles, User } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const keywordMap = [
-  ['bitonet', 6], ['why', 0], ['miksi', 0], ['почему', 0], ['чому', 0],
-  ['model', 2], ['модел', 2], ['malli', 2],
-  ['autom', 3], ['simpl', 3], ['упрост', 3], ['спрост', 3],
-  ['halluc', 4], ['quality', 4], ['качест', 4], ['якіст', 4], ['laatu', 4],
-  ['python', 5], ['api', 5], ['rag', 5], ['agent', 5],
-  ['use ai', 1], ['käyttää ai', 1], ['использ', 1], ['використ', 1],
+  ['bitonet', 6],
+  ['business', 5], ['entrepreneur', 5], ['yritt', 5], ['бизнес', 5], ['підприєм', 5],
+  ['python', 4], ['api', 4], ['rag', 4], ['agent', 4], ['technical', 4], ['технич', 4], ['техніч', 4], ['tekn', 4],
+  ['trust', 3], ['halluc', 3], ['quality', 3], ['review', 3], ['довер', 3], ['довір', 3], ['качест', 3], ['якіст', 3], ['luot', 3], ['laatu', 3],
+  ['ci', 2], ['delivery', 2], ['deploy', 2], ['github actions', 2], ['достав', 2], ['toimit', 2],
+  ['problem', 1], ['real software', 1], ['workflow', 1], ['проблем', 1], ['ongelm', 1],
+  ['why', 0], ['miksi', 0], ['почему', 0], ['чому', 0], ['role', 0], ['rooli', 0],
 ]
 
 export default function Assistant({ t, lang }) {
