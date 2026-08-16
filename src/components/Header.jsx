@@ -1,13 +1,13 @@
 import { Code2, Volume2, VolumeX } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { languages } from '../data/content'
-import { useSiteSound } from '../sound/SoundProvider'
+import { useSiteSound } from '../sound/SoundProviderV2'
 
 const soundLabels = {
-  en: ['Sound on · cyberpunk ambient + interface SFX', 'Sound off'],
-  fi: ['Ääni päällä · cyberpunk ambient + interface SFX', 'Ääni pois'],
-  ru: ['Звук включён · cyberpunk ambient + interface SFX', 'Звук выключен'],
-  uk: ['Звук увімкнено · cyberpunk ambient + interface SFX', 'Звук вимкнено'],
+  en: ['Sound on · soundtrack + interface SFX', 'Sound off'],
+  fi: ['Ääni päällä · soundtrack + interface SFX', 'Ääni pois'],
+  ru: ['Звук включён · soundtrack + interface SFX', 'Звук выключен'],
+  uk: ['Звук увімкнено · soundtrack + interface SFX', 'Звук вимкнено'],
 }
 
 export default function Header({ lang, setLang, nav }) {
