@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import SignatureSection from './components/SignatureSection'
 import ReferenceDeck from './components/ReferenceDeck'
 import Projects from './components/Projects'
 import AICore from './components/AICore'
@@ -28,7 +27,7 @@ export default function App() {
     try {
       localStorage.setItem('stanislav-cv-lang', safeLang)
     } catch {
-      // Some in-app browsers can block storage. The site should still work.
+      // Embedded browsers can block storage; language switching still works for the session.
     }
     document.documentElement.lang = safeLang
   }, [safeLang])
@@ -40,7 +39,6 @@ export default function App() {
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
       <main>
         <Hero t={t} lang={safeLang} />
-        <SignatureSection t={t} lang={safeLang} />
         <ReferenceDeck t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
         <AICore t={t} lang={safeLang} />
@@ -50,7 +48,7 @@ export default function App() {
       </main>
       <footer className="footer sectionShell">
         <span>© 2026 Stanislav Kosytskyy</span>
-        <span>React · Vite · AI Software Engineer portfolio</span>
+        <span>AI Software Engineer · Python · APIs · Git/CI · Applied AI</span>
       </footer>
     </div>
   )
