@@ -1,7 +1,7 @@
 import { Component, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import { SoundProvider } from './sound/SoundProvider.jsx'
+import { SoundProvider } from './sound/SoundProviderV2.jsx'
 import './styles.css'
 import './ai-system.css'
 import './pro-polish.css'
