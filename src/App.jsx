@@ -8,6 +8,7 @@ import BitonetFit from './components/BitonetFit'
 import Assistant from './components/Assistant'
 import Contact from './components/Contact'
 import TechBackdrop3D from './components/TechBackdrop3D'
+import MidnightLoop from './sound/MidnightLoop'
 import { content } from './data/content'
 
 function readStoredLanguage() {
@@ -27,13 +28,14 @@ export default function App() {
     try {
       localStorage.setItem('stanislav-cv-lang', safeLang)
     } catch {
-      // Embedded browsers can block storage; language switching still works for the session.
+      // Some in-app browsers can block storage. The site should still work.
     }
     document.documentElement.lang = safeLang
   }, [safeLang])
 
   return (
     <div className="appFrame">
+      <MidnightLoop />
       <TechBackdrop3D />
       <div className="ambientGlow" aria-hidden="true" />
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
@@ -48,7 +50,7 @@ export default function App() {
       </main>
       <footer className="footer sectionShell">
         <span>© 2026 Stanislav Kosytskyy</span>
-        <span>AI Software Engineer · Python · APIs · Git/CI · Applied AI</span>
+        <span>React · Vite · AI Software Engineer portfolio</span>
       </footer>
     </div>
   )
