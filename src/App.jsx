@@ -8,7 +8,6 @@ import BitonetFit from './components/BitonetFit'
 import Assistant from './components/Assistant'
 import Contact from './components/Contact'
 import TechBackdrop3D from './components/TechBackdrop3D'
-import MidnightLoop from './sound/MidnightLoop'
 import { content } from './data/content'
 
 function readStoredLanguage() {
@@ -35,7 +34,6 @@ export default function App() {
 
   return (
     <div className="appFrame">
-      <MidnightLoop />
       <TechBackdrop3D />
       <div className="ambientGlow" aria-hidden="true" />
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
