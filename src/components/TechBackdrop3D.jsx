@@ -20,19 +20,33 @@ export default function TechBackdrop3D() {
     if (reduced) return
 
     let frame = 0
+    let pointerX = 0
+    let pointerY = 0
+    let scrollRatio = 0
+
+    const renderScene = () => {
+      frame = 0
+      scene.style.setProperty('--scene-tx', `${(-pointerX * 16).toFixed(2)}px`)
+      scene.style.setProperty('--scene-ty', `${(-pointerY * 10 - scrollRatio * 44).toFixed(2)}px`)
+      scene.style.setProperty('--scene-rx', `${(61 - pointerY * 2).toFixed(2)}deg`)
+      scene.style.setProperty('--scene-rz', `${(-14 + pointerX * 1.8).toFixed(2)}deg`)
+    }
+
+    const queueRender = () => {
+      if (frame) return
+      frame = requestAnimationFrame(renderScene)
+    }
+
     const updatePointer = (event) => {
-      if (frame) cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => {
-        const x = (event.clientX / window.innerWidth - 0.5) * 2
-        const y = (event.clientY / window.innerHeight - 0.5) * 2
-        scene.style.setProperty('--scene-x', x.toFixed(3))
-        scene.style.setProperty('--scene-y', y.toFixed(3))
-      })
+      pointerX = (event.clientX / window.innerWidth - 0.5) * 2
+      pointerY = (event.clientY / window.innerHeight - 0.5) * 2
+      queueRender()
     }
 
     const updateScroll = () => {
       const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)
-      scene.style.setProperty('--scene-scroll', Math.min(window.scrollY / max, 1).toFixed(3))
+      scrollRatio = Math.min(window.scrollY / max, 1)
+      queueRender()
     }
 
     window.addEventListener('pointermove', updatePointer, { passive: true })
