@@ -1,0 +1,383 @@
+/* Professional 3D IT layer. CSS-based for fast GitHub Pages delivery and mobile stability. */
+:root {
+  --scene-x: 0;
+  --scene-y: 0;
+  --scene-scroll: 0;
+  --depth-blue: #8dcfff;
+  --depth-cyan: #83efe1;
+  --depth-green: #8de5b0;
+}
+
+.appFrame {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.appFrame > main,
+.appFrame > .topbar,
+.appFrame > .footer,
+.appFrame > .ambientGlow {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fixed, low-contrast IT topology. It reacts to the pointer and scroll but never intercepts input. */
+.tech3dScene {
+  --scene-x: 0;
+  --scene-y: 0;
+  --scene-scroll: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  perspective: 1250px;
+  opacity: .58;
+  mask-image: radial-gradient(ellipse 82% 72% at 70% 23%, #000 8%, rgba(0,0,0,.94) 46%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse 82% 72% at 70% 23%, #000 8%, rgba(0,0,0,.94) 46%, transparent 82%);
+}
+
+.tech3dWorld {
+  position: absolute;
+  width: min(1120px, 90vw);
+  height: min(720px, 78vh);
+  right: -9vw;
+  top: 3vh;
+  transform-style: preserve-3d;
+  transform-origin: 55% 38%;
+  transform:
+    translate3d(calc(var(--scene-x) * -16px), calc(var(--scene-y) * -10px - var(--scene-scroll) * 44px), 0)
+    rotateX(calc(61deg + var(--scene-y) * -2deg))
+    rotateZ(calc(-14deg + var(--scene-x) * 1.8deg));
+  transition: transform .16s linear;
+}
+
+.tech3dGridPlane {
+  position: absolute;
+  inset: 4% 3% 5% 4%;
+  transform: translateZ(-75px);
+  border: 1px solid rgba(142,205,255,.09);
+  background-image:
+    linear-gradient(rgba(142,205,255,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(142,205,255,.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  box-shadow: inset 0 0 120px rgba(48,123,178,.05);
+}
+
+.tech3dGridPlane::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 52% 38%, rgba(124,210,255,.13), transparent 45%);
+}
+
+.tech3dGlow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  transform: translateZ(-20px);
+}
+.tech3dGlowA { width: 290px; height: 290px; right: 12%; top: 8%; background: rgba(72,162,225,.12); }
+.tech3dGlowB { width: 230px; height: 230px; left: 24%; bottom: 4%; background: rgba(84,218,199,.065); }
+
+.tech3dPlane,
+.tech3dRack,
+.tech3dNode,
+.tech3dNodeCore {
+  position: absolute;
+  border: 1px solid rgba(142,205,255,.18);
+  background: linear-gradient(145deg, rgba(15,24,34,.84), rgba(8,14,21,.55));
+  box-shadow: 0 18px 45px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.035);
+  backdrop-filter: blur(8px);
+}
+
+.tech3dPlane {
+  width: 220px;
+  min-height: 116px;
+  padding: 13px;
+  border-radius: 10px;
+  transform-style: preserve-3d;
+}
+.planeCode { left: 18%; top: 14%; transform: translateZ(70px) rotateZ(5deg); }
+.planeDeploy { right: 7%; top: 23%; transform: translateZ(42px) rotateZ(-3deg); }
+.planeReview { right: 24%; bottom: 10%; transform: translateZ(95px) rotateZ(4deg); }
+
+.planeHeader { display: flex; justify-content: space-between; color: rgba(223,240,255,.76); font: 800 9px/1 ui-monospace, monospace; letter-spacing: .14em; }
+.planeHeader b { color: rgba(141,207,255,.62); }
+.tech3dPlane small { display: block; margin-top: 12px; color: rgba(158,184,205,.55); font: 700 8px/1.2 ui-monospace, monospace; letter-spacing: .08em; }
+.codeRows { display: grid; gap: 6px; margin-top: 17px; }
+.codeRows i { display: block; height: 2px; border-radius: 3px; background: linear-gradient(90deg, rgba(131,239,225,.55), rgba(141,207,255,.22), transparent); }
+.codeRows i:nth-child(2) { width: 77%; }.codeRows i:nth-child(3) { width: 91%; }.codeRows i:nth-child(4) { width: 58%; }.codeRows i:nth-child(5) { width: 82%; }
+.deployPulse { display: flex; gap: 10px; align-items: center; margin-top: 24px; }
+.deployPulse i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(141,207,255,.38); background: rgba(141,207,255,.1); box-shadow: 0 0 18px rgba(141,207,255,.09); }
+.deployPulse i:nth-child(2) { width: 28px; border-radius: 5px; }
+.reviewBars { display: flex; gap: 6px; align-items: end; height: 40px; margin-top: 14px; }
+.reviewBars i { width: 8px; border-radius: 2px; background: linear-gradient(to top, rgba(141,229,176,.16), rgba(141,229,176,.58)); }
+.reviewBars i:nth-child(1) { height: 42%; }.reviewBars i:nth-child(2) { height: 72%; }.reviewBars i:nth-child(3) { height: 94%; }
+
+.tech3dRack {
+  width: 96px;
+  padding: 10px;
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+}
+.tech3dRack span { color: rgba(183,209,229,.6); font: 800 8px/1 ui-monospace, monospace; letter-spacing: .13em; }
+.tech3dRack i { height: 7px; border: 1px solid rgba(141,207,255,.16); background: linear-gradient(90deg, rgba(141,207,255,.16), transparent); }
+.rackOne { left: 4%; bottom: 12%; transform: translateZ(24px) rotateZ(2deg); }
+.rackTwo { right: 2%; bottom: 28%; transform: translateZ(15px) rotateZ(-4deg); }
+
+.tech3dLinks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateZ(10px);
+  overflow: visible;
+}
+.tech3dLinks path { fill: none; stroke: rgba(130,205,255,.16); stroke-width: 1; stroke-dasharray: 4 9; vector-effect: non-scaling-stroke; animation: techDash 9s linear infinite; }
+.tech3dLinks path:nth-child(2) { animation-duration: 12s; stroke: rgba(127,239,218,.12); }
+.tech3dLinks path:nth-child(3) { animation-duration: 14s; }
+.tech3dLinks path:nth-child(4) { animation-duration: 10s; }
+@keyframes techDash { to { stroke-dashoffset: -80; } }
+
+.tech3dNodeCore {
+  left: 50%; top: 44%; width: 82px; height: 82px;
+  transform: translate3d(-50%,-50%,118px);
+  display: grid; place-items: center; align-content: center; border-radius: 50%;
+  box-shadow: 0 0 50px rgba(92,184,241,.14), inset 0 0 24px rgba(141,207,255,.08);
+}
+.tech3dNodeCore span { color: rgba(244,250,255,.88); font: 850 18px/1 system-ui; }
+.tech3dNodeCore small { margin-top: 4px; color: rgba(141,207,255,.55); font: 800 7px/1 ui-monospace, monospace; letter-spacing: .12em; }
+
+.tech3dNode { min-width: 62px; height: 34px; padding: 0 8px; display: flex; align-items: center; gap: 7px; border-radius: 8px; }
+.tech3dNode i { width: 5px; height: 5px; border-radius: 50%; background: rgba(132,236,221,.78); box-shadow: 0 0 10px rgba(132,236,221,.5); }
+.tech3dNode span { color: rgba(218,234,246,.7); font: 800 9px/1 ui-monospace, monospace; }
+.tech3dNode small { margin-left: auto; color: rgba(121,154,181,.45); font: 700 7px/1 ui-monospace, monospace; }
+.nodeApi { left: 8%; top: 24%; transform: translateZ(52px); }
+.nodeLlm { right: 12%; top: 8%; transform: translateZ(84px); }
+.nodeRag { right: 1%; top: 53%; transform: translateZ(66px); }
+.nodePy { left: 30%; bottom: 2%; transform: translateZ(48px); }
+.nodeGit { left: 4%; top: 57%; transform: translateZ(32px); }
+.nodeCi { right: 31%; bottom: 22%; transform: translateZ(108px); }
+
+/* 3D AI console */
+.aiSystemPerspective {
+  perspective: 1500px;
+  min-width: 0;
+}
+
+.aiSystemApp3d {
+  --app-rx: 0deg;
+  --app-ry: 0deg;
+  --app-x: 70%;
+  --app-y: 18%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--app-rx)) rotateY(var(--app-ry));
+  transform-origin: 50% 45%;
+  transition: transform .28s cubic-bezier(.2,.75,.2,1), border-color .2s ease, box-shadow .2s ease;
+  will-change: transform;
+  box-shadow:
+    0 42px 110px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,255,255,.02) inset,
+    0 0 80px rgba(66,154,220,.07) !important;
+}
+
+.aiSystemApp3d:hover {
+  border-color: rgba(143,207,255,.42) !important;
+  box-shadow:
+    0 48px 125px rgba(0,0,0,.52),
+    0 0 0 1px rgba(255,255,255,.025) inset,
+    0 0 92px rgba(66,154,220,.095) !important;
+}
+
+.aiAppSpecular {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: .75;
+  background: radial-gradient(circle at var(--app-x) var(--app-y), rgba(217,242,255,.075), transparent 21%);
+  mix-blend-mode: screen;
+}
+
+.aiAppTopbar,
+.aiAppTabs,
+.aiAppViewport,
+.aiStackRail,
+.aiAppConsole {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.aiAppTopbar { transform: translateZ(14px); }
+.aiAppTabs { transform: translateZ(10px); }
+.aiAppViewport { transform: translateZ(8px); }
+.aiAppConsole { transform: translateZ(12px); }
+
+.aiMode {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  border: 1px solid rgba(141,207,255,.13);
+  border-radius: 8px;
+  color: rgba(166,202,230,.65);
+  background: rgba(141,207,255,.025);
+  font: 800 .55rem/1 ui-monospace, monospace;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+.aiArchitecture3d {
+  perspective: 760px;
+  transform-style: preserve-3d;
+  overflow: visible !important;
+}
+
+.aiDepthPlane {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(121,201,255,.08);
+  background-image:
+    linear-gradient(rgba(121,201,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(121,201,255,.035) 1px, transparent 1px);
+  background-size: 22px 22px;
+  border-radius: 13px;
+}
+.aiDepthBack { inset: 11%; transform: translateZ(-36px) rotateX(4deg); opacity: .48; }
+.aiDepthMid { inset: 6%; transform: translateZ(-15px) rotateX(2deg); opacity: .36; }
+.aiArchitecture3d svg { transform: translateZ(5px); }
+.aiArchitecture3d .aiCore { transform: translate(-50%,-50%) translateZ(46px); }
+.aiArchitecture3d .aiStage { transform: translateZ(28px); }
+.aiArchitecture3d .aiStage:hover,
+.aiArchitecture3d .aiStage.active { transform: translateY(-3px) translateZ(40px); }
+.aiInspectorIcon { margin-top: 22px; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(121,201,255,.17); border-radius: 10px; color: var(--ai-accent); background: rgba(121,201,255,.055); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+.aiStageInspector h4 { margin-top: 16px !important; }
+
+.aiStackRail {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 15px;
+  align-items: center;
+  min-height: 46px;
+  padding: 8px 15px;
+  border-top: 1px solid var(--ai-line);
+  background: rgba(255,255,255,.012);
+}
+.aiStackRail > span { color: #5f7890; font: 800 .54rem/1 ui-monospace, monospace; letter-spacing: .12em; white-space: nowrap; }
+.aiStackRail > div { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.aiStackRail b { padding: 5px 7px; border: 1px solid rgba(121,201,255,.11); border-radius: 6px; color: #8fa9bd; background: rgba(121,201,255,.025); font: 750 .56rem/1 ui-monospace, monospace; }
+
+/* 3D treatment for the rest of the portfolio — restrained, readable and recruiter-friendly. */
+.contentSection,
+.contactSection {
+  perspective: 1200px;
+}
+
+.featuredCase,
+.engineeringBlock,
+.toolBlock,
+.developerStackBlock,
+.assistantShell,
+.contactCards {
+  transform-style: preserve-3d;
+}
+
+.featuredCase {
+  transform: rotateX(.35deg) rotateY(-.5deg);
+  box-shadow: 0 34px 90px rgba(0,0,0,.22);
+  transition: transform .34s cubic-bezier(.2,.8,.2,1), box-shadow .34s ease, border-color .25s ease;
+}
+.featuredCase:hover {
+  transform: translateY(-5px) rotateX(0deg) rotateY(.5deg);
+  box-shadow: 0 44px 110px rgba(0,0,0,.3), 0 0 60px rgba(82,168,226,.04);
+}
+.featuredCaseCopy { transform: translateZ(20px); }
+.caseVisual { transform: translateZ(32px); }
+.flowStage { transition: transform .2s ease, border-color .2s ease, background .2s ease !important; }
+.flowStage:hover,.flowStage.active { transform: translateY(-4px) scale(1.015); }
+
+.buildGrid,
+.developerToolGrid {
+  perspective: 1000px;
+}
+.buildCard,
+.developerToolCard {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.buildCard:nth-child(odd):hover { transform: translateY(-7px) rotateX(2deg) rotateY(-2deg) !important; }
+.buildCard:nth-child(even):hover { transform: translateY(-7px) rotateX(2deg) rotateY(2deg) !important; }
+.buildCard h3,.buildCard p,.buildTopLine,.buildVisualMark,.buildArrow { position: relative; transform: translateZ(18px); }
+.developerToolCard:nth-child(4n+1):hover { transform: translateY(-7px) rotateX(2deg) rotateY(-2.2deg) !important; }
+.developerToolCard:nth-child(4n+2):hover { transform: translateY(-7px) rotateX(2deg) rotateY(-.8deg) !important; }
+.developerToolCard:nth-child(4n+3):hover { transform: translateY(-7px) rotateX(2deg) rotateY(.8deg) !important; }
+.developerToolCard:nth-child(4n):hover { transform: translateY(-7px) rotateX(2deg) rotateY(2.2deg) !important; }
+.developerToolCard > * { position: relative; transform: translateZ(16px); }
+
+.experienceRow,
+.engineeringRow,
+.toolRow,
+.fitRow {
+  transform-origin: center;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease !important;
+}
+.experienceRow:hover,
+.engineeringRow:hover,
+.toolRow:hover,
+.fitRow:hover {
+  transform: translateX(5px) translateZ(8px);
+  border-color: rgba(143,207,255,.16) !important;
+}
+
+.sectionIntroGrid h2,
+.contactIntro h2 {
+  text-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+
+.heroCopy {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.heroMetaLine { transform: translateZ(8px); }
+.heroName { transform: translateZ(18px); text-shadow: 0 28px 65px rgba(0,0,0,.31); }
+.heroRole { transform: translateZ(14px); }
+.heroLead,.heroSecondary { transform: translateZ(8px); }
+.heroProofStrip { transform: translateZ(12px); }
+
+@media (max-width: 1080px) {
+  .tech3dScene { opacity: .42; mask-image: linear-gradient(to bottom, #000 0%, transparent 62%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 62%); }
+  .tech3dWorld { right: -32vw; top: 8vh; transform: rotateX(63deg) rotateZ(-15deg) scale(.88); }
+  .aiMode { display: none; }
+}
+
+@media (max-width: 760px) {
+  .tech3dScene { opacity: .22; }
+  .tech3dWorld { width: 820px; height: 520px; right: -430px; top: 86px; transform: rotateX(66deg) rotateZ(-14deg) scale(.75); }
+  .tech3dPlane,.tech3dRack { opacity: .65; }
+  .aiSystemPerspective { perspective: none; }
+  .aiSystemApp3d { transform: none !important; will-change: auto; }
+  .aiAppSpecular { display: none; }
+  .aiAppTopbar,.aiAppTabs,.aiAppViewport,.aiStackRail,.aiAppConsole { transform: none; }
+  .aiArchitecture3d .aiCore { transform: translate(-50%,-50%); }
+  .aiArchitecture3d .aiStage,.aiArchitecture3d .aiStage:hover,.aiArchitecture3d .aiStage.active { transform: none; }
+  .aiDepthPlane { display: none; }
+  .aiStackRail { grid-template-columns: 1fr; gap: 6px; }
+  .aiStackRail > div { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; scrollbar-width: none; }
+  .aiStackRail > div::-webkit-scrollbar { display: none; }
+  .featuredCase,.featuredCase:hover { transform: none; }
+  .featuredCaseCopy,.caseVisual { transform: none; }
+  .buildCard:nth-child(n):hover,.developerToolCard:nth-child(n):hover { transform: translateY(-3px) !important; }
+  .buildCard h3,.buildCard p,.buildTopLine,.buildVisualMark,.buildArrow,.developerToolCard > * { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech3dWorld { transition: none; transform: rotateX(61deg) rotateZ(-14deg); }
+  .tech3dLinks path { animation: none; }
+  .aiSystemApp3d { transform: none !important; transition: none !important; }
+  .aiAppSpecular { display: none; }
+  .featuredCase,.buildCard,.developerToolCard,.flowStage,.experienceRow,.engineeringRow,.toolRow,.fitRow { transition: none !important; transform: none !important; }
+}
