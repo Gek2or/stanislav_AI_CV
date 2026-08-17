@@ -12,15 +12,15 @@ import { content } from './data/content'
 
 function readStoredLanguage() {
   try {
-    return localStorage.getItem('stanislav-cv-lang') || 'en'
+    return localStorage.getItem('stanislav-cv-lang') || 'fi'
   } catch {
-    return 'en'
+    return 'fi'
   }
 }
 
 export default function App() {
   const [lang, setLang] = useState(readStoredLanguage)
-  const safeLang = content[lang] ? lang : 'en'
+  const safeLang = content[lang] ? lang : 'fi'
   const t = useMemo(() => content[safeLang], [safeLang])
 
   useEffect(() => {
@@ -39,8 +39,8 @@ export default function App() {
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
       <main>
         <Hero t={t} lang={safeLang} />
-        <ReferenceDeck t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
+        <ReferenceDeck t={t} lang={safeLang} />
         <AICore t={t} lang={safeLang} />
         <BitonetFit t={t} />
         <Assistant t={t} lang={safeLang} />
@@ -48,7 +48,7 @@ export default function App() {
       </main>
       <footer className="footer sectionShell">
         <span>© 2026 Stanislav Kosytskyy</span>
-        <span>React · Vite · AI Software Engineer portfolio</span>
+        <span>AI Software Engineer · Python · APIs · Git/CI · Applied AI</span>
       </footer>
     </div>
   )
