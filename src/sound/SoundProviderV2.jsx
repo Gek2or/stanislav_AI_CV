@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 const SoundContext = createContext(null)
 
 const STORAGE_KEY = 'stanislav-site-sound'
-const STEP_MS = 272
+const TRACK_URL = 'https://cdn1.suno.ai/d470d084-a7d9-418b-a2b7-fbfa1779ae5e.mp3'
 
 function readPreference() {
   try {
@@ -19,18 +19,19 @@ function savePreference(enabled) {
   } catch {}
 }
 
-function safeStop(node, when = 0) {
-  try { node?.stop?.(when) } catch {}
+function musicVolume() {
+  if (typeof window === 'undefined') return 0.44
+  return window.matchMedia?.('(max-width: 760px)').matches ? 0.36 : 0.44
 }
 
 export function SoundProvider({ children }) {
   const [enabled, setEnabled] = useState(readPreference)
   const ctxRef = useRef(null)
   const masterRef = useRef(null)
-  const musicRef = useRef(null)
   const sfxRef = useRef(null)
   const compressorRef = useRef(null)
   const soundtrackRef = useRef(null)
+  const fadeTimerRef = useRef(null)
   const hoverRef = useRef({ element: null, time: 0 })
   const sectionRef = useRef({ last: 0, seen: new Set() })
 
@@ -42,14 +43,11 @@ export function SoundProvider({ children }) {
     if (!ctxRef.current) {
       const ctx = new AudioCtx()
       const master = ctx.createGain()
-      const music = ctx.createGain()
       const sfx = ctx.createGain()
       const compressor = ctx.createDynamicsCompressor()
 
-      // Deliberately audible mix. The previous version was technically running
-      // but its individual voices were down around 0.004–0.012 gain.
+      // Keep the stronger SFX mix that was approved in the previous pass.
       master.gain.value = 0.92
-      music.gain.value = 0.72
       sfx.gain.value = 1.0
 
       compressor.threshold.value = -14
@@ -58,14 +56,12 @@ export function SoundProvider({ children }) {
       compressor.attack.value = 0.003
       compressor.release.value = 0.18
 
-      music.connect(master)
       sfx.connect(master)
       master.connect(compressor)
       compressor.connect(ctx.destination)
 
       ctxRef.current = ctx
       masterRef.current = master
-      musicRef.current = music
       sfxRef.current = sfx
       compressorRef.current = compressor
     }
@@ -124,208 +120,66 @@ export function SoundProvider({ children }) {
     }, Math.ceil((delay + duration + 0.15) * 1000))
   }, [])
 
-  const noiseHit = useCallback((ctx, destination, {
-    delay = 0,
-    duration = 0.04,
-    volume = 0.035,
-    highpass = 3800,
-    pan = 0,
-  } = {}) => {
-    if (!ctx || !destination) return
-    const frames = Math.max(1, Math.floor(ctx.sampleRate * duration))
-    const buffer = ctx.createBuffer(1, frames, ctx.sampleRate)
-    const data = buffer.getChannelData(0)
-    for (let i = 0; i < frames; i += 1) data[i] = Math.random() * 2 - 1
+  const stopSoundtrack = useCallback((fade = true) => {
+    const audio = soundtrackRef.current
+    if (!audio) return
 
-    const source = ctx.createBufferSource()
-    const filter = ctx.createBiquadFilter()
-    const gain = ctx.createGain()
-    const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
-    const start = ctx.currentTime + delay
-    const end = start + duration
-
-    source.buffer = buffer
-    filter.type = 'highpass'
-    filter.frequency.value = highpass
-    filter.Q.value = 0.65
-    gain.gain.setValueAtTime(0.0001, start)
-    gain.gain.exponentialRampToValueAtTime(volume, start + 0.004)
-    gain.gain.exponentialRampToValueAtTime(0.0001, end)
-
-    source.connect(filter)
-    filter.connect(gain)
-    if (panner) {
-      panner.pan.value = pan
-      gain.connect(panner)
-      panner.connect(destination)
-    } else {
-      gain.connect(destination)
+    if (fadeTimerRef.current) {
+      window.clearInterval(fadeTimerRef.current)
+      fadeTimerRef.current = null
     }
 
-    source.start(start)
-    source.stop(end + 0.01)
-  }, [])
+    if (!fade || audio.paused) {
+      audio.pause()
+      try { audio.currentTime = 0 } catch {}
+      audio.volume = musicVolume()
+      return
+    }
 
-  const stopSoundtrack = useCallback((fade = true) => {
-    const track = soundtrackRef.current
-    soundtrackRef.current = null
-    if (!track) return
-
-    track.active = false
-    window.clearInterval(track.interval)
-    window.clearTimeout(track.startTimer)
-
-    const now = track.ctx.currentTime
-    const stopAt = now + (fade ? 0.35 : 0.03)
-    try {
-      track.bedGain.gain.cancelScheduledValues(now)
-      track.bedGain.gain.setValueAtTime(Math.max(0.0001, track.bedGain.gain.value), now)
-      track.bedGain.gain.exponentialRampToValueAtTime(0.0001, stopAt)
-    } catch {}
-
-    track.nodes.forEach((node) => safeStop(node, stopAt + 0.04))
-    window.setTimeout(() => {
-      track.connections.forEach((node) => {
-        try { node.disconnect?.() } catch {}
-      })
-    }, fade ? 500 : 80)
+    const startVolume = audio.volume
+    const steps = 9
+    let step = 0
+    fadeTimerRef.current = window.setInterval(() => {
+      step += 1
+      audio.volume = Math.max(0, startVolume * (1 - step / steps))
+      if (step >= steps) {
+        window.clearInterval(fadeTimerRef.current)
+        fadeTimerRef.current = null
+        audio.pause()
+        try { audio.currentTime = 0 } catch {}
+        audio.volume = musicVolume()
+      }
+    }, 40)
   }, [])
 
   const startSoundtrack = useCallback(async () => {
-    if (soundtrackRef.current?.active) return true
-    const ctx = await ensureGraph()
-    const destination = musicRef.current
-    if (!ctx || ctx.state !== 'running' || !destination) return false
+    if (typeof window === 'undefined') return false
 
-    const now = ctx.currentTime
-    const bedGain = ctx.createGain()
-    const bedFilter = ctx.createBiquadFilter()
-    const nodes = []
-    const connections = [bedGain, bedFilter]
-
-    bedGain.gain.setValueAtTime(0.0001, now)
-    bedGain.gain.exponentialRampToValueAtTime(0.34, now + 0.8)
-    bedFilter.type = 'lowpass'
-    bedFilter.frequency.value = 1350
-    bedFilter.Q.value = 0.6
-    bedFilter.connect(bedGain)
-    bedGain.connect(destination)
-
-    const addBed = (frequency, type, gainValue, detune = 0, pan = 0) => {
-      const osc = ctx.createOscillator()
-      const gain = ctx.createGain()
-      const panner = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null
-      osc.type = type
-      osc.frequency.value = frequency
-      osc.detune.value = detune
-      gain.gain.value = gainValue
-      osc.connect(gain)
-      if (panner) {
-        panner.pan.value = pan
-        gain.connect(panner)
-        panner.connect(bedFilter)
-        connections.push(panner)
-      } else {
-        gain.connect(bedFilter)
-      }
-      osc.start(now)
-      nodes.push(osc)
-      connections.push(osc, gain)
+    if (fadeTimerRef.current) {
+      window.clearInterval(fadeTimerRef.current)
+      fadeTimerRef.current = null
     }
 
-    // Constant low cinematic bed so SOUND ON is immediately obvious.
-    addBed(55, 'sine', 0.16, 0, -0.08)
-    addBed(110, 'triangle', 0.075, -5, 0.08)
-    addBed(164.8, 'sine', 0.038, 4, -0.18)
-    addBed(220, 'triangle', 0.024, -7, 0.2)
-
-    const lfo = ctx.createOscillator()
-    const lfoGain = ctx.createGain()
-    lfo.type = 'sine'
-    lfo.frequency.value = 0.11
-    lfoGain.gain.value = 0.09
-    lfo.connect(lfoGain)
-    lfoGain.connect(bedGain.gain)
-    lfo.start(now)
-    nodes.push(lfo)
-    connections.push(lfo, lfoGain)
-
-    const track = { ctx, active: true, interval: 0, startTimer: 0, step: 0, nodes, connections, bedGain }
-    soundtrackRef.current = track
-
-    const bass = [55, 55, 65.4, 55, 49, 49, 65.4, 73.4]
-    const arp = [220, 261.6, 329.6, 392, 329.6, 261.6, 246.9, 293.7]
-
-    const tick = () => {
-      if (soundtrackRef.current !== track || !track.active) return
-      const step = track.step % 16
-      const phrase = Math.floor(track.step / 2) % 8
-
-      if (step % 2 === 0) {
-        const bassFreq = bass[phrase]
-        oneShot(ctx, destination, {
-          from: bassFreq,
-          to: bassFreq * 0.965,
-          duration: 0.22,
-          volume: step % 4 === 0 ? 0.19 : 0.13,
-          type: 'sine',
-          cutoff: 620,
-          pan: -0.04,
-        })
-        oneShot(ctx, destination, {
-          from: arp[phrase],
-          to: arp[phrase] * 1.018,
-          duration: 0.11,
-          volume: 0.055,
-          type: 'triangle',
-          cutoff: 2500,
-          pan: step % 4 === 0 ? -0.3 : 0.3,
-        })
-      }
-
-      if (step % 2 === 1) {
-        noiseHit(ctx, destination, {
-          duration: 0.032,
-          volume: step % 4 === 3 ? 0.052 : 0.035,
-          highpass: 4200,
-          pan: step % 4 === 1 ? -0.22 : 0.22,
-        })
-      }
-
-      if (step === 0 || step === 8) {
-        oneShot(ctx, destination, {
-          from: 92,
-          to: 48,
-          duration: 0.18,
-          volume: 0.22,
-          type: 'sine',
-          cutoff: 900,
-        })
-      }
-
-      if (step === 7 || step === 15) {
-        oneShot(ctx, destination, {
-          from: 880,
-          to: 1320,
-          duration: 0.09,
-          volume: 0.045,
-          type: 'sine',
-          cutoff: 3800,
-          pan: step === 7 ? -0.45 : 0.45,
-        })
-      }
-
-      track.step += 1
+    let audio = soundtrackRef.current
+    if (!audio) {
+      audio = new Audio(TRACK_URL)
+      audio.loop = true
+      audio.preload = 'auto'
+      audio.volume = musicVolume()
+      audio.setAttribute('playsinline', '')
+      soundtrackRef.current = audio
     }
 
-    tick()
-    track.startTimer = window.setTimeout(() => {
-      if (soundtrackRef.current !== track || !track.active) return
-      track.interval = window.setInterval(tick, STEP_MS)
-    }, STEP_MS)
+    audio.volume = musicVolume()
+    if (!audio.paused) return true
 
-    return true
-  }, [ensureGraph, noiseHit, oneShot])
+    try {
+      await audio.play()
+      return true
+    } catch {
+      return false
+    }
+  }, [])
 
   const play = useCallback(async (kind = 'tap', force = false) => {
     if (!enabled && !force) return
@@ -485,10 +339,24 @@ export function SoundProvider({ children }) {
     return () => observer.disconnect()
   }, [enabled, play])
 
+  useEffect(() => {
+    const onResize = () => {
+      if (soundtrackRef.current) soundtrackRef.current.volume = musicVolume()
+    }
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   useEffect(() => () => {
-    stopSoundtrack(false)
+    if (fadeTimerRef.current) window.clearInterval(fadeTimerRef.current)
+    const audio = soundtrackRef.current
+    if (audio) {
+      audio.pause()
+      audio.src = ''
+      soundtrackRef.current = null
+    }
     try { ctxRef.current?.close?.() } catch {}
-  }, [stopSoundtrack])
+  }, [])
 
   const value = useMemo(() => ({ enabled, toggle, play }), [enabled, toggle, play])
   return <SoundContext.Provider value={value}>{children}</SoundContext.Provider>
