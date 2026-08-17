@@ -1,0 +1,342 @@
+/* Evidence-first polish: keep the original technical character, reduce demo noise. */
+
+:root {
+  --portfolio-accent: #8fcfff;
+  --portfolio-accent-soft: rgba(143, 207, 255, .16);
+}
+
+.tech3dScene {
+  opacity: .22 !important;
+  filter: saturate(.55) contrast(.9);
+}
+
+.ambientGlow {
+  opacity: .22 !important;
+  filter: saturate(.55);
+}
+
+.referenceHero {
+  padding-top: clamp(64px, 7vw, 94px);
+  padding-bottom: clamp(84px, 9vw, 120px);
+}
+
+.referenceHeroIdentity h1 {
+  font-size: clamp(4.7rem, 10.7vw, 9.8rem);
+  line-height: .8;
+}
+
+.referenceHeroIdentity h1 span:last-child {
+  -webkit-text-stroke-color: rgba(208,229,245,.5);
+}
+
+.convictionHeroSplit {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, .65fr);
+  align-items: start;
+  margin-top: clamp(46px, 6vw, 72px);
+}
+
+.referenceHeroStatement h2 {
+  max-width: 820px;
+  font-size: clamp(2.3rem, 4.2vw, 4.7rem);
+  line-height: 1.01;
+}
+
+.referenceHeroStatement > p {
+  max-width: 720px;
+  color: #a2b0be;
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+  line-height: 1.72;
+}
+
+.heroProof {
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.heroProof article {
+  padding: 18px 2px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.heroProof article > span {
+  display: block;
+  color: #718395;
+  font: 750 .61rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.heroProof article > strong {
+  display: block;
+  margin-top: 8px;
+  color: #eef5fb;
+  font-size: 1rem;
+  letter-spacing: -.015em;
+}
+
+.heroProof article > p {
+  margin: 5px 0 0;
+  color: #8393a3;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.referenceHeroTimeline {
+  margin-top: clamp(54px, 6vw, 76px);
+}
+
+.referenceTimelineRail i::before {
+  width: 6px;
+  height: 6px;
+  background: #8fcfff;
+  box-shadow: none;
+}
+
+.compactConsoleIntro {
+  margin-top: clamp(68px, 7vw, 92px);
+}
+
+.compactConsoleIntro h3 {
+  font-size: clamp(2.2rem, 4.5vw, 4.4rem);
+}
+
+.quieterConsole .aiSystemApp {
+  box-shadow: 0 24px 70px rgba(0,0,0,.28) !important;
+  filter: saturate(.82);
+}
+
+/* Selected work is the primary evidence section. */
+.convictionWork {
+  position: relative;
+  z-index: 4;
+  padding-top: clamp(84px, 10vw, 132px);
+}
+
+.convictionWork .sectionIntroGrid h2 {
+  max-width: 790px;
+  font-size: clamp(2.45rem, 5vw, 5.3rem);
+  line-height: .96;
+}
+
+.convictionWork .sectionLead {
+  max-width: 650px;
+  color: #9aa9b8;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.evidenceCase {
+  box-shadow: none !important;
+  background: rgba(9, 17, 24, .72) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+.evidenceCase .featuredCaseCopy {
+  padding-bottom: 34px;
+}
+
+.caseFacts {
+  margin-top: 30px;
+  border-top: 1px solid rgba(255,255,255,.11);
+}
+
+.caseFacts > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 22px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,.085);
+}
+
+.caseFacts span {
+  color: #7890a3;
+  font: 750 .6rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.caseFacts p {
+  margin: 0;
+  color: #b0bdc8;
+  font-size: .82rem;
+  line-height: 1.58;
+}
+
+.flowStage,
+.buildCard,
+.referenceChapters button,
+.referenceSystemCard,
+.referenceStackRail article {
+  box-shadow: none !important;
+}
+
+.flowStage:not(.active),
+.buildCard,
+.referenceChapters button:not(.active),
+.referenceStackRail article {
+  background: rgba(255,255,255,.012) !important;
+}
+
+.flowStage.active,
+.referenceChapters button.active {
+  box-shadow: inset 0 0 0 1px rgba(143,207,255,.18) !important;
+}
+
+.selectedProjectRows {
+  margin-top: 36px;
+}
+
+.selectedProjectRows .experienceRow {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.projectType {
+  display: block;
+  margin-bottom: 8px;
+  color: #71899e;
+  font: 750 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.selectedProjectRows .experienceTitle h3 {
+  margin-top: 0;
+}
+
+.supportingContextGrid .buildCard {
+  min-height: 230px;
+  border-color: rgba(255,255,255,.085) !important;
+}
+
+.supportingContextGrid .buildCard:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(143,207,255,.18) !important;
+}
+
+/* The engineering story remains, but no longer competes with the projects. */
+.referenceDeck {
+  padding-top: clamp(92px, 10vw, 136px) !important;
+}
+
+.referenceDeck .referenceSystemVisual {
+  opacity: .72;
+  filter: saturate(.7);
+}
+
+.referenceSystemOrbit,
+.referenceSystemCore,
+.referenceNode {
+  box-shadow: none !important;
+}
+
+.contentSection,
+.referenceDeck,
+.aiCoreSection,
+.bitonetSection,
+.assistantSection,
+.contactSection {
+  scroll-margin-top: 84px;
+}
+
+@media (max-width: 1050px) {
+  .convictionHeroSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .heroProof {
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+
+  .heroProof article {
+    border-right: 1px solid rgba(255,255,255,.08);
+    border-bottom: 0;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .tech3dScene { opacity: .12 !important; }
+  .ambientGlow { opacity: .14 !important; }
+
+  .referenceHero {
+    padding-top: 48px;
+    padding-bottom: 76px;
+  }
+
+  .referenceHeroIdentity h1 {
+    font-size: clamp(3.75rem, 17.5vw, 6.4rem);
+  }
+
+  .referenceHeroSplit {
+    margin-top: 44px;
+  }
+
+  .referenceHeroStatement h2 {
+    font-size: clamp(2.1rem, 10vw, 3.8rem);
+  }
+
+  .referenceHeroActions {
+    gap: 16px 20px;
+  }
+
+  .heroProof {
+    display: block;
+  }
+
+  .heroProof article {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.085);
+  }
+
+  .referenceHeroTimeline {
+    margin-top: 54px;
+  }
+
+  .compactConsoleIntro {
+    margin-top: 66px;
+  }
+
+  .convictionWork {
+    padding-top: 76px;
+  }
+
+  .caseFacts > div {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .selectedProjectRows .experienceRow {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 430px) {
+  .referenceHeroIdentity h1 {
+    font-size: clamp(3.45rem, 17vw, 5.2rem);
+    letter-spacing: -.075em;
+  }
+
+  .referenceHeroStatement > p,
+  .convictionWork .sectionLead {
+    font-size: .94rem;
+  }
+
+  .referenceHeroActions .primaryButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .heroProof article {
+    padding: 16px 0 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .supportingContextGrid .buildCard:hover,
+  .referenceTextLink:hover {
+    transform: none !important;
+  }
+}
