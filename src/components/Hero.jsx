@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Languages, MapPin, Workflow } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Download, Languages, MapPin, Workflow } from 'lucide-react'
 import AISystemApp from './AISystemApp'
 
 const copy = {
@@ -6,6 +6,7 @@ const copy = {
     iam: 'I am',
     kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
     application: 'Target role · AI Software Engineer · Bitonet Oy',
+    downloadCV: 'Download CV · PDF',
     selectedWork: 'selected work areas',
     liveContext: 'live operating business',
     engineeringTracks: 'engineering tracks',
@@ -22,6 +23,7 @@ const copy = {
     iam: 'Minä olen',
     kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
     application: 'Tavoiterooli · AI Software Engineer · Bitonet Oy',
+    downloadCV: 'Lataa CV · PDF',
     selectedWork: 'valittua työaluetta',
     liveContext: 'toimiva liiketoimintaympäristö',
     engineeringTracks: 'engineering-polkuja',
@@ -38,6 +40,7 @@ const copy = {
     iam: 'Я —',
     kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
     application: 'Целевая роль · AI Software Engineer · Bitonet Oy',
+    downloadCV: 'Скачать CV · PDF',
     selectedWork: 'рабочих направлений',
     liveContext: 'реальный действующий бизнес',
     engineeringTracks: 'engineering-направлений',
@@ -54,6 +57,7 @@ const copy = {
     iam: 'Я —',
     kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
     application: 'Цільова роль · AI Software Engineer · Bitonet Oy',
+    downloadCV: 'Завантажити CV · PDF',
     selectedWork: 'робочих напрямів',
     liveContext: 'реальний діючий бізнес',
     engineeringTracks: 'engineering-напрямів',
@@ -70,6 +74,7 @@ const copy = {
 
 export default function Hero({ t, lang = 'en' }) {
   const text = copy[lang] || copy.en
+  const cvUrl = `${import.meta.env.BASE_URL}Stanislav_Kosytskyy_CV_Bitonet.pdf`
   const metrics = [
     [t.projects?.length || 0, text.selectedWork, BriefcaseBusiness],
     [1, text.liveContext, Workflow],
@@ -100,6 +105,7 @@ export default function Hero({ t, lang = 'en' }) {
           <div className="referenceHeroActions">
             <a href="#work" className="primaryButton">{t.ctaPrimary}<ArrowDownRight size={17}/></a>
             <a href="#contact" className="referenceTextLink">{t.ctaSecondary}<ArrowUpRight size={16}/></a>
+            <a href={cvUrl} download="Stanislav_Kosytskyy_CV_Bitonet.pdf" className="referenceTextLink" aria-label={text.downloadCV}>{text.downloadCV}<Download size={16}/></a>
           </div>
         </div>
 
