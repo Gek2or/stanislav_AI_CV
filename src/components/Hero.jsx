@@ -1,86 +1,92 @@
-import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Download, Languages, MapPin, Workflow } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, Download, MapPin } from 'lucide-react'
 import AISystemApp from './AISystemApp'
 
 const copy = {
   en: {
     iam: 'I am',
-    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    kicker: 'SOFTWARE / AUTOMATION / APPLIED AI',
     application: 'Target role · AI Software Engineer · Bitonet Oy',
+    headline: 'I build practical software and automation for real business problems.',
+    subhead: 'I combine software development and AI tools with hands-on experience in entrepreneurship, logistics and customer operations in Finland. I start from the workflow, then decide what should become software.',
     downloadCV: 'Download CV · PDF',
-    selectedWork: 'selected work areas',
-    liveContext: 'live operating business',
-    engineeringTracks: 'engineering tracks',
-    languages: 'site languages',
+    proof: [
+      ['Current context', 'Autochemix Oy', 'Live business operations in Finland'],
+      ['Building now', 'Python + APIs', 'Automation for quotes, tracking and integrations'],
+      ['What makes it different', 'Operations → software', 'Requirements come from work I actually do'],
+    ],
     timeline: [
       ['2020', 'Taitotalo', 'Software-development studies'],
-      ['2022', 'Building', 'Software + game-development projects'],
-      ['NOW', 'Finland', 'Operations → Python / APIs / AI systems'],
+      ['2022', 'Building', 'Software and game-development projects'],
+      ['NOW', 'Finland', 'Business operations → software and automation'],
     ],
-    console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'A compact view of how I approach applied AI work: define the outcome, structure context, choose the route, build, verify, and keep human review where it matters.',
+    console: 'HOW I THINK BEFORE I BUILD',
+    consoleCopy: 'The interactive console stays as a compact engineering view: define the outcome, structure the context, choose the simplest useful route, build, verify and keep human review where it matters.',
   },
   fi: {
-    iam: 'Minä olen',
-    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    iam: 'Olen',
+    kicker: 'OHJELMISTOT / AUTOMAATIO / SOVELTAVA AI',
     application: 'Tavoiterooli · AI Software Engineer · Bitonet Oy',
+    headline: 'Rakennan käytännön ohjelmistoja ja automaatioita todellisiin liiketoimintaongelmiin.',
+    subhead: 'Yhdistän ohjelmistokehityksen ja AI-työkalut käytännön kokemukseen yrittäjyydestä, logistiikasta ja asiakastyöstä Suomessa. Aloitan työnkulusta ja päätän vasta sen jälkeen, mikä kannattaa muuttaa ohjelmistoksi.',
     downloadCV: 'Lataa CV · PDF',
-    selectedWork: 'valittua työaluetta',
-    liveContext: 'toimiva liiketoimintaympäristö',
-    engineeringTracks: 'engineering-polkuja',
-    languages: 'sivuston kieltä',
+    proof: [
+      ['Nykyinen ympäristö', 'Autochemix Oy', 'Päivittäistä liiketoimintaa Suomessa'],
+      ['Rakennan nyt', 'Python + API:t', 'Automaatioita tarjouksiin, seurantaan ja integraatioihin'],
+      ['Oma näkökulmani', 'Operatiivinen työ → ohjelmisto', 'Vaatimukset syntyvät työstä, jota teen itse'],
+    ],
     timeline: [
       ['2020', 'Taitotalo', 'Ohjelmistokehityksen opinnot'],
-      ['2022', 'Rakentaminen', 'Software + game-development -projektit'],
-      ['NYT', 'Suomi', 'Operatiivinen työ → Python / API:t / AI-järjestelmät'],
+      ['2022', 'Projektit', 'Ohjelmisto- ja pelinkehitysprojekteja'],
+      ['NYT', 'Suomi', 'Liiketoiminnan prosessit → ohjelmistot ja automaatio'],
     ],
-    console: 'INTERAKTIIVINEN ENGINEERING CONSOLE',
-    consoleCopy: 'Tiivis näkymä applied AI -työtapaani: määritä tavoite, jäsennä konteksti, valitse toteutusreitti, rakenna, varmista ja pidä ihmisen tarkistus mukana siellä missä sillä on merkitystä.',
+    console: 'MITEN AJATTELEN ENNEN TOTEUTUSTA',
+    consoleCopy: 'Interaktiivinen näkymä tiivistää teknisen työskentelytapani: määritä tavoite, jäsennä konteksti, valitse yksinkertaisin hyödyllinen toteutus, rakenna, varmista ja pidä ihmisen tarkistus mukana siellä missä sitä tarvitaan.',
   },
   ru: {
     iam: 'Я —',
-    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    kicker: 'SOFTWARE / АВТОМАТИЗАЦИЯ / APPLIED AI',
     application: 'Целевая роль · AI Software Engineer · Bitonet Oy',
+    headline: 'Я создаю практичные программы и автоматизации для реальных бизнес-задач.',
+    subhead: 'Я соединяю разработку и AI-инструменты с практическим опытом предпринимательства, логистики и работы с клиентами в Финляндии. Сначала разбираюсь в процессе, а уже потом решаю, что действительно стоит превращать в software.',
     downloadCV: 'Скачать CV · PDF',
-    selectedWork: 'рабочих направлений',
-    liveContext: 'реальный действующий бизнес',
-    engineeringTracks: 'engineering-направлений',
-    languages: 'языка сайта',
+    proof: [
+      ['Сейчас', 'Autochemix Oy', 'Ежедневная работа реального бизнеса в Финляндии'],
+      ['Строю', 'Python + API', 'Автоматизации для предложений, учёта и интеграций'],
+      ['Мой подход', 'Операционка → software', 'Требования приходят из задач, которые я сам выполняю'],
+    ],
     timeline: [
       ['2020', 'Taitotalo', 'Обучение software development'],
-      ['2022', 'Разработка', 'Software + game-development проекты'],
-      ['СЕЙЧАС', 'Finland', 'Операционка → Python / API / AI-системы'],
+      ['2022', 'Проекты', 'Software- и game-development проекты'],
+      ['СЕЙЧАС', 'Finland', 'Бизнес-процессы → software и автоматизация'],
     ],
-    console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'Кратко о моём подходе к applied AI: определить результат, собрать контекст, выбрать маршрут, реализовать, проверить и оставить human review там, где он важен.',
+    console: 'КАК Я ДУМАЮ ДО НАПИСАНИЯ КОДА',
+    consoleCopy: 'Интерактивная консоль остаётся как компактное представление инженерного подхода: определить результат, собрать контекст, выбрать самый простой полезный маршрут, реализовать, проверить и оставить human review там, где он действительно нужен.',
   },
   uk: {
     iam: 'Я —',
-    kicker: 'AI SOFTWARE ENGINEER / APPLIED AI / FINLAND',
+    kicker: 'SOFTWARE / АВТОМАТИЗАЦІЯ / APPLIED AI',
     application: 'Цільова роль · AI Software Engineer · Bitonet Oy',
+    headline: 'Я створюю практичні програми й автоматизації для реальних бізнес-задач.',
+    subhead: 'Я поєдную розробку та AI-інструменти з практичним досвідом підприємництва, логістики й роботи з клієнтами у Фінляндії. Спочатку розбираюся в процесі, а вже потім вирішую, що справді варто перетворювати на software.',
     downloadCV: 'Завантажити CV · PDF',
-    selectedWork: 'робочих напрямів',
-    liveContext: 'реальний діючий бізнес',
-    engineeringTracks: 'engineering-напрямів',
-    languages: 'мови сайту',
+    proof: [
+      ['Зараз', 'Autochemix Oy', 'Щоденна робота реального бізнесу у Фінляндії'],
+      ['Будую', 'Python + API', 'Автоматизації для пропозицій, обліку та інтеграцій'],
+      ['Мій підхід', 'Операційна робота → software', 'Вимоги походять із задач, які я виконую сам'],
+    ],
     timeline: [
       ['2020', 'Taitotalo', 'Навчання software development'],
-      ['2022', 'Розробка', 'Software + game-development проєкти'],
-      ['ЗАРАЗ', 'Finland', 'Операційна робота → Python / API / AI-системи'],
+      ['2022', 'Проєкти', 'Software- та game-development проєкти'],
+      ['ЗАРАЗ', 'Finland', 'Бізнес-процеси → software та автоматизація'],
     ],
-    console: 'INTERACTIVE ENGINEERING CONSOLE',
-    consoleCopy: 'Коротко про мій підхід до applied AI: визначити результат, зібрати контекст, обрати маршрут, реалізувати, перевірити та залишити human review там, де він важливий.',
+    console: 'ЯК Я МИСЛЮ ДО НАПИСАННЯ КОДУ',
+    consoleCopy: 'Інтерактивна консоль залишається компактним відображенням інженерного підходу: визначити результат, зібрати контекст, обрати найпростіший корисний маршрут, реалізувати, перевірити та залишити human review там, де він справді потрібний.',
   },
 }
 
-export default function Hero({ t, lang = 'en' }) {
-  const text = copy[lang] || copy.en
+export default function Hero({ t, lang = 'fi' }) {
+  const text = copy[lang] || copy.fi
   const cvUrl = `${import.meta.env.BASE_URL}Stanislav_Kosytskyy_CV_Bitonet.pdf`
-  const metrics = [
-    [t.projects?.length || 0, text.selectedWork, BriefcaseBusiness],
-    [1, text.liveContext, Workflow],
-    [t.engineering?.length || 0, text.engineeringTracks, Code2],
-    [4, text.languages, Languages],
-  ]
 
   return (
     <section className="referenceHero sectionShell" id="top">
@@ -97,11 +103,11 @@ export default function Hero({ t, lang = 'en' }) {
         </h1>
       </div>
 
-      <div className="referenceHeroSplit">
+      <div className="referenceHeroSplit convictionHeroSplit">
         <div className="referenceHeroStatement">
           <span className="referenceHeroKicker">{text.kicker}</span>
-          <h2>{t.hero}</h2>
-          <p>{t.heroSecondary}</p>
+          <h2>{text.headline}</h2>
+          <p>{text.subhead}</p>
           <div className="referenceHeroActions">
             <a href="#work" className="primaryButton">{t.ctaPrimary}<ArrowDownRight size={17}/></a>
             <a href="#contact" className="referenceTextLink">{t.ctaSecondary}<ArrowUpRight size={16}/></a>
@@ -109,15 +115,15 @@ export default function Hero({ t, lang = 'en' }) {
           </div>
         </div>
 
-        <div className="referenceHeroMetrics" aria-label="Portfolio overview">
-          {metrics.map(([value, label, Icon], index) => (
+        <aside className="heroProof" aria-label="Practical background">
+          {text.proof.map(([label, title, detail]) => (
             <article key={label}>
-              <div><span>0{index + 1}</span><Icon size={17}/></div>
-              <strong>{String(value).padStart(2, '0')}</strong>
-              <p>{label}</p>
+              <span>{label}</span>
+              <strong>{title}</strong>
+              <p>{detail}</p>
             </article>
           ))}
-        </div>
+        </aside>
       </div>
 
       <div className="referenceHeroTimeline" aria-label="Professional direction timeline">
@@ -131,12 +137,12 @@ export default function Hero({ t, lang = 'en' }) {
         <div className="referenceTimelineRail" aria-hidden="true"><i/><i/><i/></div>
       </div>
 
-      <div className="referenceConsoleIntro">
+      <div className="referenceConsoleIntro compactConsoleIntro">
         <div><span>{text.console}</span><h3>{t.role}</h3></div>
         <p>{text.consoleCopy}</p>
       </div>
 
-      <div className="referenceConsoleWrap">
+      <div className="referenceConsoleWrap quieterConsole">
         <AISystemApp t={t} lang={lang} />
       </div>
     </section>
