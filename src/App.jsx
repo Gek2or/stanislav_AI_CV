@@ -1,54 +1,42 @@
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import ReferenceDeck from './components/ReferenceDeck'
 import Projects from './components/Projects'
-import AICore from './components/AICore'
-import BitonetFit from './components/BitonetFit'
-import Assistant from './components/Assistant'
-import Contact from './components/Contact'
-import TechBackdrop3D from './components/TechBackdrop3D'
-import { content } from './data/content'
+import { About, Capabilities, Contact, Operations } from './components/EditorialSections'
+import { editorialCopy } from './data/editorial'
 
 function readStoredLanguage() {
   try {
-    return localStorage.getItem('stanislav-cv-lang') || 'en'
+    return localStorage.getItem('stanislav-cv-lang') || 'fi'
   } catch {
-    return 'en'
+    return 'fi'
   }
 }
 
 export default function App() {
   const [lang, setLang] = useState(readStoredLanguage)
-  const safeLang = content[lang] ? lang : 'en'
-  const t = useMemo(() => content[safeLang], [safeLang])
+  const safeLang = editorialCopy[lang] ? lang : 'fi'
+  const copy = useMemo(() => editorialCopy[safeLang], [safeLang])
 
   useEffect(() => {
-    try {
-      localStorage.setItem('stanislav-cv-lang', safeLang)
-    } catch {
-      // Some in-app browsers can block storage. The site should still work.
-    }
+    try { localStorage.setItem('stanislav-cv-lang', safeLang) } catch {}
     document.documentElement.lang = safeLang
   }, [safeLang])
 
   return (
     <div className="appFrame">
-      <TechBackdrop3D />
-      <div className="ambientGlow" aria-hidden="true" />
-      <Header lang={safeLang} setLang={setLang} nav={t.nav} />
+      <Header lang={safeLang} setLang={setLang} copy={copy} />
       <main>
-        <Hero t={t} lang={safeLang} />
-        <ReferenceDeck t={t} lang={safeLang} />
-        <Projects t={t} lang={safeLang} />
-        <AICore t={t} lang={safeLang} />
-        <BitonetFit t={t} />
-        <Assistant t={t} lang={safeLang} />
-        <Contact t={t} />
+        <Hero copy={copy} />
+        <Projects copy={copy} />
+        <Operations copy={copy} />
+        <Capabilities copy={copy} />
+        <About copy={copy} />
+        <Contact copy={copy} />
       </main>
-      <footer className="footer sectionShell">
+      <footer className="siteFooter shell">
         <span>© 2026 Stanislav Kosytskyy</span>
-        <span>React · Vite · AI Software Engineer portfolio</span>
+        <span>React · Vite · Finland</span>
       </footer>
     </div>
   )
