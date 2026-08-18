@@ -1,4 +1,4 @@
-import { Bot, Check, CheckCircle2, ChevronRight, Code2, Database, GitBranch, Network, ShieldCheck, Target } from 'lucide-react'
+import { Check, ChevronRight, Code2, Database, GitBranch, Network, ShieldCheck, Target } from 'lucide-react'
 import { useState } from 'react'
 
 const visualCopy = {
@@ -171,25 +171,6 @@ export default function AICore({ t, lang = 'en' }) {
         </div>
       </div>
 
-      <div className="toolBlock">
-        <div className="toolHeading">
-          <Bot size={22}/>
-          <div>
-            <p className="overline">{t.modelsTitle}</p>
-            <h3>{t.modelsTitle}</h3>
-            <p>{t.modelsIntro}</p>
-          </div>
-        </div>
-        <div className="toolList">
-          {t.models.map(([name, purpose]) => (
-            <div className="toolRow" key={name} tabIndex="0">
-              <CheckCircle2 size={16}/>
-              <strong>{name}</strong>
-              <span>{purpose}</span>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   )
 }

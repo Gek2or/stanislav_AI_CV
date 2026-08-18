@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import ReferenceDeck from './components/ReferenceDeck'
 import Projects from './components/Projects'
 import AICore from './components/AICore'
-import BitonetFit from './components/BitonetFit'
 import Assistant from './components/Assistant'
 import Contact from './components/Contact'
 import TechBackdrop3D from './components/TechBackdrop3D'
@@ -40,15 +38,13 @@ export default function App() {
       <main>
         <Hero t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
-        <ReferenceDeck t={t} lang={safeLang} />
         <AICore t={t} lang={safeLang} />
-        <BitonetFit t={t} />
         <Assistant t={t} lang={safeLang} />
         <Contact t={t} />
       </main>
       <footer className="footer sectionShell">
         <span>© 2026 Stanislav Kosytskyy</span>
-        <span>AI Software Engineer · Python · APIs · Git/CI · Applied AI</span>
+        <span>{t.footer}</span>
       </footer>
     </div>
   )

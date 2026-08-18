@@ -17,7 +17,7 @@ export default function Header({ lang, setLang, nav }) {
   const links = [
     ['#work', nav[2]],
     ['#engineering', nav[0]],
-    ['#bitonet', nav[1]],
+    ['#assistant', nav[3]],
     ['#contact', nav[4]],
   ]
 

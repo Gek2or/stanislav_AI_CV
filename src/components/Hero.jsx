@@ -1,5 +1,4 @@
 import { ArrowDownRight, ArrowUpRight, Download, MapPin } from 'lucide-react'
-import AISystemApp from './AISystemApp'
 
 const copy = {
   en: {
@@ -19,8 +18,6 @@ const copy = {
       ['2022', 'Building', 'Software and game-development projects'],
       ['NOW', 'Finland', 'Business operations → software and automation'],
     ],
-    console: 'HOW I THINK BEFORE I BUILD',
-    consoleCopy: 'The interactive console stays as a compact engineering view: define the outcome, structure the context, choose the simplest useful route, build, verify and keep human review where it matters.',
   },
   fi: {
     iam: 'Olen',
@@ -39,48 +36,42 @@ const copy = {
       ['2022', 'Projektit', 'Ohjelmisto- ja pelinkehitysprojekteja'],
       ['NYT', 'Suomi', 'Liiketoiminnan prosessit → ohjelmistot ja automaatio'],
     ],
-    console: 'MITEN AJATTELEN ENNEN TOTEUTUSTA',
-    consoleCopy: 'Interaktiivinen näkymä tiivistää teknisen työskentelytapani: määritä tavoite, jäsennä konteksti, valitse yksinkertaisin hyödyllinen toteutus, rakenna, varmista ja pidä ihmisen tarkistus mukana siellä missä sitä tarvitaan.',
   },
   ru: {
     iam: 'Я —',
-    kicker: 'SOFTWARE / АВТОМАТИЗАЦИЯ / APPLIED AI',
+    kicker: 'ПРОГРАММЫ / АВТОМАТИЗАЦИЯ / ПРИКЛАДНОЙ ИИ',
     application: 'Целевая роль · AI Software Engineer · Bitonet Oy',
     headline: 'Я создаю практичные программы и автоматизации для реальных бизнес-задач.',
-    subhead: 'Я соединяю разработку и AI-инструменты с практическим опытом предпринимательства, логистики и работы с клиентами в Финляндии. Сначала разбираюсь в процессе, а уже потом решаю, что действительно стоит превращать в software.',
+    subhead: 'Я соединяю разработку и инструменты ИИ с практическим опытом предпринимательства, логистики и работы с клиентами в Финляндии. Сначала разбираюсь в процессе и только потом решаю, что действительно стоит автоматизировать.',
     downloadCV: 'Скачать CV · PDF',
     proof: [
       ['Сейчас', 'Autochemix Oy', 'Ежедневная работа реального бизнеса в Финляндии'],
       ['Строю', 'Python + API', 'Автоматизации для предложений, учёта и интеграций'],
-      ['Мой подход', 'Операционка → software', 'Требования приходят из задач, которые я сам выполняю'],
+      ['Мой подход', 'Процессы → программы', 'Требования приходят из задач, которые я сам выполняю'],
     ],
     timeline: [
-      ['2020', 'Taitotalo', 'Обучение software development'],
-      ['2022', 'Проекты', 'Software- и game-development проекты'],
-      ['СЕЙЧАС', 'Finland', 'Бизнес-процессы → software и автоматизация'],
+      ['2020', 'Taitotalo', 'Обучение разработке программного обеспечения'],
+      ['2022', 'Проекты', 'Проекты в разработке программ и игр'],
+      ['СЕЙЧАС', 'Финляндия', 'Бизнес-процессы → программы и автоматизация'],
     ],
-    console: 'КАК Я ДУМАЮ ДО НАПИСАНИЯ КОДА',
-    consoleCopy: 'Интерактивная консоль остаётся как компактное представление инженерного подхода: определить результат, собрать контекст, выбрать самый простой полезный маршрут, реализовать, проверить и оставить human review там, где он действительно нужен.',
   },
   uk: {
     iam: 'Я —',
-    kicker: 'SOFTWARE / АВТОМАТИЗАЦІЯ / APPLIED AI',
+    kicker: 'ПРОГРАМИ / АВТОМАТИЗАЦІЯ / ПРИКЛАДНИЙ ШІ',
     application: 'Цільова роль · AI Software Engineer · Bitonet Oy',
     headline: 'Я створюю практичні програми й автоматизації для реальних бізнес-задач.',
-    subhead: 'Я поєдную розробку та AI-інструменти з практичним досвідом підприємництва, логістики й роботи з клієнтами у Фінляндії. Спочатку розбираюся в процесі, а вже потім вирішую, що справді варто перетворювати на software.',
+    subhead: 'Я поєдную розробку та інструменти ШІ з практичним досвідом підприємництва, логістики й роботи з клієнтами у Фінляндії. Спочатку розбираюся в процесі й лише потім вирішую, що справді варто автоматизувати.',
     downloadCV: 'Завантажити CV · PDF',
     proof: [
       ['Зараз', 'Autochemix Oy', 'Щоденна робота реального бізнесу у Фінляндії'],
       ['Будую', 'Python + API', 'Автоматизації для пропозицій, обліку та інтеграцій'],
-      ['Мій підхід', 'Операційна робота → software', 'Вимоги походять із задач, які я виконую сам'],
+      ['Мій підхід', 'Процеси → програми', 'Вимоги походять із задач, які я виконую сам'],
     ],
     timeline: [
-      ['2020', 'Taitotalo', 'Навчання software development'],
-      ['2022', 'Проєкти', 'Software- та game-development проєкти'],
-      ['ЗАРАЗ', 'Finland', 'Бізнес-процеси → software та автоматизація'],
+      ['2020', 'Taitotalo', 'Навчання розробці програмного забезпечення'],
+      ['2022', 'Проєкти', 'Проєкти з розробки програм та ігор'],
+      ['ЗАРАЗ', 'Фінляндія', 'Бізнес-процеси → програми й автоматизація'],
     ],
-    console: 'ЯК Я МИСЛЮ ДО НАПИСАННЯ КОДУ',
-    consoleCopy: 'Інтерактивна консоль залишається компактним відображенням інженерного підходу: визначити результат, зібрати контекст, обрати найпростіший корисний маршрут, реалізувати, перевірити та залишити human review там, де він справді потрібний.',
   },
 }
 
@@ -137,14 +128,6 @@ export default function Hero({ t, lang = 'fi' }) {
         <div className="referenceTimelineRail" aria-hidden="true"><i/><i/><i/></div>
       </div>
 
-      <div className="referenceConsoleIntro compactConsoleIntro">
-        <div><span>{text.console}</span><h3>{t.role}</h3></div>
-        <p>{text.consoleCopy}</p>
-      </div>
-
-      <div className="referenceConsoleWrap quieterConsole">
-        <AISystemApp t={t} lang={lang} />
-      </div>
     </section>
   )
 }

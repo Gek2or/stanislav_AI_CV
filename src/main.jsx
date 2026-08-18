@@ -15,6 +15,7 @@ import './engineering-artifacts.css'
 import './sound.css'
 import './ai-map-fixes.css'
 import './conviction-polish.css'
+import './compact.css'
 
 class AppErrorBoundary extends Component {
   constructor(props) {
