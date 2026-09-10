@@ -25,7 +25,7 @@ const ui = {
     overline: 'VALITUT TYÖT',
     title: 'Ensin todellinen työ. Sitten työkalut.',
     intro: 'Projektit lähtevät ongelmista, joita olen itse joutunut ymmärtämään: asiakaspyynnöistä, hinnoittelusta, logistiikasta, dokumenteista, seurannasta ja ohjelmiston toiminnasta. Teknologia valitaan ongelman mukaan — ei päinvastoin.',
-    case: 'CASE 01', live: 'TOIMIVA LIIKETOIMINTA', flowTitle: 'OPERATIIVINEN TYÖNKULKU', active: 'MUU KÄYTÄNNÖN KOKEMUS',
+    case: 'TAPAUS 01', live: 'TOIMIVA LIIKETOIMINTA', flowTitle: 'OPERATIIVINEN TYÖNKULKU', active: 'MUU KÄYTÄNNÖN KOKEMUS',
     tags: ['asiakastarpeet', 'hinnoittelulogiikka', 'logistiikka', 'dokumentit'],
     facts: [
       ['Ongelma', 'Muuttopalvelu vaatii selkeät lähtötiedot, realistisen hinnoittelun, auton ja tiimin koordinoinnin sekä toimivan asiakasviestinnän.'],
@@ -115,7 +115,7 @@ export default function Projects({ t, lang = 'fi' }) {
           </div>
         </div>
 
-        <div className="caseVisual" aria-label={copy.flowTitle}>
+        <div className="caseVisual" role="group" aria-label={copy.flowTitle}>
           <div className="caseVisualTop"><span>{copy.flowTitle}</span><span>01 → 04</span></div>
           <div className="flowTrack">
             {copy.flow.map(([label], index) => {

@@ -5,6 +5,7 @@ const copy = {
     iam: 'I am',
     kicker: 'SOFTWARE / AUTOMATION / APPLIED AI',
     application: 'Target role · AI Software Engineer · Bitonet Oy',
+    location: 'Finland',
     headline: 'I build practical software and automation for real business problems.',
     subhead: 'I combine software development and AI tools with hands-on experience in entrepreneurship, logistics and customer operations in Finland. I start from the workflow, then decide what should become software.',
     downloadCV: 'Download CV · PDF',
@@ -23,6 +24,7 @@ const copy = {
     iam: 'Olen',
     kicker: 'OHJELMISTOT / AUTOMAATIO / SOVELTAVA AI',
     application: 'Tavoiterooli · AI Software Engineer · Bitonet Oy',
+    location: 'Suomi',
     headline: 'Rakennan käytännön ohjelmistoja ja automaatioita todellisiin liiketoimintaongelmiin.',
     subhead: 'Yhdistän ohjelmistokehityksen ja AI-työkalut käytännön kokemukseen yrittäjyydestä, logistiikasta ja asiakastyöstä Suomessa. Aloitan työnkulusta ja päätän vasta sen jälkeen, mikä kannattaa muuttaa ohjelmistoksi.',
     downloadCV: 'Lataa CV · PDF',
@@ -41,6 +43,7 @@ const copy = {
     iam: 'Я —',
     kicker: 'ПРОГРАММЫ / АВТОМАТИЗАЦИЯ / ПРИКЛАДНОЙ ИИ',
     application: 'Целевая роль · AI Software Engineer · Bitonet Oy',
+    location: 'Финляндия',
     headline: 'Я создаю практичные программы и автоматизации для реальных бизнес-задач.',
     subhead: 'Я соединяю разработку и инструменты ИИ с практическим опытом предпринимательства, логистики и работы с клиентами в Финляндии. Сначала разбираюсь в процессе и только потом решаю, что действительно стоит автоматизировать.',
     downloadCV: 'Скачать CV · PDF',
@@ -59,6 +62,7 @@ const copy = {
     iam: 'Я —',
     kicker: 'ПРОГРАМИ / АВТОМАТИЗАЦІЯ / ПРИКЛАДНИЙ ШІ',
     application: 'Цільова роль · AI Software Engineer · Bitonet Oy',
+    location: 'Фінляндія',
     headline: 'Я створюю практичні програми й автоматизації для реальних бізнес-задач.',
     subhead: 'Я поєдную розробку та інструменти ШІ з практичним досвідом підприємництва, логістики й роботи з клієнтами у Фінляндії. Спочатку розбираюся в процесі й лише потім вирішую, що справді варто автоматизувати.',
     downloadCV: 'Завантажити CV · PDF',
@@ -83,7 +87,7 @@ export default function Hero({ t, lang = 'fi' }) {
     <section className="referenceHero sectionShell" id="top">
       <div className="referenceHeroTopline">
         <div><span className="availabilityDot"/><strong>{text.application}</strong></div>
-        <div><MapPin size={13}/><span>Finland</span></div>
+        <div><MapPin size={13}/><span>{text.location}</span></div>
       </div>
 
       <div className="referenceHeroIdentity">
@@ -117,7 +121,7 @@ export default function Hero({ t, lang = 'fi' }) {
         </aside>
       </div>
 
-      <div className="referenceHeroTimeline" aria-label="Professional direction timeline">
+      <div className="referenceHeroTimeline" role="group" aria-label="Professional direction timeline">
         {text.timeline.map(([year, title, detail], index) => (
           <article key={`${year}-${title}`}>
             <span>{String(index + 1).padStart(2, '0')}</span>

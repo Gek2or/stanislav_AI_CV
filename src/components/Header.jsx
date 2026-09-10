@@ -4,10 +4,10 @@ import { languages } from '../data/content'
 import { useSiteSound } from '../sound/SoundProviderV2'
 
 const soundLabels = {
-  en: ['Sound on · soundtrack + interface SFX', 'Sound off'],
-  fi: ['Ääni päällä · soundtrack + interface SFX', 'Ääni pois'],
-  ru: ['Звук включён · soundtrack + interface SFX', 'Звук выключен'],
-  uk: ['Звук увімкнено · soundtrack + interface SFX', 'Звук вимкнено'],
+  en: ['Sound on · soundtrack + interface SFX', 'Sound off', 'SOUND'],
+  fi: ['Ääni päällä · musiikki ja käyttöliittymä-äänet', 'Ääni pois', 'ÄÄNI'],
+  ru: ['Звук включён · музыка и звуки интерфейса', 'Звук выключен', 'ЗВУК'],
+  uk: ['Звук увімкнено · музика та звуки інтерфейсу', 'Звук вимкнено', 'ЗВУК'],
 }
 
 export default function Header({ lang, setLang, nav }) {
@@ -63,10 +63,10 @@ export default function Header({ lang, setLang, nav }) {
         >
           <span className="soundWave" aria-hidden="true"><i/><i/><i/></span>
           {soundEnabled ? <Volume2 size={15}/> : <VolumeX size={15}/>} 
-          <span>SOUND</span>
+          <span>{labels[2]}</span>
         </button>
 
-        <div className="languageSwitch" aria-label="Language selector">
+        <div className="languageSwitch" role="group" aria-label="Language selector">
           {languages.map((item) => (
             <button
               key={item.id}

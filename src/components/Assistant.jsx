@@ -40,7 +40,7 @@ export default function Assistant({ t, lang }) {
     <section className="contentSection sectionShell assistantSection" id="assistant">
       <div className="assistantIntroGrid">
         <div>
-          <p className="sectionNumber">05</p>
+          <p className="sectionNumber">03</p>
           <p className="overline">{t.nav[3]}</p>
           <h2>{t.assistantTitle}</h2>
         </div>
@@ -54,7 +54,7 @@ export default function Assistant({ t, lang }) {
           ))}
         </div>
 
-        <div className="assistantChat">
+        <div className="assistantChat" aria-live="polite">
           {messages.map((message, index) => (
             <div className={`chatMessage ${message.type}`} key={`${index}-${message.text.slice(0, 12)}`}>
               <div className="chatIcon">{message.type === 'bot' ? <Bot size={17}/> : <User size={17}/>}</div>
@@ -64,7 +64,12 @@ export default function Assistant({ t, lang }) {
         </div>
 
         <form className="assistantInput" onSubmit={(event) => { event.preventDefault(); ask(input) }}>
-          <input value={input} onChange={(event) => setInput(event.target.value)} placeholder={t.assistantPlaceholder}/>
+          <input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            placeholder={t.assistantPlaceholder}
+            aria-label={t.assistantPlaceholder}
+          />
           <button type="submit" aria-label={t.assistantSend}><Send size={18}/><span>{t.assistantSend}</span></button>
         </form>
       </div>

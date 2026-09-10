@@ -21,22 +21,22 @@ const visualCopy = {
     deliver: ['COMMIT', 'BUILD', 'CHECK', 'DEPLOY'],
   },
   ru: {
-    artifact: 'ENGINEERING ARTIFACT',
+    artifact: 'ТЕХНИЧЕСКИЙ АРТЕФАКТ',
     problem: ['ПОТРЕБНОСТЬ', 'БИЗНЕС-РЕЗУЛЬТАТ', 'КРИТЕРИЙ'],
     context: ['ДАННЫЕ', 'ОГРАНИЧЕНИЯ', 'РИСК'],
-    route: ['CODE', 'API', 'RAG', 'LLM'],
+    route: ['КОД', 'API', 'RAG', 'LLM'],
     build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['поведение', 'edge cases', 'human review'],
-    deliver: ['COMMIT', 'BUILD', 'CHECK', 'DEPLOY'],
+    verify: ['поведение', 'крайние случаи', 'ручная проверка'],
+    deliver: ['КОММИТ', 'СБОРКА', 'ПРОВЕРКА', 'ДЕПЛОЙ'],
   },
   uk: {
-    artifact: 'ENGINEERING ARTIFACT',
+    artifact: 'ТЕХНІЧНИЙ АРТЕФАКТ',
     problem: ['ПОТРЕБА', 'БІЗНЕС-РЕЗУЛЬТАТ', 'КРИТЕРІЙ'],
     context: ['ДАНІ', 'ОБМЕЖЕННЯ', 'РИЗИК'],
-    route: ['CODE', 'API', 'RAG', 'LLM'],
+    route: ['КОД', 'API', 'RAG', 'LLM'],
     build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['поведінка', 'edge cases', 'human review'],
-    deliver: ['COMMIT', 'BUILD', 'CHECK', 'DEPLOY'],
+    verify: ['поведінка', 'крайні випадки', 'ручна перевірка'],
+    deliver: ['КОМІТ', 'ЗБІРКА', 'ПЕРЕВІРКА', 'ДЕПЛОЙ'],
   },
 }
 
@@ -114,7 +114,7 @@ export default function AICore({ t, lang = 'en' }) {
     <section className="contentSection sectionShell" id="engineering">
       <div className="sectionIntroGrid">
         <div>
-          <p className="sectionNumber">03</p>
+          <p className="sectionNumber">02</p>
           <p className="overline">{t.nav[0]}</p>
           <h2>{t.aiTitle}</h2>
         </div>
@@ -122,7 +122,7 @@ export default function AICore({ t, lang = 'en' }) {
       </div>
 
       <div className="processExperience">
-        <div className="processList" role="list" aria-label={t.aiTitle}>
+        <div className="processList" role="group" aria-label={t.aiTitle}>
           {t.pipeline.map(([num, title], index) => (
             <button
               type="button"
