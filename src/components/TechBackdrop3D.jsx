@@ -26,10 +26,9 @@ export default function TechBackdrop3D() {
 
     const renderScene = () => {
       frame = 0
-      scene.style.setProperty('--scene-tx', `${(-pointerX * 16).toFixed(2)}px`)
-      scene.style.setProperty('--scene-ty', `${(-pointerY * 10 - scrollRatio * 44).toFixed(2)}px`)
-      scene.style.setProperty('--scene-rx', `${(61 - pointerY * 2).toFixed(2)}deg`)
-      scene.style.setProperty('--scene-rz', `${(-14 + pointerX * 1.8).toFixed(2)}deg`)
+      scene.style.setProperty('--scene-x', pointerX.toFixed(2))
+      scene.style.setProperty('--scene-y', pointerY.toFixed(2))
+      scene.style.setProperty('--scene-scroll', scrollRatio.toFixed(2))
     }
 
     const queueRender = () => {

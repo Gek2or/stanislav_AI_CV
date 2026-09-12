@@ -6,7 +6,7 @@
 }
 
 .tech3dScene {
-  opacity: .22 !important;
+  opacity: .24 !important;
   filter: saturate(.55) contrast(.9);
 }
 
@@ -18,6 +18,8 @@
 .referenceHero {
   padding-top: clamp(64px, 7vw, 94px);
   padding-bottom: clamp(84px, 9vw, 120px);
+  perspective: 1500px;
+  perspective-origin: 50% 12%;
 }
 
 .referenceHeroIdentity h1 {
@@ -29,10 +31,43 @@
   -webkit-text-stroke-color: rgba(208,229,245,.5);
 }
 
+.referenceHeroTopline,
+.referenceHeroIdentity,
+.referenceHeroSplit,
+.referenceHeroTimeline,
+.heroProof {
+  transform-style: preserve-3d;
+}
+
+.referenceHeroTopline {
+  transform: translateZ(20px);
+}
+
+.referenceHeroIdentity {
+  transform: translateZ(26px);
+}
+
+.referenceHeroIdentity h1 span {
+  position: relative;
+}
+
+.referenceHeroIdentity h1 span:first-child {
+  transform: translateZ(12px);
+}
+
 .convictionHeroSplit {
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, .65fr);
   align-items: start;
   margin-top: clamp(46px, 6vw, 72px);
+}
+
+.referenceHeroStatement {
+  transform: translateZ(22px);
+  transition: transform .2s ease;
+}
+
+.referenceHeroStatement:hover {
+  transform: translateZ(28px) translateY(-1px);
 }
 
 .referenceHeroStatement h2 {
@@ -55,6 +90,9 @@
 .heroProof article {
   padding: 18px 2px 20px;
   border-bottom: 1px solid rgba(255,255,255,.1);
+  position: relative;
+  transform: translateZ(14px);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .heroProof article > span {
@@ -80,8 +118,15 @@
   line-height: 1.5;
 }
 
+.heroProof article:hover {
+  transform: translateZ(24px) translateY(-2px);
+  border-color: rgba(143,207,255,.22);
+  box-shadow: inset 0 0 0 1px rgba(143,207,255,.1), 0 16px 28px rgba(0,0,0,.2);
+}
+
 .referenceHeroTimeline {
   margin-top: clamp(54px, 6vw, 76px);
+  transform: translateZ(16px);
 }
 
 .referenceTimelineRail i::before {
@@ -89,6 +134,16 @@
   height: 6px;
   background: #8fcfff;
   box-shadow: none;
+}
+
+.referenceHeroTimeline article {
+  transform: translateZ(0);
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.referenceHeroTimeline article:hover {
+  transform: translateZ(14px) translateY(-3px);
+  border-color: rgba(143,207,255,.24);
 }
 
 .compactConsoleIntro {
@@ -128,10 +183,40 @@
   box-shadow: none !important;
   background: rgba(9, 17, 24, .72) !important;
   border-color: rgba(255,255,255,.12) !important;
+  transform: translateZ(8px);
+  perspective: 1300px;
+  perspective-origin: 64% 20%;
+  overflow: hidden;
+}
+
+.evidenceCase::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 0%, rgba(143,207,255,.13), transparent 45%);
+  transform: translateZ(-18px);
+}
+
+.evidenceCase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(143,207,255,.05);
+  border-radius: inherit;
+  transform: translateZ(-8px);
+  box-shadow: inset 0 0 60px rgba(99,215,255,.08);
 }
 
 .evidenceCase .featuredCaseCopy {
   padding-bottom: 34px;
+  transform: translateZ(16px);
+}
+
+.evidenceCase .caseVisual {
+  transform: translateZ(24px) rotateY(-1.3deg);
 }
 
 .caseFacts {
@@ -205,6 +290,12 @@
 .supportingContextGrid .buildCard {
   min-height: 230px;
   border-color: rgba(255,255,255,.085) !important;
+  transform-style: preserve-3d;
+}
+
+.supportingContextGrid .buildCard > * {
+  position: relative;
+  transform: translateZ(10px);
 }
 
 .supportingContextGrid .buildCard:hover {
@@ -292,6 +383,7 @@
 
   .referenceHeroTimeline {
     margin-top: 54px;
+    transform: none;
   }
 
   .compactConsoleIntro {
@@ -310,6 +402,17 @@
   .selectedProjectRows .experienceRow {
     padding-top: 24px;
     padding-bottom: 24px;
+  }
+
+  .referenceHeroTopline,
+  .referenceHeroIdentity,
+  .referenceHeroStatement,
+  .heroProof article,
+  .referenceHeroTimeline article,
+  .evidenceCase,
+  .evidenceCase .featuredCaseCopy,
+  .supportingContextGrid .buildCard {
+    transform: none !important;
   }
 }
 
@@ -336,7 +439,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .supportingContextGrid .buildCard:hover,
-  .referenceTextLink:hover {
+  .referenceTextLink:hover,
+  .referenceHeroStatement,
+  .heroProof article,
+  .referenceHeroTimeline article,
+  .evidenceCase .featuredCaseCopy,
+  .evidenceCase .caseVisual,
+  .supportingContextGrid .buildCard,
+  .supportingContextGrid .buildCard > * {
     transform: none !important;
   }
 }
