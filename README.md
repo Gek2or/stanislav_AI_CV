@@ -1,14 +1,34 @@
-# Stanislav_CV
+# Stanislav Kosytskyy — developer portfolio
 
-Professional React/Vite portfolio for **Stanislav Kosytskyy**, tailored to an **AI Software Engineer** direction and specifically aligned with Bitonet Oy's publicly described focus on clear business-oriented technology, industry-specific software, responsible AI usage, security and manageable implementation.
+A customer-focused portfolio for junior frontend and software developer roles in Finland.
 
-## Stack
+I build web interfaces and service prototypes around real business workflows. My strongest perspective comes from working directly with customers and operations: I notice where people get confused, where teams repeat the same work, and where a small piece of software could make the next step clearer.
 
-- React + JavaScript/JSX
-- Vite
-- Tailwind CSS via the official Vite plugin
-- lucide-react
-- GitHub Pages deployment workflow
+## Focus
+
+- React, JavaScript, TypeScript, and Vite
+- responsive product interfaces
+- customer journeys, forms, pricing, and booking flows
+- business workflow automation
+- Python, APIs, Git, and CI/CD as developing areas
+- applied AI when it solves a clear customer or team problem
+
+## Portfolio evidence
+
+- **[Autochemix OS](https://github.com/Gek2or/Autochemix-)** — a browser-based logistics prototype connecting dispatcher, driver, and customer views.
+- **[Muuttobotti](https://github.com/Gek2or/muuttobotti-finland)** — a multilingual moving-service website shaped by real customer questions and operational constraints.
+
+## Product principles
+
+- Start with the customer's confusion, not the technology.
+- Make the next step and the price easy to understand.
+- Automate repeated work without hiding important decisions.
+- Keep demos safe, transparent, and honest about what is simulated.
+- Ship small changes that can be reviewed and improved.
+
+## Technical notes
+
+The site is built with React, JavaScript/JSX, Vite, Tailwind CSS, and lucide-react. It includes multilingual content and a transparent client-side portfolio assistant. The assistant uses curated portfolio content; it is intentionally not presented as a live production LLM backend.
 
 ## Run locally
 
@@ -17,34 +37,13 @@ npm install
 npm run dev
 ```
 
-## Production build
+Build and preview:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## GitHub Pages
+## Contact
 
-The Vite base path is already configured for the repository name:
-
-```text
-stanislav_AI_CV
-```
-
-After the repository is created and the code is pushed, enable **Settings → Pages → Source: GitHub Actions**. The included workflow builds and publishes `dist/` automatically after pushes to `main`.
-
-## Portfolio structure
-
-- AI Software Engineer hero / AI workbench
-- Practical AI system-thinking pipeline
-- Multi-model routing: ChatGPT, Claude, Gemini, Grok, Google Flow, Labs/Storyboard and AI coding tools
-- Bitonet-specific fit section
-- Real business and project evidence from Autochemix / Muuttobotti
-- Python/API/automation development direction
-- Multilingual UI: English, Finnish, Ukrainian and Russian
-- Curated `Ask Stanislav AI` portfolio knowledge assistant
-
-## Important design choice
-
-The assistant is intentionally transparent: it is a curated knowledge assistant, not a fake claim that a live LLM is running in the browser. A real model endpoint can be added later through a server-side function/API so no API key is exposed client-side.
+I am looking for a junior frontend or software developer role in Finland. I bring practical customer and business experience, working web projects, and a strong interest in turning real workflow problems into useful software.
