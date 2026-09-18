@@ -1,5 +1,7 @@
 # Stanislav Kosytskyy — developer portfolio
 
+**[Open the live portfolio](https://gek2or.github.io/stanislav_AI_CV/)**
+
 A customer-focused portfolio for junior frontend and software developer roles in Finland.
 
 I build web interfaces and service prototypes around real business workflows. My strongest perspective comes from working directly with customers and operations: I notice where people get confused, where teams repeat the same work, and where a small piece of software could make the next step clearer.
@@ -15,7 +17,7 @@ I build web interfaces and service prototypes around real business workflows. My
 
 ## Portfolio evidence
 
-- **[Autochemix OS](https://github.com/Gek2or/Autochemix-)** — a browser-based logistics prototype connecting dispatcher, driver, and customer views.
+- **[Autochemix OS](https://github.com/Gek2or/Autochemix-)** · [Live demo](https://gek2or.github.io/Autochemix-/) — a browser-based logistics prototype connecting dispatcher, driver, and customer views.
 - **[Muuttobotti](https://github.com/Gek2or/muuttobotti-finland)** — a multilingual moving-service website shaped by real customer questions and operational constraints.
 
 ## Product principles
