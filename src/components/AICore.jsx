@@ -1,176 +1,66 @@
-import { Check, ChevronRight, Code2, Database, GitBranch, Network, ShieldCheck, Target } from 'lucide-react'
-import { useState } from 'react'
-
-const visualCopy = {
+const approachCopy = {
   en: {
-    artifact: 'ENGINEERING ARTIFACT',
-    problem: ['USER NEED', 'BUSINESS OUTCOME', 'ACCEPTANCE'],
-    context: ['DATA', 'CONSTRAINTS', 'RISK'],
-    route: ['CODE', 'API', 'RAG', 'LLM'],
-    build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['behavior', 'edge cases', 'human review'],
-    deliver: ['COMMIT', 'BUILD', 'CHECK', 'DEPLOY'],
+    overline: 'HOW I WORK',
+    steps: [
+      ['01', 'Start with the situation', 'What is the customer trying to do? Where does the team lose time or confidence?'],
+      ['02', 'Make the rules visible', 'Write down the inputs, assumptions and edge cases before hiding them in a component.'],
+      ['03', 'Build the smallest useful path', 'A clear form, calculation, integration or prototype is better than a dashboard nobody trusts.'],
+      ['04', 'Check the real route', 'I test the happy path, the awkward path and the moment when a person needs to take over.'],
+    ],
+    skillsTitle: 'Technical toolbox in practice',
+    skills: [['React + TypeScript', 'Interfaces, responsive flows and customer-facing products'], ['Python + APIs', 'Business automation, structured data and integrations'], ['Git + delivery', 'Small changes, checks, deploys and readable handover'], ['AI when useful', 'Bounded extraction and assistance with human review around decisions']],
   },
   fi: {
-    artifact: 'ENGINEERING-ARTEFAKTI',
-    problem: ['KÄYTTÄJÄTARVE', 'LIIKETOIMINTATULOS', 'HYVÄKSYNTÄ'],
-    context: ['DATA', 'RAJAT', 'RISKI'],
-    route: ['KOODI', 'API', 'RAG', 'LLM'],
-    build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['toiminta', 'reunatapaukset', 'ihmisen tarkistus'],
-    deliver: ['COMMIT', 'BUILD', 'CHECK', 'DEPLOY'],
-  },
-  ru: {
-    artifact: 'ТЕХНИЧЕСКИЙ АРТЕФАКТ',
-    problem: ['ПОТРЕБНОСТЬ', 'БИЗНЕС-РЕЗУЛЬТАТ', 'КРИТЕРИЙ'],
-    context: ['ДАННЫЕ', 'ОГРАНИЧЕНИЯ', 'РИСК'],
-    route: ['КОД', 'API', 'RAG', 'LLM'],
-    build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['поведение', 'крайние случаи', 'ручная проверка'],
-    deliver: ['КОММИТ', 'СБОРКА', 'ПРОВЕРКА', 'ДЕПЛОЙ'],
-  },
-  uk: {
-    artifact: 'ТЕХНІЧНИЙ АРТЕФАКТ',
-    problem: ['ПОТРЕБА', 'БІЗНЕС-РЕЗУЛЬТАТ', 'КРИТЕРІЙ'],
-    context: ['ДАНІ', 'ОБМЕЖЕННЯ', 'РИЗИК'],
-    route: ['КОД', 'API', 'RAG', 'LLM'],
-    build: ['input = normalize(request)', 'result = service.run(input)', 'return verify(result)'],
-    verify: ['поведінка', 'крайні випадки', 'ручна перевірка'],
-    deliver: ['КОМІТ', 'ЗБІРКА', 'ПЕРЕВІРКА', 'ДЕПЛОЙ'],
+    overline: 'NÄIN TYÖSKENTELEN',
+    steps: [
+      ['01', 'Aloitan tilanteesta', 'Mitä asiakas yrittää tehdä? Missä tiimi menettää aikaa tai varmuutta?'],
+      ['02', 'Teen säännöt näkyviksi', 'Kirjaan syötteet, oletukset ja reunatapaukset ennen kuin piilotan ne komponenttiin.'],
+      ['03', 'Rakennan pienimmän hyödyllisen polun', 'Selkeä lomake, laskenta, integraatio tai prototyyppi on parempi kuin epäluotettava dashboard.'],
+      ['04', 'Tarkistan todellisen polun', 'Testaan normaalin, hankalan ja sen hetken, jolloin ihmisen pitää ottaa ohjat.'],
+    ],
+    skillsTitle: 'Tekninen työkalupakki käytännössä',
+    skills: [['React + TypeScript', 'Käyttöliittymät, responsiiviset työnkulut ja asiakastuotteet'], ['Python + API:t', 'Liiketoiminnan automaatio, rakenteinen data ja integraatiot'], ['Git + toimitus', 'Pienet muutokset, tarkistukset, julkaisut ja selkeä luovutus'], ['AI tarvittaessa', 'Rajattu tiedon poiminta ja avustus, ihmisen tarkistus päätösten ympärillä']],
   },
 }
 
-function StageArtifact({ step, copy }) {
-  if (step === 0) {
-    return (
-      <div className="stageArtifact problemArtifact" aria-hidden="true">
-        <div className="artifactTarget"><Target size={30}/><span/></div>
-        <div className="artifactChip chipA">{copy.problem[0]}</div>
-        <div className="artifactChip chipB">{copy.problem[1]}</div>
-        <div className="artifactChip chipC">{copy.problem[2]}</div>
-      </div>
-    )
-  }
-
-  if (step === 1) {
-    return (
-      <div className="stageArtifact contextArtifact" aria-hidden="true">
-        <div className="contextCore"><Database size={22}/><strong>CTX</strong></div>
-        {copy.context.map((label, index) => <span className={`contextNode contextNode${index + 1}`} key={label}>{label}</span>)}
-        <i className="contextLine line1"/><i className="contextLine line2"/><i className="contextLine line3"/>
-      </div>
-    )
-  }
-
-  if (step === 2) {
-    return (
-      <div className="stageArtifact routeArtifact" aria-hidden="true">
-        <div className="routeSource"><Network size={21}/><span>TASK</span></div>
-        <div className="routeRail"/>
-        {copy.route.map((label, index) => <span className={`routeNode routeNode${index + 1}`} key={label}>{label}</span>)}
-      </div>
-    )
-  }
-
-  if (step === 3) {
-    return (
-      <div className="stageArtifact buildArtifact" aria-hidden="true">
-        <div className="buildWindowTop"><i/><i/><i/><span>workflow.py</span></div>
-        <div className="buildCode">
-          {copy.build.map((line, index) => <p key={line}><span>{index + 1}</span><code>{line}</code></p>)}
-        </div>
-        <Code2 className="buildWatermark" size={62}/>
-      </div>
-    )
-  }
-
-  if (step === 4) {
-    return (
-      <div className="stageArtifact verifyArtifact" aria-hidden="true">
-        <div className="verifyShield"><ShieldCheck size={34}/></div>
-        <div className="verifyRows">
-          {copy.verify.map((label) => <div key={label}><Check size={14}/><span>{label}</span><i/></div>)}
-        </div>
-      </div>
-    )
-  }
+export default function AICore({ t, lang = 'fi' }) {
+  const copy = approachCopy[lang] || approachCopy.en
 
   return (
-    <div className="stageArtifact deliverArtifact" aria-hidden="true">
-      <div className="deliveryBranch"><GitBranch size={21}/><span>main</span></div>
-      <div className="deliveryPipeline">
-        {copy.deliver.map((label, index) => <div key={label} className={index === copy.deliver.length - 1 ? 'last' : ''}><i>{index + 1}</i><span>{label}</span><b><Check size={11}/></b></div>)}
-      </div>
-    </div>
-  )
-}
-
-export default function AICore({ t, lang = 'en' }) {
-  const [activeStep, setActiveStep] = useState(0)
-  const active = t.pipeline[activeStep]
-  const copy = visualCopy[lang] || visualCopy.en
-
-  return (
-    <section className="contentSection sectionShell" id="engineering">
-      <div className="sectionIntroGrid">
+    <section className="humanApproach sectionShell" id="engineering">
+      <div className="humanSectionHeading">
         <div>
-          <p className="sectionNumber">02</p>
-          <p className="overline">{t.nav[0]}</p>
+          <p className="humanSectionNumber">02</p>
+          <p className="humanEyebrow">{copy.overline}</p>
           <h2>{t.aiTitle}</h2>
         </div>
-        <p className="sectionLead">{t.aiIntro}</p>
+        <p>{t.aiIntro}</p>
       </div>
 
-      <div className="processExperience">
-        <div className="processList" role="group" aria-label={t.aiTitle}>
-          {t.pipeline.map(([num, title], index) => (
-            <button
-              type="button"
-              className={`processStep ${activeStep === index ? 'active' : ''}`}
-              key={num}
-              onMouseEnter={() => setActiveStep(index)}
-              onFocus={() => setActiveStep(index)}
-              onClick={() => setActiveStep(index)}
-              aria-pressed={activeStep === index}
-            >
-              <span>{num}</span>
-              <h3>{title}</h3>
-              <ChevronRight size={16}/>
-            </button>
-          ))}
-        </div>
-        <div className="processDetail" aria-live="polite">
-          <div className="artifactHeader"><span>{copy.artifact}</span><b>0{activeStep + 1} / 06</b></div>
-          <StageArtifact step={activeStep} copy={copy}/>
-          <div className="processDetailCopy">
-            <span>{active?.[0]}</span>
-            <h3>{active?.[1]}</h3>
-            <p>{active?.[2]}</p>
-          </div>
-          <div className="detailLine"><i/><i/><i/><i/><i/><i/></div>
-        </div>
+      <div className="humanSteps">
+        {copy.steps.map(([number, title, text]) => (
+          <article key={number}>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
       </div>
 
-      <div className="engineeringBlock">
-        <div className="engineeringIntro">
-          <p className="overline">{t.engineeringTitle}</p>
-          <h3>{t.engineeringTitle}</h3>
-          <p>{t.engineeringIntro}</p>
+      <div className="humanSkills">
+        <div>
+          <p className="humanEyebrow">TOOLS I USE</p>
+          <h3>{copy.skillsTitle}</h3>
         </div>
-        <div className="engineeringList">
-          {t.engineering.map(([name, status, text]) => (
-            <article className="engineeringRow" key={name}>
-              <div>
-                <span className="statusDot" />
-                <strong>{status}</strong>
-              </div>
-              <h4>{name}</h4>
+        <div className="humanSkillsGrid">
+          {copy.skills.map(([title, text]) => (
+            <article key={title}>
+              <strong>{title}</strong>
               <p>{text}</p>
             </article>
           ))}
         </div>
       </div>
-
     </section>
   )
 }

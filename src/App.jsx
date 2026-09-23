@@ -3,9 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import AICore from './components/AICore'
-import Assistant from './components/Assistant'
 import Contact from './components/Contact'
-import TechBackdrop3D from './components/TechBackdrop3D'
 import { content } from './data/content'
 
 function readStoredLanguage() {
@@ -31,18 +29,15 @@ export default function App() {
   }, [safeLang])
 
   return (
-    <div className="appFrame">
-      <TechBackdrop3D />
-      <div className="ambientGlow" aria-hidden="true" />
+    <div className="appFrame humanPortfolio">
       <Header lang={safeLang} setLang={setLang} nav={t.nav} />
       <main>
         <Hero t={t} lang={safeLang} />
         <Projects t={t} lang={safeLang} />
         <AICore t={t} lang={safeLang} />
-        <Assistant t={t} lang={safeLang} />
         <Contact t={t} />
       </main>
-      <footer className="footer sectionShell">
+      <footer className="humanFooter sectionShell">
         <span>© 2026 Stanislav Kosytskyy</span>
         <span>{t.footer}</span>
       </footer>

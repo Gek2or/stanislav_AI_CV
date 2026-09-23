@@ -1,24 +1,25 @@
-# Stanislav Kosytskyy — developer portfolio
+# Stanislav Kosytskyy — product-minded developer
 
 **[Open the live portfolio](https://gek2or.github.io/stanislav_AI_CV/)**
 
-A customer-focused portfolio for junior frontend and software developer roles in Finland.
+A customer-focused React/Vite portfolio for junior frontend, product software and automation roles in Finland.
 
 I build web interfaces and service prototypes around real business workflows. My strongest perspective comes from working directly with customers and operations: I notice where people get confused, where teams repeat the same work, and where a small piece of software could make the next step clearer.
 
 ## Focus
 
 - React, JavaScript, TypeScript, and Vite
-- responsive product interfaces
-- customer journeys, forms, pricing, and booking flows
-- business workflow automation
+- responsive product interfaces and customer journeys
+- pricing, booking, planning and workflow automation
 - Python, APIs, Git, and CI/CD as developing areas
 - applied AI when it solves a clear customer or team problem
 
 ## Portfolio evidence
 
-- **[Autochemix OS](https://github.com/Gek2or/Autochemix-)** · [Live demo](https://gek2or.github.io/Autochemix-/) — a browser-based logistics prototype connecting dispatcher, driver, and customer views.
-- **[Muuttobotti](https://github.com/Gek2or/muuttobotti-finland)** — a multilingual moving-service website shaped by real customer questions and operational constraints.
+- **[Muuttobotti](https://github.com/Gek2or/muuttobotti-finland)** · [live service](https://muuttobotti.fi/) — a multilingual moving-service product shaped by real customer questions and operational constraints.
+- **[ARKI](https://github.com/Gek2or/ARKI)** — a Nordic weekly-planning result hub connecting meals, shopping baskets, promotions, package sizes and travel cost.
+- **[ASCII//RAIN](https://github.com/Gek2or/ascii-rain)** · [play in browser](https://gek2or.github.io/ascii-rain/) — a Godot action game with a published Web build.
+- **[Donetsk 2013](https://github.com/Gek2or/donetsk-2013)** — a reference-driven 3D environment study using Blender and Unity.
 
 ## Product principles
 
@@ -28,10 +29,6 @@ I build web interfaces and service prototypes around real business workflows. My
 - Keep demos safe, transparent, and honest about what is simulated.
 - Ship small changes that can be reviewed and improved.
 
-## Technical notes
-
-The site is built with React, JavaScript/JSX, Vite, Tailwind CSS, and lucide-react. It includes multilingual content and a transparent client-side portfolio assistant. The assistant uses curated portfolio content; it is intentionally not presented as a live production LLM backend.
-
 ## Run locally
 
 ```bash
@@ -39,12 +36,14 @@ npm install
 npm run dev
 ```
 
-Build and preview:
+Production build:
 
 ```bash
 npm run build
 npm run preview
 ```
+
+The GitHub Pages workflow builds and publishes `dist/` after pushes to `main`.
 
 ## Contact
 
